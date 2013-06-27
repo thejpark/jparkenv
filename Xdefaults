@@ -1,0 +1,49 @@
+xterm*ttyModes: erase ^?
+xterm*backarrowKeyIsErase:      true
+xterm*font:-adobe-courier-medium-r-normal--*-100-*-*-m-*-iso8859-1
+xterm*saveLines:2048
+xterm*scrollBar:true
+xterm*visualBell:true
+xterm*background:white
+xterm*foreground:black
+
+! For emacs keys
+xterm*eightBitInput:false
+xterm*metaSendsEscape:true
+xterm*keyboardType: vt220
+xterm.VT100.Translations: #override \
+Ctrl ~Meta ~Shift  <Key> 1: string(0x1b) string("[z21") \n\
+Ctrl ~Meta ~Shift  <Key> 2: string(0x1b) string("[z22") \n\
+Ctrl ~Meta ~Shift  <Key> 3: string(0x1b) string("[z23") \n\
+Ctrl ~Meta ~Shift  <Key> 4: string(0x1b) string("[z24") \n\
+Ctrl ~Meta ~Shift  <Key> 5: string(0x1b) string("[z25") \n\
+Ctrl ~Meta ~Shift  <Key> 6: string(0x1b) string("[z26") \n\
+Ctrl ~Meta ~Shift  <Key> 7: string(0x1b) string("[z27") \n\
+Ctrl ~Meta ~Shift  <Key> 8: string(0x1b) string("[z28") \n\
+Ctrl ~Meta ~Shift  <Key> 9: string(0x1b) string("[z29") \n\
+Ctrl ~Meta ~Shift  <Key> 0: string(0x1b) string("[z20") \n\
+Ctrl Meta Shift  <Key> v: string(0x1b) string("[z3v") \n\
+Ctrl ~Meta ~Shift <Key> Return: string(0x1b) string("[z3r") \n\
+~Ctrl Meta ~Shift <Key> Return: string(0x1b) string("[z3R") \n\
+~Ctrl ~Meta Shift <Key> Left: string(0x1b) string("[z40") \n\
+~Ctrl ~Meta Shift <Key> Right: string(0x1b) string("[z41") \n\
+~Ctrl ~Meta Shift <Key> Up: string(0x1b) string("[z42") \n\
+~Ctrl ~Meta Shift <Key> Down: string(0x1b) string("[z43") \n\
+~Ctrl Meta Shift <Key> Left: string(0x1b) string("[z44") \n\
+~Ctrl Meta Shift <Key> Right: string(0x1b) string("[z45") \n\
+~Ctrl Meta Shift <Key> Up: string(0x1b) string("[z46") \n\
+~Ctrl Meta Shift <Key> Down: string(0x1b) string("[z47") \n\
+~Ctrl Meta ~Shift <Key> Left: string(0x1b) string("[z48") \n\
+~Ctrl Meta ~Shift <Key> Right: string(0x1b) string("[z49") \n\
+~Ctrl Meta ~Shift <Key> Up: string(0x1b) string("[z50") \n\
+~Ctrl Meta ~Shift <Key> Down: string(0x1b) string("[z51") \n\
+Ctrl ~Meta Shift <Key> Left: string(0x1b) string("[z52") \n\
+Ctrl ~Meta Shift <Key> Right: string(0x1b) string("[z53") \n\
+Ctrl ~Meta Shift <Key> Up: string(0x1b) string("[z54") \n\
+Ctrl ~Meta Shift <Key> Down: string(0x1b) string("[z55") \n\
+
+vncviewer*fullScreen:true
+vncviewer*grabKeyboard:true
+vncviewer*passwordFile:.vnc/passwd
+vncviewer*compresslevel:1
+vncviewer*quality:0

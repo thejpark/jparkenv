@@ -1,0 +1,67 @@
+
+(pine-add-load-path "python-mode-6.0.8")
+(setq pdb-path '/usr/lib/python2.6/pdb.py)
+(setq py-install-directory (path-in-pine-emacs-root "python-mode-6.0.8"))
+
+(setq py-pychecker-command "python-checker")
+(setq py-pychecker-command-args "")
+
+(require 'python-mode)
+;; Without this, ruby-mode does not work as python-mode set it to nil
+(setq ruby-indent-level 2)
+
+(defun python-add-breakpoint (arg)
+  "Set pytest breakpoint as default. if prefix is used,use pdb"
+  (interactive "P")
+  (let ((module (if arg "pdb" "pytest")))
+    (py-newline-and-indent)
+    (insert (format "import %s; %s.set_trace()" module module))
+    ))
+
+(defun my-pychecker-run(arg)
+  (interactive "P")
+  (if arg 
+      (py-pychecker-run "python-checker --svn")
+    (call-interactively 'py-pychecker-run)))
+  
+(defun delete-trailing-whitespace-for-programming-mode()
+  (if (eq major-mode 'python-mode)
+      (delete-trailing-whitespace)))
+(add-hook 'before-save-hook 'delete-trailing-whitespace-for-programming-mode)
+
+(defun my-python-hook()
+  (interactive)
+  (highlight-lines-matching-regexp "import \\(pdb=\\|pytest\\)")
+  (highlight-lines-matching-regexp "\\(pdb\\|pytest\\).set_trace()")
+  (use-80-columns)
+  (define-key python-mode-map (kbd "C-c b") 'python-add-breakpoint)
+  (define-key python-mode-map (kbd "C-c d") 'py-documentation)
+  (define-key python-mode-map (kbd "C-c C-v") 'my-pychecker-run)
+
+  ;; For terminal emacs problem
+  (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
+  (define-key python-mode-map (kbd "C-c TAB") 'py-indent-region)
+
+  (flyspell-prog-mode))
+  
+
+(add-hook 'python-mode-hook 'my-python-hook)
+
+
+; compilation error arsing for py.test
+(setq compilation-error-regexp-alist-alist
+      (assq-delete-all 'py-test compilation-error-regexp-alist-alist))
+(nconc compilation-error-regexp-alist-alist
+       '((py-test ".* File \"\\([A-Za-z0-9_/\\.:]+\.py\\)\", line \\([0-9]+\\)" 1 2 nil)))
+(nconc compilation-error-regexp-alist '(py-test))
+
+; Omit some bookkeeping files
+(setq dired-omit-files (concat dired-omit-files "\\|__pycache__"))
+
+
+(require 'pydoc-info)
+
+(provide 'emacs-python)
+
+
+
