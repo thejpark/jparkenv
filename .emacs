@@ -26,3 +26,5 @@
 ;; use tag tables
 ;; M-x visit-tags-table
 
+;; use C-c s o to switch between files (.h for header .vs. .cpp for implementation)
+
