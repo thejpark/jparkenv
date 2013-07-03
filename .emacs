@@ -28,3 +28,5 @@
 
 ;; use C-c s o to switch between files (.h for header .vs. .cpp for implementation)
 
+
+;; C-x r m for bookmark set. C-x r C-h for help.
