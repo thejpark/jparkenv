@@ -26,3 +26,4 @@
 ;; use tag tables
 ;; M-x visit-tags-table
 
+(ido-mode t)
