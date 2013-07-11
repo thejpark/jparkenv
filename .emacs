@@ -27,6 +27,9 @@
 ;; M-x visit-tags-table
 
 (ido-mode t)
+
+(global-set-key (kbd "<f7>") 'compile)
+
 ;; use C-c s o to switch between files (.h for header .vs. .cpp for implementation)
 
 
