@@ -30,6 +30,9 @@
 
 (global-set-key (kbd "<f7>") 'compile)
 
+;; how to change default compile command?
+;; (setq compile-command "nmake")
+
 ;; use C-c s o to switch between files (.h for header .vs. .cpp for implementation)
 
 
