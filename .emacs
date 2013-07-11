@@ -26,6 +26,7 @@
 ;; use tag tables
 ;; M-x visit-tags-table
 
+;; ido mode enable to choice in files or directories
 (ido-mode t)
 
 ;; how to bind f7 to M-x compile
@@ -41,6 +42,15 @@
 ;;  (let ((arg "cd ~/wrk/test/cpp; g++ ctci.cpp"))
 ;;    (compile arg)))
 
+
+(setq project "~/")
+(defun set_project (dir-name)
+  "Set project directory"
+  (interactive "DDirectory: ")
+  (setq project
+   (format "%s" dir-name)))
+
+(global-set-key (kbd "<f1>") 'set_project)
 
 ;; use C-c s o to switch between files (.h for header .vs. .cpp for implementation)
 
