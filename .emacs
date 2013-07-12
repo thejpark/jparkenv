@@ -57,3 +57,7 @@
 
 
 ;; C-x r m for bookmark set. C-x r C-h for help.
+
+
+;; M-x set-frame-name xxx 
+;; sets frame name for emacs windows
