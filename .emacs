@@ -52,6 +52,7 @@
 
 (global-set-key (kbd "<f1>") 'set_project)
 
+
 ;; use C-c s o to switch between files (.h for header .vs. .cpp for implementation)
 
 
