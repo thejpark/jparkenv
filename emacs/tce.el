@@ -535,7 +535,6 @@ to run 'find' with long list of arguments"
     (setq tce-find-command command)
     (grep command)))
 
-
 (defun tce-tags-search()
   (interactive)
   (let ((regexp (grep-read-regexp)))

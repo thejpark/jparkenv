@@ -29,21 +29,16 @@
 ;; ido mode enable to choice in files or directories
 (ido-mode t)
 
+
+;; how to change default compile command?
+;; (setq compile-command "nmake")
+;; (setq compile-command "scons")
 ;; how to bind f7 to M-x compile
 (global-set-key (kbd "<f7>") 'compile)
 
 
-;; how to change default compile command?
-;; (setq compile-command "nmake")
-
-;;
-;;(global-set-key (kbd "<f7>") 'foo)
-;;(defun foo ()
-;;  (let ((arg "cd ~/wrk/test/cpp; g++ ctci.cpp"))
-;;    (compile arg)))
-
-
 (setq project "~/")
+
 (defun set_project (dir-name)
   "Set project directory"
   (interactive "DDirectory: ")
@@ -52,6 +47,52 @@
 
 (global-set-key (kbd "<f1>") 'set_project)
 
+(defun goto_project_dir ()
+  (interactive)
+  (dired project))
+
+(global-set-key (kbd "<f2>") 'goto_project_dir)
+
+(defun goto-vc-dir ()
+  (interactive)
+  (vc-dir project))
+
+(global-set-key (kbd "<f3>") 'goto-vc-dir)
+
+
+(setq prj_bookmark (list (cons "name" "relative-directory")))
+
+;; (setq prj_bookmarks
+;;       (list
+;; 	 (cons "output-dir" "Build/RxDebug")
+;; 	 (cons "integtest" "IntegTests")
+;; 	 (cons "feature-file-dir" "IntegTests/features")
+;; 	 (cons "step-file-dir" "IntegTests/steps")
+;; 	 (cons "phantom" "Phantom/phantom")
+;; 	 (cons "hal-rx" "Hal/Rx")
+;; 	 (cons "hal-integ" "Hal/Integ")
+;; 	 ))
+
+(defun goto-bookmark ()
+  (interactive)
+  (progn
+    (setq keywords
+	  (mapcar 'car prj_bookmarks))
+    (setq keyword (ido-completing-read "goto:" keywords))
+    (setq bookmark (assoc keyword prj_bookmarks))
+    (setq file (cdr bookmark))
+    (setq file (concat project "/" file))
+    (find-file file)))
+
+(global-set-key (kbd "<f4>") 'goto-bookmark)
+
+(defun scons-unit ()
+  (interactive)
+  (let ((arg (format "cd %s; scons --unit-test-run" project)))
+    (compile arg)
+    ))
+
+(global-set-key (kbd "<f8>") 'scons-unit)
 
 ;; use C-c s o to switch between files (.h for header .vs. .cpp for implementation)
 
