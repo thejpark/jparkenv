@@ -60,7 +60,7 @@
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 
 
-(setq prj_bookmark (list (cons "name" "relative-directory")))
+(setq prj_bookmarks (list (cons "name" "relative-directory")))
 
 ;; (setq prj_bookmarks
 ;;       (list
@@ -84,7 +84,7 @@
     (setq file (concat project "/" file))
     (find-file file)))
 
-(global-set-key (kbd "<f4>") 'goto-bookmark)
+(global-set-key (kbd "<f5>") 'goto-bookmark)
 
 (defun scons-unit ()
   (interactive)
