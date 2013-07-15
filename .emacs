@@ -1,6 +1,7 @@
 ;; (load "~/jparkenv/dots/wpc/emacs.el")
 ;; M-g g : goto line
 ;; M-x linum-mode : line number
+;; M-x hg-line-mode : highlight current line
 
 ;; shortcut in case you need many windows
 ;; M-x windmove-left
@@ -62,18 +63,18 @@
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 
 
-(setq prj_bookmarks (list (cons "name" "relative-directory")))
+;;(setq prj_bookmarks (list (cons "name" "relative-directory")))
 
-;; (setq prj_bookmarks
-;;       (list
-;; 	 (cons "output-dir" "Build/RxDebug")
-;; 	 (cons "integtest" "IntegTests")
-;; 	 (cons "feature-file-dir" "IntegTests/features")
-;; 	 (cons "step-file-dir" "IntegTests/steps")
-;; 	 (cons "phantom" "Phantom/phantom")
-;; 	 (cons "hal-rx" "Hal/Rx")
-;; 	 (cons "hal-integ" "Hal/Integ")
-;; 	 ))
+ (setq prj_bookmarks
+       (list
+ 	 (cons "output-dir" "Build/RxDebug")
+ 	 (cons "integtest" "IntegTests")
+ 	 (cons "feature-file-dir" "IntegTests/features")
+ 	 (cons "step-file-dir" "IntegTests/steps")
+ 	 (cons "phantom" "Phantom/phantom")
+ 	 (cons "hal-rx" "Hal/Rx")
+ 	 (cons "hal-integ" "Hal/Integ")
+ 	 ))
 
 (defun goto-bookmark ()
   (interactive)
@@ -95,6 +96,16 @@
     ))
 
 (global-set-key (kbd "<f8>") 'scons-unit)
+
+
+(defun style-checker ()
+  (interactive)
+  (let ((arg (format "cd %s; ./Tools/ContinuousIntegration/step_stylecheck.sh" project)))
+    (compile arg)
+    ))
+
+(global-set-key (kbd "<f9>") 'style-checker)
+
 
 ;; use C-c s o to switch between files (.h for header .vs. .cpp for implementation)
 
