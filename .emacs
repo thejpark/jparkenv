@@ -43,7 +43,9 @@
   "Set project directory"
   (interactive "DDirectory: ")
   (setq project
-   (format "%s" dir-name)))
+   (format "%s" dir-name))
+  (set-frame-name project)
+)
 
 (global-set-key (kbd "<f1>") 'set_project)
 
