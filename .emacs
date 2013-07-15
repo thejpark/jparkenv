@@ -6,10 +6,14 @@
 ;; shortcut in case you need many windows
 ;; M-x windmove-left
 ;; M-x windmove-up : move upper window
+;; C-s M-p shows search history
+
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f") 'windmove-right)
 (global-set-key (kbd "C-c p")    'windmove-up)
 (global-set-key (kbd "C-c n")  'windmove-down)
+
+(global-set-key (kbd "C-c o")  'ff-find-other-file)
 
 ;; add PATH
 (setq exec-path (append  exec-path (list "/usr/local/bin" "/User/jpark/bin")))
@@ -64,7 +68,6 @@
 
 
 ;;(setq prj_bookmarks (list (cons "name" "relative-directory")))
-
  (setq prj_bookmarks
        (list
  	 (cons "output-dir" "Build/RxDebug")
@@ -107,11 +110,21 @@
 (global-set-key (kbd "<f9>") 'style-checker)
 
 
-;; use C-c s o to switch between files (.h for header .vs. .cpp for implementation)
-
-
 ;; C-x r m for bookmark set. C-x r C-h for help.
 
 
 ;; M-x set-frame-name xxx 
 ;; sets frame name for emacs windows
+
+
+;;C-h v tab-width shows how to change it
+(setq-default tab-width 4)
+(setq indent-tabs-mode nil)
+(setq c-basic-offset 4)
+
+;; Treat .h as c++
+(setq auto-mode-alist (cons '("\\.h$" . c++-mode) auto-mode-alist))
+
+
+;;M-x highlight-80+-mode
+
