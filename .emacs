@@ -137,5 +137,5 @@
 ;; '(tab-width 4))
 
 ;; For cygwin environment
-;; (if (file-directory-p "c:/cygwin/bin")
-;;      (add-to-list 'exec-path "c:/cygwin/bin"))
+ (if (file-directory-p "c:/cygwin/bin")
+      (add-to-list 'exec-path "c:/cygwin/bin"))
