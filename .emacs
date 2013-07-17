@@ -138,4 +138,5 @@
 
 ;; For cygwin environment
  (if (file-directory-p "c:/cygwin/bin")
-      (add-to-list 'exec-path "c:/cygwin/bin"))
+	 (setq shell-file-name "C:/cygwin/bin/bash.exe"))
+;;      (add-to-list 'exec-path "c:/cygwin/bin"))
