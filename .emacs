@@ -137,6 +137,35 @@
 ;; '(tab-width 4))
 
 ;; For cygwin environment
+;; The value of “PATH” is used by emacs when you are running a shell in emacs, similar to when you are using a shell in a terminal.
+;; The exec-path is used by emacs itself to find programs it needs for its features, such as spell checking, file compression, compiling, grep, diff, etc.
+;; The value of “PATH” is used by emacs when you are running a shell in emacs, similar to when you are using a shell in a terminal.
+;; The exec-path is used by emacs itself to find programs it needs for its features, such as spell checking, file compression, compiling, grep, diff, etc.
  (if (file-directory-p "c:/cygwin/bin")
 	 (setq shell-file-name "C:/cygwin/bin/bash.exe"))
 ;;      (add-to-list 'exec-path "c:/cygwin/bin"))
+
+
+
+
+;; Some people can do like this for cygwin
+;;(when (string-equal system-type "windows-nt")
+;;  (setq exec-path
+;;'(
+;;"C:/Program Files (x86)/Emacs/emacs/bin/"
+;;"C:/Program Files (x86)/Emacs/EmacsW32/gnuwin32/bin/"
+;;"C:/Windows/system32/"
+;;"C:/Windows/"
+;;"C:/Windows/System32/Wbem/"
+;;"C:/Windows/system32/WindowsPowerShell/v1.0/"
+;;)
+;; ))
+
+;; exaple of setting env var named PATH
+;; (setenv "PATH"
+;; 		(concat
+;; 		 "C:/cygwin/usr/bin" ";"
+;; 		 "C:/cygwin/bin" ";"
+;; 		 (getenv "PATH")))
+
+
