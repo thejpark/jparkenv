@@ -1,4 +1,4 @@
-;; (load "~/jparkenv/dots/wpc/emacs.el")
+;; www.emacswiki.org/emacs/EmacsNiftyTricks
 ;; M-g g : goto line
 ;; M-x linum-mode : line number
 ;; M-x hg-line-mode : highlight current line
