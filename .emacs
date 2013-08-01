@@ -8,6 +8,12 @@
 ;; M-x windmove-up : move upper window
 ;; C-s M-p shows search history
 
+;; C-x Tab is used to add indent rigidly (regardless of indent mode). It also used for region.
+
+;; how to delete first letter in a line in a region?
+;; use C-x r k. Mark the start of the region, go to the end of the line, second column,
+;; then press the C-x r k then it will remove the rectangle marked so delete first char.
+
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f") 'windmove-right)
 (global-set-key (kbd "C-c p")    'windmove-up)
@@ -116,10 +122,11 @@
 ;; M-x set-frame-name xxx 
 ;; sets frame name for emacs windows
 
-
+;; The setq-default command sets values only in buffers that do not have 
+;; their own local values for the variable.
 
 (setq-default tab-width 4)
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 (setq c-basic-offset 4)
 
 ;; Treat .h as c++
