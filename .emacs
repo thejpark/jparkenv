@@ -176,3 +176,4 @@
 ;; 		 (getenv "PATH")))
 
 
+(flyspell-prog-mode)
