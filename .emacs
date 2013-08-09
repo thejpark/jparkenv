@@ -176,11 +176,12 @@
 ;; 		 (getenv "PATH")))
 
 
-(flyspell-prog-mode)
-
 ;; find diff in region
 ;; (M-x ediff-region-wordwise)
 
 
 ;; emacs word count region
 ;; Set a region, then press M-=
+
+;; add this hook as common to all languages
+(add-hook 'c-mode-common-hook 'flyspell-prog-mode)
