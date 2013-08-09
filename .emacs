@@ -180,3 +180,7 @@
 
 ;; find diff in region
 ;; (M-x ediff-region-wordwise)
+
+
+;; emacs word count region
+;; Set a region, then press M-=
