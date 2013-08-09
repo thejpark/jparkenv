@@ -177,3 +177,6 @@
 
 
 (flyspell-prog-mode)
+
+;; find diff in region
+;; (M-x ediff-region-wordwise)
