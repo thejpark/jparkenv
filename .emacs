@@ -185,3 +185,12 @@
 
 ;; add this hook as common to all languages
 (add-hook 'c-mode-common-hook 'flyspell-prog-mode)
+
+(add-to-list 'load-path "./emacs.d/lisp/")
+(require 'browse-kill-ring)
+
+(browse-kill-ring-default-keybindings)
+
+
+;; C-x ( mean macro begin
+:: C-x ) means macro end
