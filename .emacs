@@ -217,5 +217,5 @@
 ;; find command name
 ;M-x apropos-command RET then press command name
 
-(global-set-key (kbd "C-x g")  'insert-register)
-(global-set-key (kbd "C-x x")  'copy-to-register)
+(global-set-key (kbd "C-c v")  'insert-register)
+(global-set-key (kbd "C-c c")  'copy-to-register)
