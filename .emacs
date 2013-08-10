@@ -116,7 +116,13 @@
 (global-set-key (kbd "<f9>") 'style-checker)
 
 
-;; C-x r m for bookmark set. C-x r C-h for help.
+;; C-_ meanx undo-
+;; C-x s means save all
+
+;; C-x r m # for bookmark set. C-x r C-h for help.
+;; C-x r j # for bookmark set. C-x r C-h for help.
+;; C-x r s # copy register
+;; C-x r i # paste
 
 
 ;; M-x set-frame-name xxx 
@@ -193,4 +199,23 @@
 
 
 ;; C-x ( mean macro begin
-:: C-x ) means macro end
+;; C-x ) means macro end
+;; C-x e plays macro
+;; M-# or C-u # means repeat command # times
+
+
+;; M-u uppercase word
+;; M-l lowercase word
+;; M-c capitalize word
+;; C-x C-u uppercase region
+;; C-x C-u lowercase region
+
+
+;;identify what command is bound on the new keys:
+;; C-h k then press short cut keys
+
+;; find command name
+;M-x apropos-command RET then press command name
+
+(global-set-key (kbd "C-x g")  'insert-register)
+(global-set-key (kbd "C-x x")  'copy-to-register)
