@@ -169,6 +169,13 @@
  (if (file-directory-p "c:/cygwin/bin")
 	 (setenv "PATH" (concat (getenv "PATH") ":c:/home/junggyup:c:/home/junggyup/bin")))
 
+;; default face for ResMed computer
+(if (file-directory-p "c:/cygwin/bin")
+      (setq default-frame-alist
+            '(
+              (font . "-outline-Lucida Console-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1")
+)))
+
 ;; Some people can do like this for cygwin
 ;;(when (string-equal system-type "windows-nt")
 ;;  (setq exec-path
