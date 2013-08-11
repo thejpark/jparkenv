@@ -7,6 +7,7 @@
 ;; M-x windmove-left
 ;; M-x windmove-up : move upper window
 ;; C-s M-p shows search history
+;; C-x C-v shows find alternative files with current file as default.
 
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f") 'windmove-right)
