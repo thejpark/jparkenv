@@ -9,6 +9,12 @@
 ;; C-s M-p shows search history
 ;; C-x C-v shows find alternative files with current file as default.
 
+;; C-x Tab is used to add indent rigidly (regardless of indent mode). It also used for region.
+
+;; how to delete first letter in a line in a region?
+;; use C-x r k. Mark the start of the region, go to the end of the line, second column,
+;; then press the C-x r k then it will remove the rectangle marked so delete first char.
+
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f") 'windmove-right)
 (global-set-key (kbd "C-c p")    'windmove-up)
@@ -111,16 +117,23 @@
 (global-set-key (kbd "<f9>") 'style-checker)
 
 
-;; C-x r m for bookmark set. C-x r C-h for help.
+;; C-_ meanx undo-
+;; C-x s means save all
+
+;; C-x r m # for bookmark set. C-x r C-h for help.
+;; C-x r j # for bookmark set. C-x r C-h for help.
+;; C-x r s # copy register
+;; C-x r i # paste
 
 
 ;; M-x set-frame-name xxx 
 ;; sets frame name for emacs windows
 
-
+;; The setq-default command sets values only in buffers that do not have 
+;; their own local values for the variable.
 
 (setq-default tab-width 4)
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 (setq c-basic-offset 4)
 
 ;; Treat .h as c++
@@ -168,5 +181,60 @@
 ;; 		 "C:/cygwin/usr/bin" ";"
 ;; 		 "C:/cygwin/bin" ";"
 ;; 		 (getenv "PATH")))
+
+
+;; find diff in region
+;; (M-x ediff-region-wordwise)
+
+
+;; emacs word count region
+;; Set a region, then press M-=
+
+;; add this hook as common to all languages
+(add-hook 'c-mode-common-hook 'flyspell-prog-mode)
+
+
+
+;; Mode hooks are commonly used to enable minor modes (see Minor Modes). 
+;; For example, you can put the following lines in your init file to enable
+;;  Flyspell minor mode in all text-based major modes (see Spelling), and
+;; Eldoc minor mode in Emacs Lisp mode (see Lisp Doc):
+;;     (add-hook 'text-mode-hook 'flyspell-mode)
+;;     (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+
+
+
+(add-to-list 'load-path "./emacs.d/lisp/")
+(require 'browse-kill-ring)
+
+(browse-kill-ring-default-keybindings)
+
+
+;; C-x ( mean macro begin
+;; C-x ) means macro end
+;; C-x e plays macro
+;; M-# or C-u # means repeat command # times
+
+
+;; M-u uppercase word
+;; M-l lowercase word
+;; M-c capitalize word
+;; C-x C-u uppercase region
+;; C-x C-u lowercase region
+
+
+;;identify what command is bound on the new keys:
+;; C-h k then press short cut keys
+
+;; find command name
+;M-x apropos-command RET then press command name
+
+(global-set-key (kbd "C-c v")  'insert-register)
+(global-set-key (kbd "C-c c")  'copy-to-register)
+
+;; C-h m describes current mode
+
+
+;; M-` activates menu bar
 
 
