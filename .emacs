@@ -192,6 +192,17 @@
 ;; add this hook as common to all languages
 (add-hook 'c-mode-common-hook 'flyspell-prog-mode)
 
+
+
+;; Mode hooks are commonly used to enable minor modes (see Minor Modes). 
+;; For example, you can put the following lines in your init file to enable
+;;  Flyspell minor mode in all text-based major modes (see Spelling), and
+;; Eldoc minor mode in Emacs Lisp mode (see Lisp Doc):
+;;     (add-hook 'text-mode-hook 'flyspell-mode)
+;;     (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+
+
+
 (add-to-list 'load-path "./emacs.d/lisp/")
 (require 'browse-kill-ring)
 
@@ -219,3 +230,10 @@
 
 (global-set-key (kbd "C-c v")  'insert-register)
 (global-set-key (kbd "C-c c")  'copy-to-register)
+
+;; C-h m describes current mode
+
+
+
+
+
