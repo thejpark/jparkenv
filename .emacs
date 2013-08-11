@@ -234,6 +234,6 @@
 ;; C-h m describes current mode
 
 
-
+;; M-` activates menu bar
 
 
