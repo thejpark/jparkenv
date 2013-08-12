@@ -260,3 +260,5 @@
 ;; M-` activates menu bar
 
 
+(require 'run-assoc)
+
