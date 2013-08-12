@@ -8,8 +8,6 @@
 ;; M-x windmove-up : move upper window
 ;; C-s M-p shows search history
 
-;; C-x Tab is used to add indent rigidly (regardless of indent mode). It also used for region.
-
 ;; how to delete first letter in a line in a region?
 ;; use C-x r k. Mark the start of the region, go to the end of the line, second column,
 ;; then press the C-x r k then it will remove the rectangle marked so delete first char.
@@ -134,6 +132,11 @@
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 (setq c-basic-offset 4)
+
+;; C-x Tab is used to add indent rigidly (regardless of indent mode). It also used for region.
+
+;; C-M-\ indent region
+
 
 ;; Treat .h as c++
 (setq auto-mode-alist (cons '("\\.h$" . c++-mode) auto-mode-alist))
