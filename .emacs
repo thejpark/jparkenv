@@ -7,6 +7,7 @@
 ;; M-x windmove-left
 ;; M-x windmove-up : move upper window
 ;; C-s M-p shows search history
+;; C-x C-v shows find alternative files with current file as default.
 
 ;; how to delete first letter in a line in a region?
 ;; use C-x r k. Mark the start of the region, go to the end of the line, second column,
@@ -153,15 +154,37 @@
 ;; '(tab-width 4))
 
 ;; For cygwin environment
-;; The value of “PATH” is used by emacs when you are running a shell in emacs, similar to when you are using a shell in a terminal.
-;; The exec-path is used by emacs itself to find programs it needs for its features, such as spell checking, file compression, compiling, grep, diff, etc.
-;; The value of “PATH” is used by emacs when you are running a shell in emacs, similar to when you are using a shell in a terminal.
-;; The exec-path is used by emacs itself to find programs it needs for its features, such as spell checking, file compression, compiling, grep, diff, etc.
+;; The value of “PATH” is used by emacs when you are running a shell in emacs, 
+;; similar to when you are using a shell in a terminal.
+;; The exec-path is used by emacs itself to find programs it needs for its
+;; features, such as spell checking, file compression, compiling, grep, diff, etc.
+;; The value of “PATH” is used by emacs when you are running a shell in emacs,
+;; similar to when you are using a shell in a terminal.
+;; The exec-path is used by emacs itself to find programs it needs for its
+;; features, such as spell checking, file compression, compiling, grep, diff, etc.
+
  (if (file-directory-p "c:/cygwin/bin")
-	 (setq shell-file-name "C:/cygwin/bin/bash.exe"))
+	 (progn
+	   (setq shell-file-name "bash")
+;;  	 (setq shell-file-name "C:/cygwin/bin/bash.exe"))
 ;;      (add-to-list 'exec-path "c:/cygwin/bin"))
 
+;; This is for ResMed computer.
+       (setenv "PATH" (concat (getenv "PATH") ":c:/home/junggyup:c:/home/junggyup/bin"))
 
+))
+
+ (if (file-directory-p "c:/cygwin/bin")
+;; if window version of emacs
+ 	 (if (eq window-system 'w32)
+       (setq default-frame-alist
+            '(
+              (font . "-outline-Lucida Console-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1")))
+
+))
+
+
+;;	window-system variable shows which windows system am I using. w32, nil (if used in terminal), etc
 
 
 ;; Some people can do like this for cygwin
@@ -206,7 +229,7 @@
 
 
 
-(add-to-list 'load-path "./emacs.d/lisp/")
+(add-to-list 'load-path "~/jparkenv/emacs.d/lisp/")
 (require 'browse-kill-ring)
 
 (browse-kill-ring-default-keybindings)
@@ -239,4 +262,6 @@
 
 ;; M-` activates menu bar
 
+
+(require 'run-assoc)
 
