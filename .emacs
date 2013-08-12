@@ -161,20 +161,28 @@
 ;; features, such as spell checking, file compression, compiling, grep, diff, etc.
 
  (if (file-directory-p "c:/cygwin/bin")
-     (setq shell-file-name "bash"))
-;;	 (setq shell-file-name "C:/cygwin/bin/bash.exe"))
+	 (progn
+	   (setq shell-file-name "bash")
+;;  	 (setq shell-file-name "C:/cygwin/bin/bash.exe"))
 ;;      (add-to-list 'exec-path "c:/cygwin/bin"))
 
 ;; This is for ResMed computer.
- (if (file-directory-p "c:/cygwin/bin")
-	 (setenv "PATH" (concat (getenv "PATH") ":c:/home/junggyup:c:/home/junggyup/bin")))
+       (setenv "PATH" (concat (getenv "PATH") ":c:/home/junggyup:c:/home/junggyup/bin"))
 
-;; default face for ResMed computer
-(if (file-directory-p "c:/cygwin/bin")
-      (setq default-frame-alist
+))
+
+ (if (file-directory-p "c:/cygwin/bin")
+;; if window version of emacs
+ 	 (if (eq window-system 'w32)
+       (setq default-frame-alist
             '(
-              (font . "-outline-Lucida Console-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1")
-)))
+              (font . "-outline-Lucida Console-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1")))
+
+))
+
+
+;;	window-system variable shows which windows system am I using. w32, nil (if used in terminal), etc
+
 
 ;; Some people can do like this for cygwin
 ;;(when (string-equal system-type "windows-nt")
