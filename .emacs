@@ -274,3 +274,6 @@
     (let ((process-connection-type nil)) (start-process "" nil "xdg-open" "."))
     ;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. ⁖ with nautilus
     ) ))
+
+;; Mac can start application associated with file with 'open' command
+;; Windows/Cygwin can start applications with 'cmd /c start' command 
