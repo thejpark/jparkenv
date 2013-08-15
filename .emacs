@@ -130,27 +130,29 @@
 ;; The setq-default command sets values only in buffers that do not have 
 ;; their own local values for the variable.
 
-(setq-default tab-width 4)
-(setq-default indent-tabs-mode nil)
-(setq c-basic-offset 4)
+;;(setq-default tab-width 4)
+;; (setq-default indent-tabs-mode nil)
+;; (setq c-basic-offset 4)
 
 
-;; (defun jung-c-mode-hook ()
-;;   (setq c-default-style
-;; 	'((java-mode . "java")
-;; 	  (c-mode . "bsd")
-;; 	  (c++-mode . "bsd")
-;; 	  (other . "bsd")
-;; 	  ))
-;;   (setq 
-;;    c-basic-offset 4
-;;    indent-tabs-mode nil             ;; Use space instead of tab
-;;    )
-;;   (use-80-columns)
-;;   (c-set-offset 'innamespace 0)
-;; )
+(defun jung-c-mode-hook ()
+  (setq c-default-style
+	'((java-mode . "java")
+	  (c-mode . "bsd")
+	  (c++-mode . "bsd")
+	  (other . "bsd")
+	  ))
+  (setq c-basic-offset 4)
+  (setq indent-tabs-mode nil)             ;; Use space instead of tab
+  (setq tab-width 4)
+;;  (use-80-columns)
+  (c-set-offset 'innamespace 0)
+  (c-set-offset 'substatement-open 0)
+)
 
-;; (add-hook 'c-mode-hook 'jung-c-mode-hook)
+(add-hook 'c-mode-hook 'jung-c-mode-hook)
+(add-hook 'c++-mode-hook 'jung-c-mode-hook)
+
 
 
 ;; C-x Tab is used to add indent rigidly (regardless of indent mode). It also used for region.
@@ -237,6 +239,8 @@
 ;; add this hook as common to all languages
 (add-hook 'c-mode-common-hook 'flyspell-prog-mode)
 
+;; common to all language, but it looks like for c-mode-common-hook I should add-hook only once?
+;;(add-hook 'c-mode-common-hook 'jung-c-mode-hook)
 
 
 ;; Mode hooks are commonly used to enable minor modes (see Minor Modes). 
@@ -312,3 +316,6 @@
 ;;    '(font-lock-type-face ((t (:foreground "ForestGreen"))))
 ;;    '(font-lock-variable-name-face ((t (:foreground "sienna" :weight light)))))
 ;; )
+
+
+;; emacs indenting http://www.emacswiki.org/emacs/IndentingC#toc2
