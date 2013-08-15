@@ -134,6 +134,25 @@
 (setq-default indent-tabs-mode nil)
 (setq c-basic-offset 4)
 
+
+;; (defun jung-c-mode-hook ()
+;;   (setq c-default-style
+;; 	'((java-mode . "java")
+;; 	  (c-mode . "bsd")
+;; 	  (c++-mode . "bsd")
+;; 	  (other . "bsd")
+;; 	  ))
+;;   (setq 
+;;    c-basic-offset 4
+;;    indent-tabs-mode nil             ;; Use space instead of tab
+;;    )
+;;   (use-80-columns)
+;;   (c-set-offset 'innamespace 0)
+;; )
+
+;; (add-hook 'c-mode-hook 'jung-c-mode-hook)
+
+
 ;; C-x Tab is used to add indent rigidly (regardless of indent mode). It also used for region.
 
 ;; C-M-\ indent region
