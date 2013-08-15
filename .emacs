@@ -296,3 +296,19 @@
 
 ;; Mac can start application associated with file with 'open' command
 ;; Windows/Cygwin can start applications with 'cmd /c start' command 
+
+
+;; This customizing is for terminal version of emacs in Cygwin/Windows.
+;; (unless window-system
+;;   (custom-set-faces
+;;    ;; custom-set-faces was added by Custom.
+;;    ;; If you edit it by hand, you could mess it up, so be careful.
+;;    ;; Your init file should contain only one such instance.
+;;    ;; If there is more than one, they won't work right.
+;;    '(flyspell-duplicate ((t (:underline t))))
+;;    '(font-lock-constant-face ((t (:foreground "dark cyan"))))
+;;    '(font-lock-keyword-face ((t (:foreground "purple" :weight bold))))
+;;    '(font-lock-string-face ((t (:foreground "violetRed4"))))
+;;    '(font-lock-type-face ((t (:foreground "ForestGreen"))))
+;;    '(font-lock-variable-name-face ((t (:foreground "sienna" :weight light)))))
+;; )
