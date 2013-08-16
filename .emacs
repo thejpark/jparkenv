@@ -130,9 +130,15 @@
 ;; The setq-default command sets values only in buffers that do not have 
 ;; their own local values for the variable.
 
-;;(setq-default tab-width 4)
+;; put here makes settings as default for all
+;; (setq-default tab-width 4)
 ;; (setq-default indent-tabs-mode nil)
 ;; (setq c-basic-offset 4)
+
+
+(defun use-80-columns()
+  (setq fill-column 79)
+  (highlight-80+-mode t))
 
 
 (defun jung-c-mode-hook ()
@@ -145,20 +151,42 @@
   (setq c-basic-offset 4)
   (setq indent-tabs-mode nil)             ;; Use space instead of tab
   (setq tab-width 4)
-;;  (use-80-columns)
+  (use-80-columns)
   (c-set-offset 'innamespace 0)
   (c-set-offset 'substatement-open 0)
 )
 
 (add-hook 'c-mode-hook 'jung-c-mode-hook)
 (add-hook 'c++-mode-hook 'jung-c-mode-hook)
+(add-hook 'python-mode-hook 'jung-c-mode-hook)
 
+
+;; add this hook as common to all languages 
+(add-hook 'c-mode-common-hook 'flyspell-prog-mode)
+
+;; common to all language, but it looks like for c-mode-common-hook I should add-hook only once?
+;; (add-hook 'c-mode-common-hook 'jung-c-mode-hook)
+
+
+
+;; (defun my-python-hook()
+;;   (interactive)
+;;   (highlight-lines-matching-regexp "import \\(pdb=\\|pytest\\)")
+;;   (highlight-lines-matching-regexp "\\(pdb\\|pytest\\).set_trace()")
+;;   (use-80-columns)
+
+;;   (define-key python-mode-map (kbd "C-c l") 'python-indent-shift-left)
+;;   (define-key python-mode-map (kbd "C-c r") 'python-indent-shift-right)
+;;   (flyspell-prog-mode))
+;; (add-hook 'python-mode-hook 'my-python-hook)
 
 
 ;; C-x Tab is used to add indent rigidly (regardless of indent mode). It also used for region.
 
+;; C-x h select entire buffer
+;; C-M h select entire function
 ;; C-M-\ indent region
-
+;; so C-x h C-M-\ make indents for entire buffer
 
 ;; Treat .h as c++
 (setq auto-mode-alist (cons '("\\.h$" . c++-mode) auto-mode-alist))
@@ -236,12 +264,6 @@
 ;; emacs word count region
 ;; Set a region, then press M-=
 
-;; add this hook as common to all languages
-(add-hook 'c-mode-common-hook 'flyspell-prog-mode)
-
-;; common to all language, but it looks like for c-mode-common-hook I should add-hook only once?
-;;(add-hook 'c-mode-common-hook 'jung-c-mode-hook)
-
 
 ;; Mode hooks are commonly used to enable minor modes (see Minor Modes). 
 ;; For example, you can put the following lines in your init file to enable
@@ -254,6 +276,7 @@
 
 (add-to-list 'load-path "~/jparkenv/emacs.d/lisp/")
 (require 'browse-kill-ring)
+;; (require 'okl-style)
 
 (browse-kill-ring-default-keybindings)
 
