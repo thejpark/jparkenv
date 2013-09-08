@@ -188,6 +188,8 @@
 ;; C-M-\ indent region
 ;; so C-x h C-M-\ make indents for entire buffer
 
+;; M-m -> move to the start in the line (compare with C-a)
+
 ;; Treat .h as c++
 (setq auto-mode-alist (cons '("\\.h$" . c++-mode) auto-mode-alist))
 
@@ -297,6 +299,9 @@
 ;;identify what command is bound on the new keys:
 ;; C-h k then press short cut keys
 
+;; C-h v then enter variable to find
+
+
 ;; find command name
 ;M-x apropos-command RET then press command name
 
@@ -339,6 +344,7 @@
 ;;    '(font-lock-type-face ((t (:foreground "ForestGreen"))))
 ;;    '(font-lock-variable-name-face ((t (:foreground "sienna" :weight light)))))
 ;; )
+
 
 
 ;; emacs indenting http://www.emacswiki.org/emacs/IndentingC#toc2
