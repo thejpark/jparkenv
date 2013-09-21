@@ -115,6 +115,17 @@
 (global-set-key (kbd "<f9>") 'style-checker)
 
 
+(add-to-list 'load-path "~/jparkenv/emacs.d/lisp/")
+(require 'browse-kill-ring)
+;; (require 'okl-style)
+(require 'gtags)
+
+
+(global-set-key (kbd "C-c d")  'gtags-find-tag)
+(global-set-key (kbd "C-c r")  'gtags-find-rtag)
+(global-set-key (kbd "C-c s")  'gtags-find-symbol)
+
+
 ;; C-_ meanx undo-
 ;; C-x s means save all
 
@@ -152,6 +163,7 @@
   (setq indent-tabs-mode nil)             ;; Use space instead of tab
   (setq tab-width 4)
   (use-80-columns)
+  (gtags-mode 1)
   (c-set-offset 'innamespace 0)
   (c-set-offset 'substatement-open 0)
 )
@@ -159,7 +171,6 @@
 (add-hook 'c-mode-hook 'jung-c-mode-hook)
 (add-hook 'c++-mode-hook 'jung-c-mode-hook)
 (add-hook 'python-mode-hook 'jung-c-mode-hook)
-
 
 ;; add this hook as common to all languages 
 (add-hook 'c-mode-common-hook 'flyspell-prog-mode)
@@ -274,11 +285,6 @@
 ;;     (add-hook 'text-mode-hook 'flyspell-mode)
 ;;     (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 
-
-
-(add-to-list 'load-path "~/jparkenv/emacs.d/lisp/")
-(require 'browse-kill-ring)
-;; (require 'okl-style)
 
 (browse-kill-ring-default-keybindings)
 
