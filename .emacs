@@ -135,6 +135,7 @@
 ;; C-x r i # paste
 
 ;; C-M k # delete word (so that you can copy and paste)
+;; compare with M d
 
 ;; M-x set-frame-name xxx 
 ;; sets frame name for emacs windows
