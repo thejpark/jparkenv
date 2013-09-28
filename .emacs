@@ -134,6 +134,7 @@
 ;; C-x r s # copy register
 ;; C-x r i # paste
 
+;; C-M k # delete word (so that you can copy and paste)
 
 ;; M-x set-frame-name xxx 
 ;; sets frame name for emacs windows
@@ -354,3 +355,8 @@
 
 
 ;; emacs indenting http://www.emacswiki.org/emacs/IndentingC#toc2
+
+
+(require 'thing-edit)
+(global-set-key (kbd "C-c l") 'thing-copy-line)
+(global-set-key (kbd "C-c w") 'thing-copy-word)
