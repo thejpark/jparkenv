@@ -13,6 +13,8 @@
 ;; use C-x r k. Mark the start of the region, go to the end of the line, second column,
 ;; then press the C-x r k then it will remove the rectangle marked so delete first char.
 
+;; Cancel auto complete in file selection? C-f
+
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f") 'windmove-right)
 (global-set-key (kbd "C-c p")    'windmove-up)
