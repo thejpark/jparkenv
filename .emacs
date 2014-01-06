@@ -125,7 +125,7 @@
 (add-to-list 'load-path "~/jparkenv/emacs.d/evil/") ; only without ELPA/el-get
 (require 'evil)
 (evil-mode 1)
-
+(global-set-key (kbd "M-,")  'find-tag)
 
 (global-set-key (kbd "C-c d")  'gtags-find-tag)
 (global-set-key (kbd "C-c r")  'gtags-find-rtag)
