@@ -63,6 +63,7 @@ if has("autocmd")
   " 'cindent' is on in C files, etc.
   " Also load indent files, to automatically do language-dependent indenting.
   filetype plugin indent on
+  set expandtab
   set tabstop=4
   set shiftwidth=4
 
