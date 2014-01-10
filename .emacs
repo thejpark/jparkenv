@@ -154,6 +154,7 @@
 ;; (setq-default indent-tabs-mode nil)
 ;; (setq c-basic-offset 4)
 
+;; first non-white space char M-m
 
 (defun use-80-columns()
   (setq fill-column 79)
