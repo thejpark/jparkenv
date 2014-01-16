@@ -40,7 +40,8 @@
 
 ;; ido mode enable to choice in files or directories
 (ido-mode t)
-
+;; for more information, http://www.emacswiki.org/emacs/InteractivelyDoThings
+;; C-s (next), C-r (prev), C-f (fall back to normal mode)
 
 ;; how to change default compile command?
 ;; (setq compile-command "nmake")
@@ -59,19 +60,17 @@
   (set-frame-name project)
 )
 
-(global-set-key (kbd "<f1>") 'set_project)
-
 (defun goto_project_dir ()
   (interactive)
   (dired project))
 
-(global-set-key (kbd "<f2>") 'goto_project_dir)
+(global-set-key (kbd "<f4>") 'goto_project_dir)
 
 (defun goto-vc-dir ()
   (interactive)
   (vc-dir project))
 
-(global-set-key (kbd "<f3>") 'goto-vc-dir)
+(global-set-key (kbd "<f5>") 'goto-vc-dir)
 
 
 ;;(setq prj_bookmarks (list (cons "name" "relative-directory")))
@@ -97,7 +96,10 @@
     (setq file (concat project "/" file))
     (find-file file)))
 
-(global-set-key (kbd "<f5>") 'goto-bookmark)
+(global-set-key (kbd "<f1>") 'ido-find-file)
+(global-set-key (kbd "<f2>") 'ido-switch-buffer)
+(global-set-key (kbd "<f3>") 'other-window)
+(global-set-key (kbd "<f6>") 'goto-bookmark)
 
 (defun scons-unit ()
   (interactive)
