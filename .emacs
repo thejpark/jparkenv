@@ -96,7 +96,11 @@
     (setq file (concat project "/" file))
     (find-file file)))
 
-(global-set-key (kbd "<f1>") 'ido-find-file)
+(defun find-file-in-project ()
+  (interactive)
+  (ido-find-file-in-dir project))
+
+(global-set-key (kbd "<f1>") 'find-file-in-project)
 (global-set-key (kbd "<f2>") 'ido-switch-buffer)
 (global-set-key (kbd "<f3>") 'other-window)
 (global-set-key (kbd "<f6>") 'goto-bookmark)
@@ -315,7 +319,7 @@
 
 ;;identify what command is bound on the new keys:
 ;; C-h k then press short cut keys
-
+;; C-h f function_name (i.e., ido-find-file) shows help for a function
 ;; C-h v then enter variable to find
 
 
