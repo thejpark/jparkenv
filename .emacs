@@ -15,10 +15,10 @@
 
 ;; Cancel auto complete in file selection? C-f
 
-(global-set-key (kbd "C-c b")  'windmove-left)
-(global-set-key (kbd "C-c f") 'windmove-right)
-(global-set-key (kbd "C-c p")    'windmove-up)
-(global-set-key (kbd "C-c n")  'windmove-down)
+(global-set-key (kbd "C-c b")  'other-window)
+;; (global-set-key (kbd "C-c f") 'windmove-right)
+;; (global-set-key (kbd "C-c p")    'windmove-up)
+;; (global-set-key (kbd "C-c n")  'windmove-down)
 
 (global-set-key (kbd "C-c o")  'ff-find-other-file)
 
@@ -64,13 +64,13 @@
   (interactive)
   (dired project))
 
-(global-set-key (kbd "<f4>") 'goto_project_dir)
+(global-set-key (kbd "<f2>") 'goto_project_dir)
 
 (defun goto-vc-dir ()
   (interactive)
   (vc-dir project))
 
-(global-set-key (kbd "<f5>") 'goto-vc-dir)
+(global-set-key (kbd "<f3>") 'goto-vc-dir)
 
 
 ;;(setq prj_bookmarks (list (cons "name" "relative-directory")))
@@ -101,8 +101,8 @@
   (ido-find-file-in-dir project))
 
 (global-set-key (kbd "<f1>") 'find-file-in-project)
-(global-set-key (kbd "<f2>") 'ido-switch-buffer)
-(global-set-key (kbd "<f3>") 'other-window)
+(global-set-key (kbd "<f4>") 'ido-switch-buffer)
+(global-set-key (kbd "<f5>") 'other-window)
 (global-set-key (kbd "<f6>") 'goto-bookmark)
 
 (defun scons-unit ()
