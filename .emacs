@@ -15,10 +15,10 @@
 
 ;; Cancel auto complete in file selection? C-f
 
-(global-set-key (kbd "C-c b")  'other-window)
-;; (global-set-key (kbd "C-c f") 'windmove-right)
-;; (global-set-key (kbd "C-c p")    'windmove-up)
-;; (global-set-key (kbd "C-c n")  'windmove-down)
+(global-set-key (kbd "C-c b")  'windmove-left)
+(global-set-key (kbd "C-c f")  'windmove-right)
+(global-set-key (kbd "C-c p")  'windmove-up)
+(global-set-key (kbd "C-c n")  'windmove-down)
 
 (global-set-key (kbd "C-c o")  'ff-find-other-file)
 
