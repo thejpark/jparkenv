@@ -101,9 +101,21 @@
   (ido-find-file-in-dir project))
 
 (global-set-key (kbd "<f1>") 'find-file-in-project)
-(global-set-key (kbd "<f4>") 'ido-switch-buffer)
-(global-set-key (kbd "<f5>") 'other-window)
-(global-set-key (kbd "<f6>") 'goto-bookmark)
+(global-set-key (kbd "M-3") 'split-window-horizontally)
+(global-set-key (kbd "M-2") 'split-window-vertically)
+(global-set-key (kbd "M-1") 'delete-other-window)
+(global-set-key (kbd "M-s") 'other-window)
+(global-set-key (kbd "<f5>") 'goto-bookmark)
+(global-set-key (kbd "<f4>") 'save-buffer)
+(global-set-key (kbd "<f8>") 'execute-extended-command)
+
+;; check http://ergoemacs.org/emacs/effective_emacs.html for more effective key binding
+(global-set-key (kbd "M-j") 'backward-char) ; was indent-new-comment-line
+(global-set-key (kbd "M-l") 'forward-char)  ; was downcase-word
+(global-set-key (kbd "M-i") 'previous-line) ; was tab-to-tab-stop
+(global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
+
+(global-set-key (kbd "C-=") 'next-line)
 
 (defun scons-unit ()
   (interactive)
@@ -111,7 +123,7 @@
     (compile arg)
     ))
 
-(global-set-key (kbd "<f8>") 'scons-unit)
+(global-set-key (kbd "<f6>") 'scons-unit)
 
 
 (defun style-checker ()
@@ -137,10 +149,11 @@
 ;; (require 'okl-style)
 (require 'gtags)
 
-(add-to-list 'load-path "~/jparkenv/emacs.d/evil/") ; only without ELPA/el-get
-(require 'evil)
-(evil-mode 1)
-(global-set-key (kbd "M-,")  'find-tag)
+;; evil mode changes
+;; (add-to-list 'load-path "~/jparkenv/emacs.d/evil/") ; only without ELPA/el-get
+;; (require 'evil)
+;; (evil-mode 1)
+;; (global-set-key (kbd "M-,")  'find-tag)
 
 (global-set-key (kbd "C-c d")  'gtags-find-tag)
 (global-set-key (kbd "C-c r")  'gtags-find-rtag)
