@@ -122,6 +122,15 @@
 
 (global-set-key (kbd "<f9>") 'style-checker)
 
+(defun scons ()
+  (interactive)
+  (let ((arg (format "cd %s; scons" project)))
+    (compile arg)
+    ))
+
+(global-set-key (kbd "<f10>") 'scons)
+(global-set-key (kbd "<f11>") 'next-error)
+(global-set-key (kbd "<f12>") 'previous-error)
 
 (add-to-list 'load-path "~/jparkenv/emacs.d/lisp/")
 (require 'browse-kill-ring)
