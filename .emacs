@@ -15,12 +15,6 @@
 
 ;; Cancel auto complete in file selection? C-f
 
-(global-set-key (kbd "C-c b")  'windmove-left)
-(global-set-key (kbd "C-c f")  'windmove-right)
-(global-set-key (kbd "C-c p")  'windmove-up)
-(global-set-key (kbd "C-c n")  'windmove-down)
-
-(global-set-key (kbd "C-c o")  'ff-find-other-file)
 
 ;; add PATH
 (setq exec-path (append  exec-path (list "/usr/local/bin" "/User/jpark/bin")))
@@ -36,8 +30,6 @@
   )
 
 ;; use tag tables
-;; M-x visit-tags-table
-
 ;; ido mode enable to choice in files or directories
 (ido-mode t)
 ;; for more information, http://www.emacswiki.org/emacs/InteractivelyDoThings
@@ -47,7 +39,7 @@
 ;; (setq compile-command "nmake")
 ;; (setq compile-command "scons")
 ;; how to bind f7 to M-x compile
-(global-set-key (kbd "<f7>") 'compile)
+
 
 
 (setq project "~/")
@@ -64,14 +56,9 @@
   (interactive)
   (dired project))
 
-(global-set-key (kbd "<f2>") 'goto_project_dir)
-
 (defun goto-vc-dir ()
   (interactive)
   (vc-dir project))
-
-(global-set-key (kbd "<f3>") 'goto-vc-dir)
-
 
 ;;(setq prj_bookmarks (list (cons "name" "relative-directory")))
  (setq prj_bookmarks
@@ -100,22 +87,6 @@
   (interactive)
   (ido-find-file-in-dir project))
 
-(global-set-key (kbd "<f1>") 'find-file-in-project)
-(global-set-key (kbd "M-3") 'split-window-horizontally)
-(global-set-key (kbd "M-2") 'split-window-vertically)
-(global-set-key (kbd "M-1") 'delete-other-window)
-(global-set-key (kbd "M-s") 'other-window)
-(global-set-key (kbd "<f5>") 'goto-bookmark)
-(global-set-key (kbd "<f4>") 'save-buffer)
-(global-set-key (kbd "<f8>") 'execute-extended-command)
-
-;; check http://ergoemacs.org/emacs/effective_emacs.html for more effective key binding
-(global-set-key (kbd "M-j") 'backward-char) ; was indent-new-comment-line
-(global-set-key (kbd "M-l") 'forward-char)  ; was downcase-word
-(global-set-key (kbd "M-i") 'previous-line) ; was tab-to-tab-stop
-(global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
-
-(global-set-key (kbd "C-=") 'next-line)
 
 (defun scons-unit ()
   (interactive)
@@ -123,7 +94,6 @@
     (compile arg)
     ))
 
-(global-set-key (kbd "<f6>") 'scons-unit)
 
 
 (defun style-checker ()
@@ -140,10 +110,6 @@
     (compile arg)
     ))
 
-(global-set-key (kbd "<f10>") 'scons)
-(global-set-key (kbd "<f11>") 'next-error)
-(global-set-key (kbd "<f12>") 'previous-error)
-
 (add-to-list 'load-path "~/jparkenv/emacs.d/lisp/")
 (require 'browse-kill-ring)
 ;; (require 'okl-style)
@@ -154,10 +120,6 @@
 ;; (require 'evil)
 ;; (evil-mode 1)
 ;; (global-set-key (kbd "M-,")  'find-tag)
-
-(global-set-key (kbd "C-c d")  'gtags-find-tag)
-(global-set-key (kbd "C-c r")  'gtags-find-rtag)
-(global-set-key (kbd "C-c s")  'gtags-find-symbol)
 
 
 ;; C-_ meanx undo-
@@ -323,6 +285,18 @@
 ;;     (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
 
 
+(defun jpark-diff-mode-hook ()
+  (define-key diff-mode-map (kbd "M-s") 'other-window)
+  (define-key diff-mode-map (kbd "M-1") 'kill-buffer)
+)
+
+(add-hook 'diff-mode-hook 'jpark-diff-mode-hook)
+
+
+
+
+
+
 (browse-kill-ring-default-keybindings)
 
 
@@ -396,3 +370,40 @@
 (require 'thing-edit)
 (global-set-key (kbd "C-c l") 'thing-copy-line)
 (global-set-key (kbd "C-c w") 'thing-copy-word)
+
+
+(global-set-key (kbd "<f1>") 'find-file-in-project)
+(global-set-key (kbd "<f2>") 'goto_project_dir)
+(global-set-key (kbd "<f3>") 'goto-vc-dir)
+(global-set-key (kbd "<f4>") 'save-buffer)
+(global-set-key (kbd "<f5>") 'goto-bookmark)
+(global-set-key (kbd "<f6>") 'scons-unit)
+(global-set-key (kbd "<f7>") 'compile)
+(global-set-key (kbd "<f8>") 'execute-extended-command)
+(global-set-key (kbd "<f10>") 'scons)
+(global-set-key (kbd "<f11>") 'next-error)
+(global-set-key (kbd "<f12>") 'previous-error)
+
+(global-set-key (kbd "M-1") 'delete-other-window)
+(global-set-key (kbd "M-2") 'split-window-vertically)
+(global-set-key (kbd "M-3") 'split-window-horizontally)
+
+(global-set-key (kbd "M-s") 'other-window)
+;; check http://ergoemacs.org/emacs/effective_emacs.html for more effective key binding
+(global-set-key (kbd "M-j") 'backward-char) ; was indent-new-comment-line
+(global-set-key (kbd "M-l") 'forward-char)  ; was downcase-word
+(global-set-key (kbd "M-i") 'previous-line) ; was tab-to-tab-stop
+(global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
+(global-set-key (kbd "C-=") 'next-line)
+
+(global-set-key (kbd "C-c b")  'windmove-left)
+(global-set-key (kbd "C-c f")  'windmove-right)
+(global-set-key (kbd "C-c p")  'windmove-up)
+(global-set-key (kbd "C-c n")  'windmove-down)
+
+(global-set-key (kbd "C-c o")  'ff-find-other-file)
+
+(global-set-key (kbd "C-c d")  'gtags-find-tag)
+(global-set-key (kbd "C-c r")  'gtags-find-rtag)
+(global-set-key (kbd "C-c s")  'gtags-find-symbol)
+
