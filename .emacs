@@ -40,6 +40,7 @@
 ;; (setq compile-command "scons")
 ;; how to bind f7 to M-x compile
 
+(show-paren-mode t)
 
 
 (setq project "~/")
@@ -293,6 +294,21 @@
 (add-hook 'diff-mode-hook 'jpark-diff-mode-hook)
 
 
+(defun jpark-vc-dir-mode-hook ()
+  (define-key vc-dir-mode-map (kbd "M-s") 'other-window)
+  (define-key vc-dir-mode-map (kbd "M-1") 'kill-buffer)
+)
+
+(add-hook 'vc-dir-mode-hook 'jpark-vc-dir-mode-hook)
+
+(defun jpark-dired-mode-hook ()
+  (define-key dired-mode-map (kbd "M-s") 'other-window)
+  (define-key dired-mode-map (kbd "M-1") 'kill-buffer)
+)
+
+(add-hook 'dired-mode-hook 'jpark-dired-mode-hook)
+
+
 
 
 
@@ -322,14 +338,9 @@
 ;; find command name
 ;M-x apropos-command RET then press command name
 
-(global-set-key (kbd "C-c v")  'insert-register)
-(global-set-key (kbd "C-c c")  'copy-to-register)
-
 ;; C-h m describes current mode
 
-
 ;; M-` activates menu bar
-
 
 (defun ergoemacs-open-in-desktop ()
   "Show current file in desktop (OS's file manager)."
@@ -368,11 +379,11 @@
 
 
 (require 'thing-edit)
-(global-set-key (kbd "C-c l") 'thing-copy-line)
+(global-set-key (kbd "C-c e") 'thing-copy-line)
 (global-set-key (kbd "C-c w") 'thing-copy-word)
 
 
-(global-set-key (kbd "<f1>") 'find-file-in-project)
+(global-set-key (kbd "<f1>") 'ido-find-file)
 (global-set-key (kbd "<f2>") 'goto_project_dir)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'save-buffer)
@@ -384,9 +395,10 @@
 (global-set-key (kbd "<f11>") 'next-error)
 (global-set-key (kbd "<f12>") 'previous-error)
 
-(global-set-key (kbd "M-1") 'delete-other-window)
+(global-set-key (kbd "M-1") 'ido-switch-buffer)
 (global-set-key (kbd "M-2") 'split-window-vertically)
 (global-set-key (kbd "M-3") 'split-window-horizontally)
+(global-set-key (kbd "M-4") 'delete-other-windows)
 
 (global-set-key (kbd "M-s") 'other-window)
 ;; check http://ergoemacs.org/emacs/effective_emacs.html for more effective key binding
@@ -395,6 +407,8 @@
 (global-set-key (kbd "M-i") 'previous-line) ; was tab-to-tab-stop
 (global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
 (global-set-key (kbd "C-=") 'next-line)
+(global-set-key (kbd "C-;") 'backward-char)
+(global-set-key (kbd "C-'") 'forward-char)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f")  'windmove-right)
@@ -406,4 +420,7 @@
 (global-set-key (kbd "C-c d")  'gtags-find-tag)
 (global-set-key (kbd "C-c r")  'gtags-find-rtag)
 (global-set-key (kbd "C-c s")  'gtags-find-symbol)
+
+(global-set-key (kbd "C-c v")  'insert-register)
+(global-set-key (kbd "C-c c")  'copy-to-register)
 
