@@ -42,7 +42,6 @@
 
 (show-paren-mode t)
 
-
 (setq project "~/")
 
 (defun set_project (dir-name)
@@ -112,13 +111,13 @@
     ))
 
 (add-to-list 'load-path "~/jparkenv/emacs.d/lisp/")
+
 (require 'browse-kill-ring)
-;; (require 'okl-style)
 (require 'gtags)
 
 ;; evil mode changes
-;; (add-to-list 'load-path "~/jparkenv/emacs.d/evil/") ; only without ELPA/el-get
-;; (require 'evil)
+(add-to-list 'load-path "~/jparkenv/emacs.d/evil/") ; only without ELPA/el-get
+(require 'evil)
 ;; (evil-mode 1)
 ;; (global-set-key (kbd "M-,")  'find-tag)
 
@@ -147,6 +146,8 @@
 
 ;; first non-white space char M-m
 
+(require 'highlight-80+)
+
 (defun use-80-columns()
   (setq fill-column 79)
   (highlight-80+-mode t))
@@ -172,7 +173,7 @@
 (add-hook 'c++-mode-hook 'jung-c-mode-hook)
 (add-hook 'python-mode-hook 'jung-c-mode-hook)
 
-;; add this hook as common to all languages 
+;;add this hook as common to all languages 
 (add-hook 'c-mode-common-hook 'flyspell-prog-mode)
 
 ;; common to all language, but it looks like for c-mode-common-hook I should add-hook only once?
@@ -180,22 +181,25 @@
 
 
 
-;; (defun my-python-hook()
-;;   (interactive)
+(defun my-python-hook()
+;;    (interactive)
 ;;   (highlight-lines-matching-regexp "import \\(pdb=\\|pytest\\)")
 ;;   (highlight-lines-matching-regexp "\\(pdb\\|pytest\\).set_trace()")
 ;;   (use-80-columns)
 
-;;   (define-key python-mode-map (kbd "C-c l") 'python-indent-shift-left)
-;;   (define-key python-mode-map (kbd "C-c r") 'python-indent-shift-right)
+  (define-key python-mode-map (kbd "<M-tab>") 'python-indent-shift-left)
+  (define-key python-mode-map (kbd "<C-tab>") 'python-indent-shift-right)
 ;;   (flyspell-prog-mode))
-;; (add-hook 'python-mode-hook 'my-python-hook)
+)
+(add-hook 'python-mode-hook 'my-python-hook)
 
 
 ;; C-x Tab is used to add indent rigidly (regardless of indent mode). It also used for region.
 
 ;; C-x h select entire buffer
 ;; C-M h select entire function
+;; C-u <tab> Shift an entire parenthetical grouping rigidly sideways so that its first line is properly indented.
+;; C-M-q Reindent all the lines within one parenthetical grouping.
 ;; C-M-\ indent region
 ;; so C-x h C-M-\ make indents for entire buffer
 
@@ -424,3 +428,49 @@
 (global-set-key (kbd "C-c v")  'insert-register)
 (global-set-key (kbd "C-c c")  'copy-to-register)
 
+
+
+;; http://www.emacswiki.org/emacs/IndentingText, shift left and right
+(defun shift-region (distance)
+  (let ((mark (mark)))
+    (save-excursion
+      (indent-rigidly (region-beginning) (region-end) distance)
+      (push-mark mark t t)
+      ;; Tell the command loop not to deactivate the mark
+      ;; for transient mark mode
+      (setq deactivate-mark nil))))
+
+(defun shift-line (distance)
+  (let ((mark (mark)))
+    (save-excursion
+      (indent-rigidly (line-beginning-position) (line-end-position) distance)
+      (push-mark mark t t)
+      ;; Tell the command loop not to deactivate the mark
+      ;; for transient mark mode
+      (setq deactivate-mark nil))))
+
+(defun shift-right ()
+  (interactive)
+  (shift-region 1))
+
+(defun shift-left ()
+  (interactive)
+  (shift-region -1))
+
+(defun tab-right ()
+  (interactive)
+  (shift-line 4))
+
+(defun tab-left ()
+  (interactive)
+  (shift-line -4))
+
+;; Bind (shift-right) and (shift-left) function to your favorite keys. I use
+;; the following so that Ctrl-Shift-Right Arrow moves selected text one 
+;; column to the right, Ctrl-Shift-Left Arrow moves selected text one
+;; column to the left:
+
+(global-set-key [C-S-right] 'shift-right)
+(global-set-key [C-S-left] 'shift-left)
+(global-set-key (kbd "<C-tab>") 'tab-right)
+(global-set-key (kbd "<M-tab>") 'tab-left)
