@@ -208,6 +208,7 @@
 ;; so C-x h C-M-\ make indents for entire buffer
 
 ;; M-m -> move to the start in the line (compare with C-a)
+;; M-^ -> join line
 
 ;; Treat .h as c++
 (setq auto-mode-alist (cons '("\\.h$" . c++-mode) auto-mode-alist))
