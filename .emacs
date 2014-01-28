@@ -174,7 +174,11 @@
 (add-hook 'python-mode-hook 'jung-c-mode-hook)
 
 ;;add this hook as common to all languages 
-(add-hook 'c-mode-common-hook 'flyspell-prog-mode)
+;; (add-hook 'c-mode-common-hook 'flyspell-prog-mode)
+
+;; this is added to remap after flyspell mode, but did not work.
+;; (eval-after-load 'flyspell-mode
+;;   '(define-key c-mode-map (kbd "<C-;>") 'backward-char))
 
 ;; common to all language, but it looks like for c-mode-common-hook I should add-hook only once?
 ;; (add-hook 'c-mode-common-hook 'jung-c-mode-hook)
@@ -187,8 +191,8 @@
 ;;   (highlight-lines-matching-regexp "\\(pdb\\|pytest\\).set_trace()")
 ;;   (use-80-columns)
 
-  (define-key python-mode-map (kbd "<M-tab>") 'python-indent-shift-left)
-  (define-key python-mode-map (kbd "<C-tab>") 'python-indent-shift-right)
+  (define-key python-mode-map (kbd "C-<") 'python-indent-shift-left)
+  (define-key python-mode-map (kbd "C->") 'python-indent-shift-right)
 ;;   (flyspell-prog-mode))
 )
 (add-hook 'python-mode-hook 'my-python-hook)
@@ -413,6 +417,7 @@
 (global-set-key (kbd "C-=") 'next-line)
 (global-set-key (kbd "C-;") 'backward-char)
 (global-set-key (kbd "C-'") 'forward-char)
+(global-set-key (kbd "C-+") 'scroll-down-command)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f")  'windmove-right)
@@ -472,5 +477,5 @@
 
 (global-set-key [C-S-right] 'shift-right)
 (global-set-key [C-S-left] 'shift-left)
-(global-set-key (kbd "<C-tab>") 'tab-right)
-(global-set-key (kbd "<M-tab>") 'tab-left)
+(global-set-key (kbd "C->") 'tab-right)
+(global-set-key (kbd "C-<") 'tab-left)
