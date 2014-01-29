@@ -297,7 +297,8 @@
 
 (defun jpark-diff-mode-hook ()
   (define-key diff-mode-map (kbd "M-s") 'other-window)
-  (define-key diff-mode-map (kbd "M-1") 'kill-buffer)
+  (define-key diff-mode-map (kbd "M-1") 'ido-switch-buffer)
+  (define-key diff-mode-map (kbd "M-4") 'kill-buffer)
 )
 
 (add-hook 'diff-mode-hook 'jpark-diff-mode-hook)
@@ -305,14 +306,16 @@
 
 (defun jpark-vc-dir-mode-hook ()
   (define-key vc-dir-mode-map (kbd "M-s") 'other-window)
-  (define-key vc-dir-mode-map (kbd "M-1") 'kill-buffer)
+  (define-key vc-dir-mode-map (kbd "M-1") 'ido-switch-buffer)
+  (define-key diff-mode-map (kbd "M-4") 'kill-buffer)
 )
 
 (add-hook 'vc-dir-mode-hook 'jpark-vc-dir-mode-hook)
 
 (defun jpark-dired-mode-hook ()
   (define-key dired-mode-map (kbd "M-s") 'other-window)
-  (define-key dired-mode-map (kbd "M-1") 'kill-buffer)
+  (define-key dired-mode-map (kbd "M-1") 'ido-switch-buffer)
+  (define-key diff-mode-map (kbd "M-4") 'kill-buffer)
 )
 
 (add-hook 'dired-mode-hook 'jpark-dired-mode-hook)
@@ -480,3 +483,11 @@
 (global-set-key [C-S-left] 'shift-left)
 (global-set-key (kbd "C->") 'tab-right)
 (global-set-key (kbd "C-<") 'tab-left)
+
+;; (defun my-return ()
+;;   (interactive)
+;;   (move-end-of-line())
+;;   (newline-and-indent()))
+
+;; (global-set-key (kbd "C-J") 'my-return)
+;; (global-set-key (kbd "C-O") 'my-space)
