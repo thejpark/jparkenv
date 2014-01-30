@@ -391,11 +391,18 @@
 
 
 (require 'thing-edit)
-(global-set-key (kbd "C-c e") 'thing-copy-line)
+;;(global-set-key (kbd "C-c e") 'thing-copy-line)
 (global-set-key (kbd "C-c w") 'thing-copy-word)
 
+(defun my-copy-line ()
+  (interactive)
+  (progn
+    (thing-copy-line)
+    (move-beginning-of-line())
+  )
+)
 
-(global-set-key (kbd "<f1>") 'keyboard-quit)
+(global-set-key (kbd "<f1>") 'my-copy-line)
 (global-set-key (kbd "<f2>") 'goto_project_dir)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'goto-line)
