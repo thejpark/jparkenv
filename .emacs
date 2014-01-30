@@ -395,10 +395,10 @@
 (global-set-key (kbd "C-c w") 'thing-copy-word)
 
 
-(global-set-key (kbd "<f1>") 'ido-find-file)
+(global-set-key (kbd "<f1>") 'keyboard-quit)
 (global-set-key (kbd "<f2>") 'goto_project_dir)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
-(global-set-key (kbd "<f4>") 'save-buffer)
+(global-set-key (kbd "<f4>") 'goto-line)
 (global-set-key (kbd "<f5>") 'goto-bookmark)
 (global-set-key (kbd "<f6>") 'scons-unit)
 (global-set-key (kbd "<f7>") 'compile)
