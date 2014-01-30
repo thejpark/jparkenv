@@ -418,10 +418,11 @@
 (global-set-key (kbd "M-l") 'forward-char)  ; was downcase-word
 (global-set-key (kbd "M-i") 'previous-line) ; was tab-to-tab-stop
 (global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
-(global-set-key (kbd "C-=") 'next-line)
-(global-set-key (kbd "C-;") 'backward-char)
+(global-set-key (kbd "C--") 'scroll-up-command)
+(global-set-key (kbd "C-;") 'next-line)
+(global-set-key (kbd "C-l") 'backward-char)
 (global-set-key (kbd "C-'") 'forward-char)
-(global-set-key (kbd "C-+") 'scroll-down-command)
+(global-set-key (kbd "C-=") 'scroll-down-command)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f")  'windmove-right)
