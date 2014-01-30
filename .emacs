@@ -297,7 +297,7 @@
 
 (defun jpark-diff-mode-hook ()
   (define-key diff-mode-map (kbd "M-s") 'other-window)
-  (define-key diff-mode-map (kbd "M-1") 'ido-switch-buffer)
+  (define-key diff-mode-map (kbd "M-2") 'ido-switch-buffer)
   (define-key diff-mode-map (kbd "M-4") 'kill-buffer)
 )
 
@@ -306,7 +306,7 @@
 
 (defun jpark-vc-dir-mode-hook ()
   (define-key vc-dir-mode-map (kbd "M-s") 'other-window)
-  (define-key vc-dir-mode-map (kbd "M-1") 'ido-switch-buffer)
+  (define-key vc-dir-mode-map (kbd "M-2") 'ido-switch-buffer)
   (define-key diff-mode-map (kbd "M-4") 'kill-buffer)
 )
 
@@ -314,7 +314,7 @@
 
 (defun jpark-dired-mode-hook ()
   (define-key dired-mode-map (kbd "M-s") 'other-window)
-  (define-key dired-mode-map (kbd "M-1") 'ido-switch-buffer)
+  (define-key dired-mode-map (kbd "M-2") 'ido-switch-buffer)
   (define-key diff-mode-map (kbd "M-4") 'kill-buffer)
 )
 
@@ -414,10 +414,11 @@
 (global-set-key (kbd "<f11>") 'next-error)
 (global-set-key (kbd "<f12>") 'previous-error)
 
-(global-set-key (kbd "M-1") 'ido-switch-buffer)
-(global-set-key (kbd "M-2") 'split-window-vertically)
+;;(global-set-key (kbd "M-1") 'ido-switch-buffer)
+(global-set-key (kbd "M-2") 'ido-switch-buffer)
 (global-set-key (kbd "M-3") 'split-window-horizontally)
 (global-set-key (kbd "M-4") 'delete-other-windows)
+(global-set-key (kbd "M-4") 'kill-buffer)
 
 (global-set-key (kbd "M-s") 'other-window)
 ;; check http://ergoemacs.org/emacs/effective_emacs.html for more effective key binding
