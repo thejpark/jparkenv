@@ -307,7 +307,7 @@
 (defun jpark-vc-dir-mode-hook ()
   (define-key vc-dir-mode-map (kbd "M-s") 'other-window)
   (define-key vc-dir-mode-map (kbd "M-2") 'ido-switch-buffer)
-  (define-key diff-mode-map (kbd "M-4") 'kill-buffer)
+  (define-key vc-dir-mode-map (kbd "M-4") 'kill-buffer)
 )
 
 (add-hook 'vc-dir-mode-hook 'jpark-vc-dir-mode-hook)
@@ -315,7 +315,7 @@
 (defun jpark-dired-mode-hook ()
   (define-key dired-mode-map (kbd "M-s") 'other-window)
   (define-key dired-mode-map (kbd "M-2") 'ido-switch-buffer)
-  (define-key diff-mode-map (kbd "M-4") 'kill-buffer)
+  (define-key dired-mode-map (kbd "M-4") 'kill-buffer)
 )
 
 (add-hook 'dired-mode-hook 'jpark-dired-mode-hook)
