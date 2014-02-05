@@ -402,9 +402,18 @@
   )
 )
 
+(defun my-kill-line ()
+  (interactive)
+  (progn
+    (move-beginning-of-line())
+    (kill-line)
+  )
+)
+
 (global-set-key (kbd "<f1>") 'my-copy-line)
 (global-set-key (kbd "C-<f1>") 'yank)
 (global-set-key (kbd "<f2>") 'goto_project_dir)
+(global-set-key (kbd "C-<f2>") 'my-kill-line)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'goto-line)
 (global-set-key (kbd "<f5>") 'goto-bookmark)
