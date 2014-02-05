@@ -403,6 +403,7 @@
 )
 
 (global-set-key (kbd "<f1>") 'my-copy-line)
+(global-set-key (kbd "C-<f1>") 'yank)
 (global-set-key (kbd "<f2>") 'goto_project_dir)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'goto-line)
@@ -426,13 +427,16 @@
 (global-set-key (kbd "M-l") 'forward-char)  ; was downcase-word
 (global-set-key (kbd "M-i") 'previous-line) ; was tab-to-tab-stop
 (global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
-(global-set-key (kbd "C--") 'scroll-up-command)
+(global-set-key (kbd "M-[") 'backward-word)
+(global-set-key (kbd "M-]") 'forward-word) 
+(global-set-key (kbd "C--") 'scroll-down-command)
 (global-set-key (kbd "C-;") 'next-line)
 (global-set-key (kbd "C-l") 'backward-char)
 (global-set-key (kbd "C-'") 'forward-char)
-(global-set-key (kbd "C-=") 'scroll-down-command)
+(global-set-key (kbd "C-=") 'scroll-up-command)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
+(global-set-key (kbd "C-c l")  'recenter-top-bottom)
 (global-set-key (kbd "C-c f")  'windmove-right)
 (global-set-key (kbd "C-c p")  'windmove-up)
 (global-set-key (kbd "C-c n")  'windmove-down)
