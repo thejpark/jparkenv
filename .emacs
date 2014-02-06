@@ -410,12 +410,10 @@
   )
 )
 
-(global-set-key (kbd "C-<f1>") 'my-copy-line)
-(global-set-key (kbd "<f1>") 'yank)
-(global-set-key (kbd "<f2>") 'goto_project_dir)
-(global-set-key (kbd "C-<f2>") 'my-kill-line)
+(global-set-key (kbd "<f1>") 'my-copy-line)
+(global-set-key (kbd "<f2>") 'my-kill-line)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
-(global-set-key (kbd "<f4>") 'goto-line)
+(global-set-key (kbd "<f4>") 'goto_project_dir)
 (global-set-key (kbd "<f5>") 'goto-bookmark)
 (global-set-key (kbd "<f6>") 'scons-unit)
 (global-set-key (kbd "<f7>") 'compile)
@@ -424,10 +422,9 @@
 (global-set-key (kbd "<f11>") 'next-error)
 (global-set-key (kbd "<f12>") 'previous-error)
 
-;;(global-set-key (kbd "M-1") 'ido-switch-buffer)
+(global-set-key (kbd "M-1") 'delete-other-windows)
 (global-set-key (kbd "M-2") 'ido-switch-buffer)
 (global-set-key (kbd "M-3") 'split-window-horizontally)
-(global-set-key (kbd "M-4") 'delete-other-windows)
 (global-set-key (kbd "M-4") 'kill-buffer)
 
 (global-set-key (kbd "M-s") 'other-window)
@@ -438,6 +435,7 @@
 (global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
 (global-set-key (kbd "M-[") 'backward-word)
 (global-set-key (kbd "M-]") 'forward-word) 
+(global-set-key (kbd "M-n") 'forward-word) 
 (global-set-key (kbd "C--") 'scroll-down-command)
 (global-set-key (kbd "C-;") 'next-line)
 (global-set-key (kbd "C-l") 'backward-char)
