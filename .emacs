@@ -443,7 +443,7 @@
 (global-set-key (kbd "C-=") 'scroll-up-command)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
-(global-set-key (kbd "C-c l")  'recenter-top-bottom)
+(global-set-key (kbd "C-x l")  'recenter-top-bottom)
 (global-set-key (kbd "C-c f")  'windmove-right)
 (global-set-key (kbd "C-c p")  'windmove-up)
 (global-set-key (kbd "C-c n")  'windmove-down)
@@ -457,6 +457,8 @@
 (global-set-key (kbd "C-c v")  'insert-register)
 (global-set-key (kbd "C-c c")  'copy-to-register)
 
+(global-set-key (kbd "C-c l") 'my-copy-line)
+(global-set-key (kbd "C-c k") 'my-kill-line)
 
 
 ;; http://www.emacswiki.org/emacs/IndentingText, shift left and right
