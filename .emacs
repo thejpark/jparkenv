@@ -514,4 +514,5 @@
 ;; (global-set-key (kbd "C-J") 'my-return)
 ;; (global-set-key (kbd "C-O") 'my-space)
 
-;; C-x C-+ for increase font size, C-x C--for decrease
+;; C-x C-+  (or =) for increase font size, C-x C--for decrease
+;; C-spc C-spc to mark to remember a position, and C-u C-spc to go back
