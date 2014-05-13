@@ -516,3 +516,18 @@
 
 ;; C-x C-+  (or =) for increase font size, C-x C--for decrease
 ;; C-spc C-spc to mark to remember a position, and C-u C-spc to go back
+
+
+
+
+;;; Shell mode
+;; see this http://amitp.blogspot.com.au/2007/04/emacs-color-in-shell-buffers.html
+;; also this https://snarfed.org/why_i_dont_run_shells_inside_emacs
+(setq ansi-color-names-vector ; better contrast colors
+      ["black" "red4" "green4" "yellow4"
+       "blue3" "magenta4" "cyan4" "white"])
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+(add-hook 'shell-mode-hook 
+     '(lambda () (toggle-truncate-lines 1)))
+(setq comint-prompt-read-only t)
