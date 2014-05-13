@@ -523,6 +523,15 @@
 ;;; Shell mode
 ;; see this http://amitp.blogspot.com.au/2007/04/emacs-color-in-shell-buffers.html
 ;; also this https://snarfed.org/why_i_dont_run_shells_inside_emacs
+
+(custom-set-variables
+ '(comint-scroll-to-bottom-on-input t)  ; always insert at the bottom
+ '(comint-scroll-to-bottom-on-output t) ; always add output at the bottom
+ '(comint-scroll-show-maximum-output t) ; scroll to show max possible output
+ '(comint-completion-autolist t)        ; show completion list when ambiguous
+ '(comint-input-ignoredups t)           ; no duplicates in command history
+ '(comint-completion-addsuffix t)       ; insert space/slash after file completion
+ )
 (setq ansi-color-names-vector ; better contrast colors
       ["black" "red4" "green4" "yellow4"
        "blue3" "magenta4" "cyan4" "white"])
