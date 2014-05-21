@@ -410,8 +410,8 @@
   )
 )
 
-(global-set-key (kbd "<f1>") 'my-copy-line)
-(global-set-key (kbd "<f2>") 'my-kill-line)
+;; (global-set-key (kbd "<f1>") 'my-copy-line)
+;; (global-set-key (kbd "<f2>") 'my-kill-line)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'goto_project_dir)
 (global-set-key (kbd "<f5>") 'goto-bookmark)
@@ -433,8 +433,8 @@
 (global-set-key (kbd "M-l") 'forward-char)  ; was downcase-word
 (global-set-key (kbd "M-i") 'previous-line) ; was tab-to-tab-stop
 (global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
-(global-set-key (kbd "M-[") 'backward-word)
-(global-set-key (kbd "M-]") 'forward-word) 
+;; (global-set-key (kbd "M-[") 'backward-word)
+;; (global-set-key (kbd "M-]") 'forward-word) 
 (global-set-key (kbd "M-n") 'forward-word) 
 ;(global-set-key (kbd "C--") 'scroll-down-command)
 ;(global-set-key (kbd "C-;") 'next-line)
@@ -459,6 +459,8 @@
 
 (global-set-key (kbd "C-c l") 'my-copy-line)
 (global-set-key (kbd "C-c k") 'my-kill-line)
+(global-set-key (kbd "C-.") 'my-copy-line)
+(global-set-key (kbd "C-,") 'my-kill-line)
 
 
 ;; http://www.emacswiki.org/emacs/IndentingText, shift left and right
