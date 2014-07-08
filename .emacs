@@ -542,3 +542,8 @@
 (add-hook 'shell-mode-hook 
      '(lambda () (toggle-truncate-lines 1)))
 (setq comint-prompt-read-only t)
+
+;; (global-set-key (kbd "C-?") 'help-command)
+;; (global-set-key (kbd "C-h") 'delete-backward-char)
+;; (global-set-key (kbd "M-?") 'mark-paragraph)
+;; (global-set-key (kbd "M-h") 'backward-kill-word)
