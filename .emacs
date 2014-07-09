@@ -410,8 +410,8 @@
   )
 )
 
-;; (global-set-key (kbd "<f1>") 'my-copy-line)
-;; (global-set-key (kbd "<f2>") 'my-kill-line)
+(global-set-key (kbd "<f1>") 'ido-find-file)
+(global-set-key (kbd "<f2>") 'save-buffer)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'goto_project_dir)
 (global-set-key (kbd "<f5>") 'goto-bookmark)
@@ -457,8 +457,8 @@
 (global-set-key (kbd "C-c v")  'insert-register)
 (global-set-key (kbd "C-c c")  'copy-to-register)
 
-(global-set-key (kbd "C-c l") 'my-copy-line)
-(global-set-key (kbd "C-c k") 'my-kill-line)
+;; (global-set-key (kbd "C-c l") 'my-copy-line)
+;; (global-set-key (kbd "C-c k") 'my-kill-line)
 (global-set-key (kbd "C-.") 'my-copy-line)
 (global-set-key (kbd "C-,") 'my-kill-line)
 
