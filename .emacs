@@ -126,7 +126,8 @@
 ;; C-x s means save all
 
 ;; C-x r m # for bookmark set. C-x r C-h for help.
-;; C-x r j # for bookmark set. C-x r C-h for help.
+;; C-x r b # bookmark jump. C-x r C-h for help.
+;; C-x r j # jump to register. C-x r C-h for help.
 ;; C-x r s # copy register
 ;; C-x r i # paste
 
