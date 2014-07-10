@@ -436,7 +436,8 @@
 (global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
 ;; (global-set-key (kbd "M-[") 'backward-word)
 ;; (global-set-key (kbd "M-]") 'forward-word) 
-(global-set-key (kbd "M-n") 'forward-word) 
+(global-set-key (kbd "M-n") 'scroll-up-command) 
+(global-set-key (kbd "M-p") 'scroll-down-command) 
 ;(global-set-key (kbd "C--") 'scroll-down-command)
 ;(global-set-key (kbd "C-;") 'next-line)
 ;(global-set-key (kbd "C-l") 'backward-char)
@@ -444,7 +445,6 @@
 ;(global-set-key (kbd "C-=") 'scroll-up-command)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
-;(global-set-key (kbd "C-x l")  'recenter-top-bottom)
 (global-set-key (kbd "C-c f")  'windmove-right)
 (global-set-key (kbd "C-c p")  'windmove-up)
 (global-set-key (kbd "C-c n")  'windmove-down)
