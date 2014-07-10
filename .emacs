@@ -444,7 +444,7 @@
 ;(global-set-key (kbd "C-=") 'scroll-up-command)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
-(global-set-key (kbd "C-x l")  'recenter-top-bottom)
+;(global-set-key (kbd "C-x l")  'recenter-top-bottom)
 (global-set-key (kbd "C-c f")  'windmove-right)
 (global-set-key (kbd "C-c p")  'windmove-up)
 (global-set-key (kbd "C-c n")  'windmove-down)
