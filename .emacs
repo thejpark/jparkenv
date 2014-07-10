@@ -438,11 +438,11 @@
 ;; (global-set-key (kbd "M-]") 'forward-word) 
 (global-set-key (kbd "M-n") 'scroll-up-command) 
 (global-set-key (kbd "M-p") 'scroll-down-command) 
-;(global-set-key (kbd "C--") 'scroll-down-command)
+(global-set-key (kbd "C--") 'beginning-of-buffer)
 ;(global-set-key (kbd "C-;") 'next-line)
 ;(global-set-key (kbd "C-l") 'backward-char)
 ;(global-set-key (kbd "C-'") 'forward-char)
-;(global-set-key (kbd "C-=") 'scroll-up-command)
+(global-set-key (kbd "C-=") 'end-of-buffer)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f")  'windmove-right)
