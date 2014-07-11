@@ -442,7 +442,7 @@
 (global-set-key (kbd "C--") 'scroll-down-command)
 (global-set-key (kbd "C-;") 'next-line)
 (global-set-key (kbd "C-l") 'backward-word)
-(global-set-key (kbd "C-'") 'forward-word
+(global-set-key (kbd "C-'") 'forward-word)
 ;(global-set-key (kbd "C-=") 'end-of-buffer)
 (global-set-key (kbd "C-=") 'scroll-up-command)
 
