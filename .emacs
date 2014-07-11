@@ -460,7 +460,7 @@
 (global-set-key (kbd "C-c v")  'insert-register)
 (global-set-key (kbd "C-c c")  'copy-to-register)
 
-;; (global-set-key (kbd "C-c l") 'my-copy-line)
+(global-set-key (kbd "C-c l") 'recenter)
 ;; (global-set-key (kbd "C-c k") 'my-kill-line)
 (global-set-key (kbd "C-.") 'my-copy-line)
 (global-set-key (kbd "C-,") 'my-kill-line)
