@@ -11,6 +11,7 @@
 
 ;; how to delete first letter in a line in a region?
 ;; use C-x r k. Mark the start of the region, go to the end of the line, second column,
+
 ;; then press the C-x r k then it will remove the rectangle marked so delete first char.
 
 ;; Cancel auto complete in file selection? C-f
@@ -443,8 +444,8 @@
 (global-set-key (kbd "C-;") 'next-line)
 (global-set-key (kbd "C-l") 'backward-word)
 (global-set-key (kbd "C-'") 'forward-word)
-;(global-set-key (kbd "C-=") 'end-of-buffer)
-(global-set-key (kbd "C-=") 'scroll-up-command)
+(global-set-key (kbd "C-]") 'goto-line)
+(global-set-key (kbd "C-=") 'beginning-of-buffer)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f")  'windmove-right)
