@@ -177,7 +177,7 @@
 
 ;;add this hook as common to all languages 
 ;; (add-hook 'c-mode-common-hook 'flyspell-prog-mode)
-
+;
 ;; this is added to remap after flyspell mode, but did not work.
 ;; (eval-after-load 'flyspell-mode
 ;;   '(define-key c-mode-map (kbd "<C-;>") 'backward-char))
@@ -440,12 +440,12 @@
 (global-set-key (kbd "M-n") 'scroll-up-command) 
 (global-set-key (kbd "M-p") 'scroll-down-command) 
 ;(global-set-key (kbd "C--") 'beginning-of-buffer)
-(global-set-key (kbd "C--") 'scroll-down-command)
+(global-set-key (kbd "C--") 'backward-paragraph)
 (global-set-key (kbd "C-;") 'next-line)
 (global-set-key (kbd "C-l") 'backward-word)
 (global-set-key (kbd "C-'") 'forward-word)
 (global-set-key (kbd "C-]") 'goto-line)
-(global-set-key (kbd "C-=") 'beginning-of-buffer)
+(global-set-key (kbd "C-=") 'forward-paragraph)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f")  'windmove-right)
