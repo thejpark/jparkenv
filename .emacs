@@ -299,6 +299,7 @@
   (define-key diff-mode-map (kbd "M-2") 'other-window)
   (define-key diff-mode-map (kbd "M-3") 'ido-switch-buffer)
   (define-key diff-mode-map (kbd "M-4") 'kill-buffer)
+  (define-key diff-mode-map (kbd "M-5") 'shell)
 )
 
 (add-hook 'diff-mode-hook 'jpark-diff-mode-hook)
@@ -308,6 +309,7 @@
   (define-key vc-dir-mode-map (kbd "M-2") 'other-window)
   (define-key vc-dir-mode-map (kbd "M-3") 'ido-switch-buffer)
   (define-key vc-dir-mode-map (kbd "M-4") 'kill-buffer)
+  (define-key vc-dir-mode-map (kbd "M-5") 'shell)
 )
 
 (add-hook 'vc-dir-mode-hook 'jpark-vc-dir-mode-hook)
@@ -316,6 +318,7 @@
   (define-key dired-mode-map (kbd "M-2") 'other-window)
   (define-key dired-mode-map (kbd "M-3") 'ido-switch-buffer)
   (define-key dired-mode-map (kbd "M-4") 'kill-buffer)
+  (define-key dired-mode-map (kbd "M-5") 'shell)
 )
 
 (add-hook 'dired-mode-hook 'jpark-dired-mode-hook)
@@ -428,6 +431,7 @@
 (global-set-key (kbd "M-2") 'other-window)
 (global-set-key (kbd "M-3") 'ido-switch-buffer)
 (global-set-key (kbd "M-4") 'kill-buffer)
+(global-set-key (kbd "M-5") 'shell)
 
 ;; check http://ergoemacs.org/emacs/effective_emacs.html for more effective key binding
 ;; (global-set-key (kbd "M-j") 'backward-char) ; was indent-new-comment-line
@@ -549,3 +553,6 @@
 ;; (global-set-key (kbd "C-h") 'delete-backward-char)
 ;; (global-set-key (kbd "M-?") 'mark-paragraph)
 ;; (global-set-key (kbd "M-h") 'backward-kill-word)
+
+;; for vim key bindings
+;; http://www.keyxl.com/aaa8263/290/vim-keyboard-shortcuts.htm
