@@ -96,14 +96,12 @@
     ))
 
 
-
 (defun style-checker ()
   (interactive)
   (let ((arg (format "cd %s; ./Tools/ContinuousIntegration/step_stylecheck.sh" project)))
     (compile arg)
     ))
 
-(global-set-key (kbd "<f9>") 'style-checker)
 
 (defun scons ()
   (interactive)
@@ -416,25 +414,26 @@
 (global-set-key (kbd "<f2>") 'save-buffer)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'goto_project_dir)
-(global-set-key (kbd "<f5>") 'goto-bookmark)
+(global-set-key (kbd "<f5>") 'style-checker)
 (global-set-key (kbd "<f6>") 'scons-unit)
 (global-set-key (kbd "<f7>") 'compile)
 (global-set-key (kbd "<f8>") 'execute-extended-command)
+(global-set-key (kbd "<f9>") 'evil-mode)
 (global-set-key (kbd "<f10>") 'scons)
 (global-set-key (kbd "<f11>") 'next-error)
 (global-set-key (kbd "<f12>") 'previous-error)
 
 (global-set-key (kbd "M-1") 'delete-other-windows)
-(global-set-key (kbd "M-2") 'ido-switch-buffer)
-(global-set-key (kbd "M-3") 'split-window-horizontally)
+(global-set-key (kbd "M-2") 'other-window)
+(global-set-key (kbd "M-3") 'ido-switch-buffer)
 (global-set-key (kbd "M-4") 'kill-buffer)
 
-(global-set-key (kbd "M-s") 'other-window)
 ;; check http://ergoemacs.org/emacs/effective_emacs.html for more effective key binding
 (global-set-key (kbd "M-j") 'backward-char) ; was indent-new-comment-line
 (global-set-key (kbd "M-l") 'forward-char)  ; was downcase-word
 (global-set-key (kbd "M-i") 'previous-line) ; was tab-to-tab-stop
 (global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
+
 ;; (global-set-key (kbd "M-[") 'backward-word)
 ;; (global-set-key (kbd "M-]") 'forward-word) 
 (global-set-key (kbd "M-n") 'scroll-up-command) 
@@ -444,7 +443,6 @@
 (global-set-key (kbd "C-;") 'next-line)
 (global-set-key (kbd "C-l") 'backward-word)
 (global-set-key (kbd "C-'") 'forward-word)
-(global-set-key (kbd "C-]") 'goto-line)
 (global-set-key (kbd "C-=") 'forward-paragraph)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
@@ -462,7 +460,6 @@
 (global-set-key (kbd "C-c c")  'copy-to-register)
 
 (global-set-key (kbd "C-c l") 'recenter)
-;; (global-set-key (kbd "C-c k") 'my-kill-line)
 (global-set-key (kbd "C-.") 'my-copy-line)
 (global-set-key (kbd "C-,") 'my-kill-line)
 
