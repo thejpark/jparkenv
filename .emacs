@@ -417,7 +417,8 @@
 (global-set-key (kbd "<f5>") 'style-checker)
 (global-set-key (kbd "<f6>") 'scons-unit)
 (global-set-key (kbd "<f7>") 'compile)
-(global-set-key (kbd "<f8>") 'execute-extended-command)
+;(global-set-key (kbd "<f8>") 'execute-extended-command)
+(global-set-key (kbd "<f8>") 'rgrep)
 (global-set-key (kbd "<f9>") 'evil-mode)
 (global-set-key (kbd "<f10>") 'scons)
 (global-set-key (kbd "<f11>") 'next-error)
@@ -429,15 +430,15 @@
 (global-set-key (kbd "M-4") 'kill-buffer)
 
 ;; check http://ergoemacs.org/emacs/effective_emacs.html for more effective key binding
-(global-set-key (kbd "M-j") 'backward-char) ; was indent-new-comment-line
-(global-set-key (kbd "M-l") 'forward-char)  ; was downcase-word
-(global-set-key (kbd "M-i") 'previous-line) ; was tab-to-tab-stop
-(global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
+;; (global-set-key (kbd "M-j") 'backward-char) ; was indent-new-comment-line
+;; (global-set-key (kbd "M-l") 'forward-char)  ; was downcase-word
+;; (global-set-key (kbd "M-i") 'previous-line) ; was tab-to-tab-stop
+;; (global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
 
 ;; (global-set-key (kbd "M-[") 'backward-word)
 ;; (global-set-key (kbd "M-]") 'forward-word) 
-(global-set-key (kbd "M-n") 'scroll-up-command) 
-(global-set-key (kbd "M-p") 'scroll-down-command) 
+(global-set-key (kbd "M-n") 'forward-paragraph) 
+(global-set-key (kbd "M-p") 'backward-paragraph) 
 ;(global-set-key (kbd "C--") 'beginning-of-buffer)
 (global-set-key (kbd "C--") 'backward-paragraph)
 (global-set-key (kbd "C-;") 'next-line)
