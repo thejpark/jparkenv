@@ -296,8 +296,9 @@
 
 
 (defun jpark-diff-mode-hook ()
-  (define-key diff-mode-map (kbd "M-2") 'other-window)
-  (define-key diff-mode-map (kbd "M-3") 'ido-switch-buffer)
+  (define-key diff-mode-map (kbd "M-3") 'split-window-right)
+  (define-key diff-mode-map (kbd "M-s") 'other-window)
+  (define-key diff-mode-map (kbd "M-2") 'ido-switch-buffer)
   (define-key diff-mode-map (kbd "M-4") 'kill-buffer)
   (define-key diff-mode-map (kbd "M-5") 'shell)
 )
@@ -306,8 +307,9 @@
 
 
 (defun jpark-vc-dir-mode-hook ()
-  (define-key vc-dir-mode-map (kbd "M-2") 'other-window)
-  (define-key vc-dir-mode-map (kbd "M-3") 'ido-switch-buffer)
+  (define-key vc-dir-mode-map (kbd "M-3") 'split-window-right)
+  (define-key vc-dir-mode-map (kbd "M-s") 'other-window)
+  (define-key vc-dir-mode-map (kbd "M-2") 'ido-switch-buffer)
   (define-key vc-dir-mode-map (kbd "M-4") 'kill-buffer)
   (define-key vc-dir-mode-map (kbd "M-5") 'shell)
 )
@@ -315,8 +317,9 @@
 (add-hook 'vc-dir-mode-hook 'jpark-vc-dir-mode-hook)
 
 (defun jpark-dired-mode-hook ()
-  (define-key dired-mode-map (kbd "M-2") 'other-window)
-  (define-key dired-mode-map (kbd "M-3") 'ido-switch-buffer)
+  (define-key dired-mode-map (kbd "M-3") 'split-window-right)
+  (define-key dired-mode-map (kbd "M-s") 'other-window)
+  (define-key dired-mode-map (kbd "M-2") 'ido-switch-buffer)
   (define-key dired-mode-map (kbd "M-4") 'kill-buffer)
   (define-key dired-mode-map (kbd "M-5") 'shell)
 )
@@ -428,8 +431,9 @@
 (global-set-key (kbd "<f12>") 'previous-error)
 
 (global-set-key (kbd "M-1") 'delete-other-windows)
-(global-set-key (kbd "M-2") 'other-window)
-(global-set-key (kbd "M-3") 'ido-switch-buffer)
+(global-set-key (kbd "M-3") 'split-window-right)
+(global-set-key (kbd "M-s") 'other-window)
+(global-set-key (kbd "M-2") 'ido-switch-buffer)
 (global-set-key (kbd "M-4") 'kill-buffer)
 (global-set-key (kbd "M-5") 'shell)
 
