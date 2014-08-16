@@ -560,3 +560,5 @@
 
 ;; for vim key bindings
 ;; http://www.keyxl.com/aaa8263/290/vim-keyboard-shortcuts.htm
+
+;; M-j  means new comment line
