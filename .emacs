@@ -61,6 +61,13 @@
   (interactive)
   (vc-dir project))
 
+;; General bookmarks
+(setq gen_bookmarks
+       (list
+ 	 (cons "jparkenv" "jparkenv")
+ 	 (cons "jparksrc" "wrk/jparksrc")
+ 	 ))
+
 ;;(setq prj_bookmarks (list (cons "name" "relative-directory")))
  (setq prj_bookmarks
        (list
@@ -73,7 +80,18 @@
  	 (cons "hal-integ" "Hal/Integ")
  	 ))
 
-(defun goto-bookmark ()
+(defun goto-gen-bookmark ()
+  (interactive)
+  (progn
+    (setq keywords
+	  (mapcar 'car gen_bookmarks))
+    (setq keyword (ido-completing-read "goto:" keywords))
+    (setq bookmark (assoc keyword gen_bookmarks))
+    (setq file (cdr bookmark))
+    (setq file (concat "~/" file))
+    (find-file file)))
+
+(defun goto-prj-bookmark ()
   (interactive)
   (progn
     (setq keywords
@@ -416,8 +434,8 @@
   )
 )
 
-(global-set-key (kbd "<f1>") 'ido-find-file)
-(global-set-key (kbd "<f2>") 'save-buffer)
+(global-set-key (kbd "<f1>") 'goto-gen-bookmark)
+(global-set-key (kbd "<f2>") 'goto-prj-bookmark)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'goto_project_dir)
 (global-set-key (kbd "<f5>") 'style-checker)
