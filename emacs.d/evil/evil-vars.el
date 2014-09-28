@@ -3,7 +3,7 @@
 ;; Author: Vegard Øye <vegard_oye at hotmail.com>
 ;; Maintainer: Vegard Øye <vegard_oye at hotmail.com>
 
-;; Version: 1.0.8
+;; Version: 1.0.9
 
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -166,8 +166,7 @@ of `evil-shift-width'."
   :group 'evil)
 (make-variable-buffer-local 'evil-shift-round)
 
-(defcustom evil-default-cursor
-  (list (or (frame-parameter nil 'cursor-color) "black") t)
+(defcustom evil-default-cursor t
   "The default cursor.
 May be a cursor type as per `cursor-type', a color string as passed
 to `set-cursor-color', a zero-argument function for changing the
@@ -568,6 +567,7 @@ If STATE is nil, Evil is disabled in the buffer."
     magit-stash-mode
     magit-status-mode
     magit-wazzup-mode
+    magit-process-mode
     mh-folder-mode
     monky-mode
     mu4e-main-mode
@@ -692,6 +692,7 @@ If STATE is nil, Evil is disabled in the buffer."
     (color-theme-mode-map . nil)
     (comint-mode-map . nil)
     (compilation-mode-map . nil)
+    (grep-mode-map . nil)
     (dictionary-mode-map . nil)
     (ert-results-mode-map . motion)
     (Info-mode-map . motion)
@@ -1041,6 +1042,12 @@ specified, then is works only on the first match."
   "Face for interactive replacement text."
   :group 'evil)
 
+(defcustom evil-command-window-height 8
+  "Height (in lines) of the command line window.
+Set to 0 to use the default height for `split-window'."
+  :type 'integer
+  :group 'evil)
+
 ;;; Variables
 
 (defmacro evil-define-local-var (symbol &optional initvalue docstring)
@@ -1318,6 +1325,10 @@ buffer-region of the newly inserted text.")
   "The last piece of deleted text.
 The text should be less than a line.")
 
+(defvar evil-was-yanked-without-register t
+  "Whether text being saved to the numbered-register ring was
+not deleted and not yanked to a specific register.")
+
 (defvar evil-paste-count nil
   "The count argument of the current paste command.")
 
@@ -1337,6 +1348,12 @@ instead of `buffer-undo-list'.")
 
 (defvar evil-search-prompt nil
   "String to use for search prompt.")
+
+(defvar evil-search-forward-history nil
+  "History of forward searches.")
+
+(defvar evil-search-backward-history nil
+  "History of backward searches.")
 
 (defvar evil-inner-text-objects-map (make-sparse-keymap)
   "Keymap for inner text objects.")
@@ -1447,6 +1464,9 @@ See `evil-ex-init-shell-argument-completion'.")
 (defvar evil-ex-previous-command nil
   "The previously executed Ex command.")
 
+(defvar evil-ex-cmd nil
+  "The current Ex command string.")
+
 (defvar evil-ex-point nil
   "The position of `point' when the ex command has been called.")
 
@@ -1512,6 +1532,17 @@ See `evil-ex-init-shell-argument-completion'.")
   "Non-nil if the previous was a search.
 Otherwise the previous command is assumed as substitute.")
 
+;;; Command line window
+
+(defvar evil-command-window-current-buffer nil
+  "The buffer from which the command line window was called.")
+
+(evil-define-local-var evil-command-window-execute-fn nil
+  "The command to execute when exiting the command line window.")
+
+(evil-define-local-var evil-command-window-cmd-key nil
+  "The key for the command that opened the command line window (:, /, or ?).")
+
 ;; The lazy-highlighting framework.
 (evil-define-local-var evil-ex-active-highlights-alist nil
   "An alist of currently active highlights.")
@@ -1523,7 +1554,35 @@ Otherwise the previous command is assumed as substitute.")
   "Keymap used in ex-search-mode.")
 (set-keymap-parent evil-ex-search-keymap minibuffer-local-map)
 
-(defconst evil-version "1.0-dev"
+(defconst evil-version
+  (eval-when-compile
+    (with-temp-buffer
+      (let ((dir (file-name-directory (or load-file-name
+                                          byte-compile-current-file))))
+        (cond
+         ;; git repository
+         ((and (file-exists-p (concat dir "/.git"))
+               (condition-case nil
+                   (zerop (call-process "git" nil '(t nil) nil
+                                        "rev-parse"
+                                        "--short" "HEAD"))
+                 (error nil)))
+          (goto-char (point-min))
+          (concat "evil-git-"
+                  (buffer-substring (point-min)
+                                    (line-end-position))))
+         ;; mercurial repository
+         ((and (file-exists-p (concat dir "/.hg"))
+               (condition-case nil
+                   (zerop (call-process "hg" nil '(t nil) nil
+                                        "parents"
+                                        "--template"
+                                        "evil-hg-{node|short}"))
+                 (error nil)))
+          (goto-char (point-min))
+          (buffer-substring (point-min) (line-end-position)))
+         ;; no repo, use plain version
+         (t "1.0-dev")))))
   "The current version of Evil")
 
 (defun evil-version ()

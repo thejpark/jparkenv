@@ -3,7 +3,7 @@
 ;; Author: Frank Fischer <frank fischer at mathematik.tu-chemnitz.de>
 ;; Maintainer: Vegard Øye <vegard_oye at hotmail.com>
 
-;; Version: 1.0.8
+;; Version: 1.0.9
 
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -136,21 +136,22 @@ is appended to the line."
   :keep-visual t
   (interactive
    (list
-    (concat
-     (cond
-      ((and (evil-visual-state-p)
-            evil-ex-visual-char-range
-            (memq (evil-visual-type) '(inclusive exclusive)))
-       "`<,`>")
-      ((evil-visual-state-p)
-       "'<,'>")
-      (current-prefix-arg
-       (let ((arg (prefix-numeric-value current-prefix-arg)))
-         (cond ((< arg 0) (setq arg (1+ arg)))
-               ((> arg 0) (setq arg (1- arg))))
-         (if (= arg 0) '(".")
-           (format ".,.%+d" arg)))))
-     evil-ex-initial-input)))
+    (let ((s (concat
+              (cond
+               ((and (evil-visual-state-p)
+                     evil-ex-visual-char-range
+                     (memq (evil-visual-type) '(inclusive exclusive)))
+                "`<,`>")
+               ((evil-visual-state-p)
+                "'<,'>")
+               (current-prefix-arg
+                (let ((arg (prefix-numeric-value current-prefix-arg)))
+                  (cond ((< arg 0) (setq arg (1+ arg)))
+                        ((> arg 0) (setq arg (1- arg))))
+                  (if (= arg 0) '(".")
+                    (format ".,.%+d" arg)))))
+              evil-ex-initial-input)))
+      (and (> (length s) 0) s))))
   (let ((evil-ex-current-buffer (current-buffer))
         (evil-ex-previous-command (unless initial-input
                                     (car-safe evil-ex-history)))
@@ -170,16 +171,20 @@ is appended to the line."
              'evil-ex-history
              evil-ex-previous-command
              t)))
-    ;; empty input means repeating the previous command
-    (when (zerop (length result))
-      (setq result evil-ex-previous-command))
-    ;; parse data
-    (evil-ex-update nil nil nil result)
-    ;; execute command
-    (unless (zerop (length result))
-      (if evil-ex-expression
-          (eval evil-ex-expression)
-        (error "Ex: syntax error")))))
+    (evil-ex-execute result)))
+
+(defun evil-ex-execute (result)
+  "Execute RESULT as an ex command on `evil-ex-current-buffer'."
+  ;; empty input means repeating the previous command
+  (when (zerop (length result))
+    (setq result evil-ex-previous-command))
+  ;; parse data
+  (evil-ex-update nil nil nil result)
+  ;; execute command
+  (unless (zerop (length result))
+    (if evil-ex-expression
+        (eval evil-ex-expression)
+      (error "Ex: syntax error"))))
 
 (defun evil-ex-delete-backward-char ()
   "Close the minibuffer if it is empty.
@@ -265,7 +270,7 @@ in case of incomplete or unknown commands."
       (setq evil-ex-tree tree
             evil-ex-expression expr
             evil-ex-range range
-            evil-ex-command cmd
+            evil-ex-cmd cmd
             evil-ex-bang bang
             evil-ex-argument arg)
       ;; test the current command
@@ -323,13 +328,12 @@ in case of incomplete or unknown commands."
 (defun evil-ex-command-completion-at-point ()
   (let ((context (evil-ex-syntactic-context (1- (point)))))
     (when (memq 'command context)
-      (let ((beg (or (get-text-property 0 'ex-index evil-ex-command)
+      (let ((beg (or (get-text-property 0 'ex-index evil-ex-cmd)
                      (point)))
-            (end (1+ (or (get-text-property (1- (length evil-ex-command))
+            (end (1+ (or (get-text-property (1- (length evil-ex-cmd))
                                             'ex-index
-                                            evil-ex-command)
+                                            evil-ex-cmd)
                          (1- (point))))))
-        (when evil-ex-bang) (setq end (1+ end))
         (list beg end (evil-ex-completion-table))))))
 
 (defun evil-ex-completion-table ()
@@ -360,8 +364,7 @@ in case of incomplete or unknown commands."
        ((null result1) result2)
        ((null result2) result1)
        ((and (eq result1 t) (eq result2 t)) t)
-       (t (assert (equal result1 result2))
-          result1))))
+       (t result1))))
    ((eq flag t)
     (delete-dups
      (append (all-completions string table1 pred)
@@ -415,7 +418,7 @@ in case of incomplete or unknown commands."
                                                   'ex-index
                                                   evil-ex-argument))
                           (1- (point)))))
-             (binding (evil-ex-completed-binding evil-ex-command))
+             (binding (evil-ex-completed-binding evil-ex-cmd))
              (arg-type (evil-get-command-property binding :ex-arg))
              (arg-handler (assoc arg-type evil-ex-argument-types))
              (completer (and arg-handler
@@ -648,7 +651,7 @@ This function interprets special file names like # and %."
       (let ((evil-ex-last-cmd (pop hist)))
         (when evil-ex-last-cmd
           (evil-ex-update nil nil nil evil-ex-last-cmd)
-          (let ((binding (evil-ex-binding evil-ex-command)))
+          (let ((binding (evil-ex-binding evil-ex-cmd)))
             (unless (eq binding #'evil-ex-repeat)
               (setq hist nil)
               (if evil-ex-expression

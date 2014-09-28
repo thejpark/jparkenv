@@ -3,7 +3,7 @@
 ;; Author: Vegard Øye <vegard_oye at hotmail.com>
 ;; Maintainer: Vegard Øye <vegard_oye at hotmail.com>
 
-;; Version: 1.0.8
+;; Version: 1.0.9
 
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -613,6 +613,23 @@ the end of the execution of BODY."
     (evil-test-local-mode-disabled)
     (evil-test-change-state 'normal)))
 
+(ert-deftest evil-test-execute-in-normal-state ()
+  "Test `evil-execute-in-normal-state'."
+  :tags '(evil)
+  (ert-info ("Execute normal state command in insert state")
+    (evil-test-buffer
+      "[a]bcdef\n"
+      ("I")
+      (should (evil-insert-state-p))
+      ("\C-ox")
+      (ert-info ("Should return to insert state")
+        (should (evil-insert-state-p)))
+      "[b]cdef\n"
+      ("\C-oA")
+      (ert-info ("Should return to insert state after insert state command")
+        (should (evil-insert-state-p)))
+      ("bcdef[]\n"))))
+
 (defun evil-test-suppress-keymap (state)
   "Verify that `self-insert-command' is suppressed in STATE"
   (evil-test-buffer
@@ -1098,6 +1115,32 @@ If nil, KEYS is used."
       ("w.")
       ";; (This) (buffer[)] is for notes you don't want to save")))
 
+(ert-deftest evil-test-repeat-register ()
+  "Test repeating a register command."
+  :tags '(evil repeat)
+  (evil-test-buffer
+    "[l]ine 1\nline 2\nline 3\nline 4\n"
+    ("\"addyy\"aP")
+    "[l]ine 1\nline 2\nline 3\nline 4\n"
+    (".")
+    "[l]ine 1\nline 1\nline 2\nline 3\nline 4\n"))
+
+(ert-deftest evil-test-repeat-numeric-register ()
+  "Test repeating a command with a numeric register."
+  :tags '(evil repeat)
+  (evil-test-buffer
+    "[l]ine 1\nline 2\nline 3\nline 4\nline 5\n"
+    ("dd...")
+    "[l]ine 5\n"
+    ("\"1P")
+    "[l]ine 4\nline 5\n"
+    (".")
+    "[l]ine 3\nline 4\nline 5\n"
+    (".")
+    "[l]ine 2\nline 3\nline 4\nline 5\n"
+    (".")
+    "[l]ine 1\nline 2\nline 3\nline 4\nline 5\n"))
+
 (ert-deftest evil-test-cmd-replace-char ()
   "Calling `evil-replace-char' should replace characters"
   :tags '(evil repeat)
@@ -1167,7 +1210,7 @@ This buffer is for notes")))
   "Test whether repeat returns to normal state in case of an error."
   (evil-test-buffer
     "[l]ine 1\nline 2\nline 3\nline 4"
-    ("ixxx" [down] [down] [home] "yyy" [escape])
+    ("ixxx" [down] [down] [left] [left] [left] "yyy" [escape])
     "xxxline 1\nline 2\nyy[y]line 3\nline 4"
     (should-error (execute-kbd-macro "j^."))
     (should (evil-normal-state-p))
@@ -2773,6 +2816,17 @@ This bufferThis bufferThis buffe[r];; and for Lisp evaluation."))
     "line 1\nAB[C]"
     ("gg\".P")
     "AB[C]line 1\nABC"))
+
+(ert-deftest evil-test-zero-register ()
+  "\"0 contains the last text that was yanked without specificying a register."
+  (evil-test-buffer
+    "[l]ine 1\nline 2\n"
+    ("yy\"0p")
+    "line 1\n[l]ine 1\nline 2\n"
+    ("j\"ayy\"0p")
+    "line 1\nline 1\nline 2\n[l]ine 1\n" ; yanked line 2 to "a, so "0 is still line 1
+    ("kdd\"0p")
+    "line 1\nline 1\nline 1\n[l]ine 1\n"))
 
 (ert-deftest evil-test-align ()
   "Test `evil-align-left', `evil-align-right' and `evil-align-center'."
@@ -5390,6 +5444,14 @@ Below some empty line."))
     (evil-test-buffer
       ";; [T]his buffer is for notes."
       ("vaw")
+      ";; <This[ ]>buffer is for notes.")
+    (evil-test-buffer
+      ";; Thi[s] buffer is for notes."
+      ("viw")
+      ";; <Thi[s]> buffer is for notes.")
+    (evil-test-buffer
+      ";; Thi[s] buffer is for notes."
+      ("vaw")
       ";; <This[ ]>buffer is for notes."))
   (ert-info ("Select two words")
     (ert-info ("Include whitespace on this side")
@@ -6109,7 +6171,13 @@ Below some empty line."))
       "This is \"a test[\"]. For \"quote\" objects."
       (emacs-lisp-mode)
       ("va\"")
-      "This is< \"a test[\"]>. For \"quote\" objects.")))
+      "This is< \"a test[\"]>. For \"quote\" objects."))
+  (ert-info ("Delete text from outside")
+    (evil-test-buffer
+      "Th[i]s is \"a test\". For \"quote\" objects."
+      (emacs-lisp-mode)
+      ("da\"")
+      "This is[.] For \"quote\" objects.")))
 
 (ert-deftest evil-test-paren-objects ()
   "Test `evil-inner-paren', etc."
@@ -6598,6 +6666,36 @@ if no previous selection")
         "[a]Xcdef\nabcdef\nabcdef"
         ("jj:@:" [return] ":1@:" [return])
         "[a]XcdXf\nabcdef\naXcdef"))))
+
+(ert-deftest evil-test-ex-repeat2 ()
+  "Test @: command."
+  :tags '(evil ex)
+  (evil-without-display
+    (ert-info ("Repeat in current line")
+      (evil-test-buffer
+        "[a]bcdef\nabcdef\nabcdef"
+        (":s/[be]/X" [return])
+        "[a]Xcdef\nabcdef\nabcdef"
+        ("jj@:")
+        "aXcdef\nabcdef\n[a]Xcdef"))
+    (ert-info ("Repeat with count in current line")
+      (evil-test-buffer
+        "[a]bcdef\nabcdef\nabcdef"
+        (":s/[be]/X" [return])
+        "[a]Xcdef\nabcdef\nabcdef"
+        ("jj2@:")
+        "aXcdef\nabcdef\n[a]XcdXf"))
+    (ert-info ("Do not record dot repeat")
+      (evil-test-buffer
+        ""
+        ("OAAAAAA" [escape] "^")
+        "[A]AAAAA\n"
+        (":s/A/X" [return])
+        "[X]AAAAA\n"
+        ("@:")
+        "[X]XAAAA\n"
+        (".")
+        "AAAAAA\nXXAAAA\n"))))
 
 (ert-deftest evil-test-ex-visual-char-range ()
   "Test visual character ranges in ex state."
@@ -7255,6 +7353,108 @@ maybe we need one line more with some text\n")
       "line1\nline2\nline3\nli[n]e4\nline5\n"
       (":2,4move.")
       "line1\nline2\nline3\n[l]ine4\nline5\n")))
+
+;;; Command line window
+
+(ert-deftest evil-test-command-window-ex ()
+  "Test command line window for ex commands"
+  (evil-test-buffer
+    "[f]oo foo foo"
+    (":s/foo/bar" [return])
+    "[b]ar foo foo"
+    (":s/foo/baz" [return])
+    "[b]ar baz foo"
+    ("q:")
+    "s/foo/bar\ns/foo/baz\n[ ]"
+    ("kk:s/bar/quz" [return])
+    "[s]/foo/quz\ns/foo/baz\n "
+    ("fzrx")
+    "s/foo/qu[x]\ns/foo/baz\n "
+    ([return])
+    "[b]ar baz qux"
+    (should (equal (car evil-ex-history)
+                   "s/foo/qux"))))
+
+(ert-deftest evil-test-command-window-recursive ()
+  "Test that recursive command windows shouldn't be allowed"
+  (let ((evil-command-window-height 0))
+    (evil-test-buffer
+      "[f]oo foo foo"
+      (":s/foo/bar" [return])
+      ("q:")
+      (should-error (execute-kbd-macro "q:")))))
+
+(ert-deftest evil-test-command-window-noop ()
+  "Test that executing a blank command does nothing"
+  (evil-test-buffer
+    "[f]oo foo foo"
+    ("q:")
+    "[ ]"
+    ([return])
+    "[f]oo foo foo"))
+
+(ert-deftest evil-test-command-window-multiple ()
+  "Test that multiple command line windows can't be visible at the same time"
+  (let ((evil-command-window-height 0))
+    (evil-test-buffer
+      "[f]oo foo foo"
+      ("q:")
+      (let ((num-windows (length (window-list))))
+        (select-window (previous-window))
+        (execute-kbd-macro "q:")
+        (should (= (length (window-list)) num-windows))))))
+
+(defmacro evil-with-both-search-modules (&rest body)
+  `(mapc (lambda (search-module)
+           (setq evil-search-forward-history nil
+                 evil-search-backward-history nil)
+           (evil-select-search-module 'evil-search-module search-module)
+           ,@body)
+         '(isearch evil-search)))
+
+(ert-deftest evil-test-command-window-search-history ()
+  "Test command window with forward and backward search history"
+  (evil-with-both-search-modules
+   (evil-test-buffer
+     "[f]oo bar baz qux one two three four"
+     ("/qux" [return])
+     "foo bar baz [q]ux one two three four"
+     ("/three" [return])
+     "foo bar baz qux one two [t]hree four"
+     ("?bar" [return])
+     "foo [b]ar baz qux one two three four"
+     ("/four" [return])
+     "foo bar baz qux one two three [f]our"
+     ("?baz" [return])
+     "foo bar [b]az qux one two three four"
+     ("q/")
+     "qux\nthree\nfour\n[ ]"
+     ("k" [return])
+     "foo bar baz qux one two three [f]our"
+     ("0N")
+     "foo bar baz qux one two three [f]our"
+     ("q?")
+     "bar\nbaz\n[ ]"
+     ("k$rr" [return])
+     "foo [b]ar baz qux one two three four"
+     (should-error
+      (progn (execute-kbd-macro "q/iNOT THERE")
+             (execute-kbd-macro [return])))
+     "foo [b]ar baz qux one two three four")))
+
+(ert-deftest evil-test-command-window-search-word ()
+  "Test command window history when searching for word under cursor"
+  (evil-with-both-search-modules
+   (evil-test-buffer
+     "[f]oo bar foo bar foo"
+     ("**")
+     "foo bar foo bar [f]oo"
+     ("B#")
+     "foo [b]ar foo bar foo"
+     ("q/k" [return])
+     "foo bar [f]oo bar foo"
+     ("q?k" [return])
+     "foo [b]ar foo bar foo")))
 
 ;;; Utilities
 

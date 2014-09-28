@@ -2,7 +2,7 @@
 ;; Author: Vegard Øye <vegard_oye at hotmail.com>
 ;; Maintainer: Vegard Øye <vegard_oye at hotmail.com>
 
-;; Version: 1.0.8
+;; Version: 1.0.9
 
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -29,6 +29,7 @@
 (require 'evil-search)
 (require 'evil-ex)
 (require 'evil-types)
+(require 'evil-command-window)
 
 ;;; Compatibility for Emacs 23
 (unless (fboundp 'window-body-width)
@@ -942,29 +943,37 @@ or line COUNT to the top of the window."
   (recenter -1)
   (evil-first-non-blank))
 
-(defun evil-scroll-left ()
-  "Scrolls the window half a screenwidth to the left."
-  (interactive)
+(evil-define-command evil-scroll-left (count)
+  "Scrolls the window COUNT half-screenwidths to the left."
+  :repeat nil
+  :keep-visual t
+  (interactive "p")
   (evil-with-hproject-point-on-window
-    (scroll-right (/ (window-width) 2))))
+    (scroll-right (* count (/ (window-width) 2)))))
 
-(defun evil-scroll-right ()
-  "Scrolls the window half a screenwidth to the right."
-  (interactive)
+(evil-define-command evil-scroll-right (count)
+  "Scrolls the window COUNT half-screenwidths to the right."
+  :repeat nil
+  :keep-visual t
+  (interactive "p")
   (evil-with-hproject-point-on-window
-    (scroll-left (/ (window-width) 2))))
+    (scroll-left (* count (/ (window-width) 2)))))
 
-(defun evil-scroll-column-left ()
-  "Scrolls the window one column to the left."
-  (interactive)
+(evil-define-command evil-scroll-column-left (count)
+  "Scrolls the window COUNT columns to the left."
+  :repeat nil
+  :keep-visual t
+  (interactive "p")
   (evil-with-hproject-point-on-window
-    (scroll-right 1)))
+    (scroll-right count)))
 
-(defun evil-scroll-column-right ()
-  "Scrolls the window one column to the right."
-  (interactive)
+(evil-define-command evil-scroll-column-right (count)
+  "Scrolls the window COUNT columns to the right."
+  :repeat nil
+  :keep-visual t
+  (interactive "p")
   (evil-with-hproject-point-on-window
-    (scroll-left 1)))
+    (scroll-left count)))
 
 ;;; Text objects
 
@@ -1152,6 +1161,36 @@ or line COUNT to the top of the window."
   (require 'thingatpt)
   (evil-inner-object-range count beg end type #'forward-symbol))
 
+(evil-define-text-object evil-next-match (count &optional beg end type)
+  "Select next match."
+  (unless (and (boundp 'evil-search-module)
+               (eq evil-search-module 'evil-search))
+    (error "next-match text objects only work with Evil search module."))
+  (let ((pnt (point)))
+    (cond
+     ((eq evil-ex-search-direction 'forward)
+      (unless (eobp) (forward-char))
+      (evil-ex-search-previous 1)
+      (when (and (<= evil-ex-search-match-beg pnt)
+                 (> evil-ex-search-match-end pnt))
+        (setq count (1- count)))
+      (if (> count 0) (evil-ex-search-next count)))
+     (t
+      (unless (eobp) (forward-char))
+      (evil-ex-search-next count))))
+  (list evil-ex-search-match-beg evil-ex-search-match-end))
+
+(evil-define-text-object evil-previous-match (count &optional beg end type)
+  "Select next match."
+  (unless (and (boundp 'evil-search-module)
+               (eq evil-search-module 'evil-search))
+    (error "previous-match text objects only work with Evil search module."))
+  (let ((evil-ex-search-direction
+         (if (eq evil-ex-search-direction 'backward)
+             'forward
+           'backward)))
+    (evil-next-match count beg end type)))
+
 ;;; Operator commands
 
 (evil-define-operator evil-yank (beg end type register yank-handler)
@@ -1159,17 +1198,19 @@ or line COUNT to the top of the window."
   :move-point nil
   :repeat nil
   (interactive "<R><x><y>")
-  (cond
-   ((and (fboundp 'cua--global-mark-active)
-         (fboundp 'cua-copy-region-to-global-mark)
-         (cua--global-mark-active))
-    (cua-copy-region-to-global-mark beg end))
-   ((eq type 'block)
-    (evil-yank-rectangle beg end register yank-handler))
-   ((eq type 'line)
-    (evil-yank-lines beg end register yank-handler))
-   (t
-    (evil-yank-characters beg end register yank-handler))))
+  (let ((evil-was-yanked-without-register
+         (and evil-was-yanked-without-register (not register))))
+    (cond
+     ((and (fboundp 'cua--global-mark-active)
+           (fboundp 'cua-copy-region-to-global-mark)
+           (cua--global-mark-active))
+      (cua-copy-region-to-global-mark beg end))
+     ((eq type 'block)
+      (evil-yank-rectangle beg end register yank-handler))
+     ((eq type 'line)
+      (evil-yank-lines beg end register yank-handler))
+     (t
+      (evil-yank-characters beg end register yank-handler)))))
 
 (evil-define-operator evil-yank-line (beg end type register)
   "Saves whole lines into the kill-ring."
@@ -1194,7 +1235,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
       (unless (string-match-p "\n" text)
         ;; set the small delete register
         (evil-set-register ?- text))))
-  (evil-yank beg end type register yank-handler)
+  (let ((evil-was-yanked-without-register nil))
+    (evil-yank beg end type register yank-handler))
   (cond
    ((eq type 'block)
     (evil-apply-on-block #'delete-region beg end nil))
@@ -1398,7 +1440,13 @@ of the block."
       (evil-apply-on-block #'evil-invert-case beg end nil)
     (evil-invert-case beg end)
     (when evil-this-motion
-      (goto-char end))))
+      (goto-char end)
+      (when (and evil-cross-lines
+                 evil-move-cursor-back
+                 (not (evil-visual-state-p))
+                 (not (evil-operator-state-p))
+                 (eolp) (not (eobp)) (not (bolp)))
+        (forward-char)))))
 
 (evil-define-operator evil-rot13 (beg end type)
   "ROT13 encrypt text."
@@ -1764,11 +1812,14 @@ The return value is the yanked text."
 (evil-define-command evil-use-register (register)
   "Use REGISTER for the next command."
   :keep-visual t
+  :repeat ignore
   (interactive "<C>")
   (setq evil-this-register register))
 
 (evil-define-command evil-record-macro (register)
-  "Record a keyboard macro into REGISTER."
+  "Record a keyboard macro into REGISTER.
+If REGISTER is :, /, or ?, the corresponding command line window
+will be opened instead."
   :keep-visual t
   :suppress-operator t
   (interactive
@@ -1784,6 +1835,12 @@ The return value is the yanked text."
         (setq last-kbd-macro nil))
       (evil-set-register evil-this-macro last-kbd-macro))
     (setq evil-this-macro nil))
+   ((eq register ?:)
+    (evil-command-window-ex))
+   ((eq register ?/)
+    (evil-command-window-search-forward))
+   ((eq register ??)
+    (evil-command-window-search-backward))
    (t
     (when defining-kbd-macro (end-kbd-macro))
     (setq evil-this-macro register)
@@ -1805,17 +1862,27 @@ when called interactively."
                          current-prefix-arg
                        0) 1)
            register (or evil-this-register (read-char)))
-     (if (eq register ?@)
-         (setq macro last-kbd-macro)
-       (setq macro (evil-get-register register t)))
+     (cond
+      ((eq register ?@)
+       (setq macro last-kbd-macro))
+      ((eq register ?:)
+       (setq macro (lambda () (evil-ex-repeat nil))))
+      (t
+       (setq macro (evil-get-register register t))))
      (list count macro)))
-  (if (or (and (not (stringp macro))
-               (not (vectorp macro)))
-          (member macro '("" [])))
-      ;; allow references to currently empty registers
-      ;; when defining macro
-      (unless evil-this-macro
-        (error "No previous macro"))
+  (cond
+   ((functionp macro)
+    (evil-repeat-abort)
+    (dotimes (i (or count 1))
+      (funcall macro)))
+   ((or (and (not (stringp macro))
+             (not (vectorp macro)))
+        (member macro '("" [])))
+    ;; allow references to currently empty registers
+    ;; when defining macro
+    (unless evil-this-macro
+      (error "No previous macro")))
+   (t
     (condition-case err
         (evil-with-single-undo
           (execute-kbd-macro macro count))
@@ -1823,7 +1890,7 @@ when called interactively."
       (error
        (evil-normal-state)
        (evil-normalize-keymaps)
-       (signal (car err) (cdr err))))))
+       (signal (car err) (cdr err)))))))
 
 ;;; Visual commands
 
@@ -2663,8 +2730,8 @@ the previous shell command is executed instead."
      ((zerop (length command))
       (if previous (error "No previous shell command")
         (error "No shell command")))
-     ((and beg end)
-      (shell-command-on-region beg end command t)
+     (evil-ex-range
+      (shell-command-on-region beg end command nil t)
       (goto-char beg)
       (evil-first-non-blank))
      (t
@@ -2685,6 +2752,49 @@ the previous shell command is executed instead."
                             (replace-regexp-in-string "\n" "^J" (cdr reg))
                           (cdr reg))))
         (newline)))))
+
+(evil-define-command evil-show-marks (mrks)
+  "Shows all marks.
+If MRKS is non-nil it should be a string and only registers
+corresponding to the characters of this string are shown."
+  :repeat nil
+  (interactive "<a>")
+  ;; To get markers and positions, we can't rely on 'global-mark-ring'
+  ;; provided by Emacs (although it will be much simpler and faster),
+  ;; because 'global-mark-ring' does not store mark characters, but
+  ;; only buffer name and position. Instead, 'evil-markers-alist' is
+  ;; used; this is list maintained by Evil for each buffer.
+  (let ((all-markers
+         ;; get global and local marks
+         (append (evil-filter-list #'(lambda (m)
+                                       (or (evil-global-marker-p (car m))
+                                           (not (markerp (cdr m)))))
+                                   evil-markers-alist)
+                 (evil-filter-list #'(lambda (m)
+                                       (or (not (evil-global-marker-p
+                                                 (car m)))
+                                           (not (markerp (cdr m)))))
+                                   (default-value 'evil-markers-alist)))))
+    (when mrks
+      (setq mrks (string-to-list mrks))
+      (setq all-markers (evil-filter-list #'(lambda (m)
+                                              (not (member (car m) mrks)))
+                                          all-markers)))
+    ;; map marks to list of 4-tuples (char row col file)
+    (setq all-markers
+          (mapcar #'(lambda (m)
+                      (with-current-buffer (marker-buffer (cdr m))
+                        (save-excursion
+                          (goto-char (cdr m))
+                          (list (car m)
+                                (1+ (count-lines 1 (line-beginning-position)))
+                                (current-column)
+                                (buffer-name)))))
+                  all-markers))
+    (evil-with-view-list "evil-marks"
+      (setq truncate-lines t)
+      (dolist (m (sort all-markers #'(lambda (a b) (< (car a) (car b)))))
+        (insert (apply 'format " %c %6d %6d %s\n" m))))))
 
 (eval-when-compile (require 'ffap))
 (evil-define-command evil-find-file-at-point-with-line ()
@@ -2768,33 +2878,7 @@ Change to `%s'? "
   "Goes to the next occurrence."
   :jump t
   :type exclusive
-  (setq evil-ex-search-start-point (point)
-        evil-ex-last-was-search t)
-  (let ((orig (point))
-        wrapped)
-    (dotimes (i (or count 1))
-      (if (eq evil-ex-search-direction 'backward)
-          (unless (bobp) (backward-char))
-        (unless (eobp) (forward-char))
-        ;; maybe skip end-of-line
-        (when (and evil-move-cursor-back
-                   (eolp) (not (eobp)))
-          (forward-char)))
-      (let ((res (evil-ex-find-next)))
-        (cond
-         ((not res)
-          (goto-char orig)
-          (signal 'search-failed
-                  (list (evil-ex-pattern-regex evil-ex-search-pattern))))
-         ((eq res 'wrapped) (setq wrapped t)))))
-    (if wrapped
-        (let (message-log-max)
-          (message "Search wrapped")))
-    (goto-char (match-beginning 0))
-    (setq evil-ex-search-match-beg (match-beginning 0)
-          evil-ex-search-match-end (match-end 0))
-    (evil-ex-search-goto-offset evil-ex-search-offset)
-    (evil-ex-search-activate-highlight evil-ex-search-pattern)))
+  (evil-ex-search count))
 
 (evil-define-motion evil-ex-search-previous (count)
   "Goes the the previous occurrence."
@@ -2802,7 +2886,7 @@ Change to `%s'? "
   :type exclusive
   (let ((evil-ex-search-direction
          (if (eq evil-ex-search-direction 'backward) 'forward 'backward)))
-    (evil-ex-search-next count)))
+    (evil-ex-search count)))
 
 (defun evil-repeat-ex-search (flag)
   "Called to record a search command.
@@ -3142,13 +3226,15 @@ Default position is the beginning of the buffer."
   "Shows basic file information."
   (let* ((nlines   (count-lines (point-min) (point-max)))
          (curr     (line-number-at-pos (point)))
-         (perc     (* (/ (float curr) (float nlines)) 100.0))
+         (perc     (if (> nlines 0)
+                       (format "%d%%" (* (/ (float curr) (float nlines)) 100.0))
+                     "No lines in buffer"))
          (file     (buffer-file-name (buffer-base-buffer)))
          (writable (and file (file-writable-p file)))
          (readonly (if (and file (not writable)) "[readonly] " "")))
     (if file
-        (message "\"%s\" %d %slines --%d%%--" file nlines readonly perc)
-      (message "%d lines --%d%%--" nlines perc))))
+        (message "\"%s\" %d %slines --%s--" file nlines readonly perc)
+      (message "%d lines --%s--" nlines perc))))
 
 ;;; Window navigation
 
@@ -3203,7 +3289,11 @@ the deleted window's parent window are rebalanced."
   (let ((p (window-parent)))
     (delete-window)
     (when evil-auto-balance-windows
-      (balance-windows p))))
+      ;; balance-windows raises an error if the parent does not have
+      ;; any futher childs (then rebalancing is not necessary anywa)
+      (condition-case nil
+          (balance-windows p)
+        (error)))))
 
 (evil-define-command evil-window-split (&optional count file)
   "Splits the current window horizontally, COUNT lines height,
@@ -3785,7 +3875,7 @@ if the previous state was Emacs state."
                             universal-argument-more
                             universal-argument-other-key)))
       `(progn
-         (evil-change-to-previous-state)
+         (evil-change-state ',evil-state)
          (setq evil-move-cursor-back ',evil-move-cursor-back))
     'post-command-hook)
   (setq evil-move-cursor-back nil)

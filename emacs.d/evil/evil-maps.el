@@ -3,7 +3,7 @@
 ;; Author: Vegard Øye <vegard_oye at hotmail.com>
 ;; Maintainer: Vegard Øye <vegard_oye at hotmail.com>
 
-;; Version: 1.0.8
+;; Version: 1.0.9
 
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -28,6 +28,7 @@
 (require 'evil-states)
 (require 'evil-ex)
 (require 'evil-commands)
+(require 'evil-command-window)
 
 ;;; Code:
 
@@ -312,6 +313,8 @@
 (define-key evil-inner-text-objects-map "`" 'evil-inner-back-quote)
 (define-key evil-inner-text-objects-map "t" 'evil-inner-tag)
 (define-key evil-inner-text-objects-map "o" 'evil-inner-symbol)
+(define-key evil-motion-state-map "gn" 'evil-next-match)
+(define-key evil-motion-state-map "gN" 'evil-previous-match)
 
 (when evil-want-C-i-jump
   (define-key evil-motion-state-map (kbd "C-i") 'evil-jump-forward))
@@ -459,10 +462,6 @@
 (evil-ex-define-cmd "set-initial-state" 'evil-ex-set-initial-state)
 (evil-ex-define-cmd "show-digraphs" 'evil-ex-show-digraphs)
 
-(when (fboundp 'undo-tree-visualize)
-  (evil-ex-define-cmd "undol[ist]" 'undo-tree-visualize)
-  (evil-ex-define-cmd "ul" 'undo-tree-visualize))
-
 ;; search command line
 (define-key evil-ex-search-keymap "\d" #'evil-ex-delete-backward-char)
 
@@ -500,6 +499,12 @@
 (define-key evil-read-key-map (kbd "C-v") #'evil-read-quoted-char)
 (define-key evil-read-key-map (kbd "C-k") #'evil-read-digraph-char)
 (define-key evil-read-key-map "\r" "\n")
+
+;; command line window
+(evil-define-key 'normal
+  evil-command-window-mode-map (kbd "RET") 'evil-command-window-execute)
+(evil-define-key 'insert
+  evil-command-window-mode-map (kbd "RET") 'evil-command-window-execute)
 
 (provide 'evil-maps)
 

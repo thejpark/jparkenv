@@ -2,7 +2,7 @@
 ;; Author: Vegard Øye <vegard_oye at hotmail.com>
 ;; Maintainer: Vegard Øye <vegard_oye at hotmail.com>
 
-;; Version: 1.0.8
+;; Version: 1.0.9
 
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -46,10 +46,6 @@
    (message "evil: Could not load `windmove', \
 window commands not available.")
    nil))
-
-(when (and (require 'undo-tree nil t)
-           (fboundp 'global-undo-tree-mode))
-  (global-undo-tree-mode 1))
 
 ;;; Compatibility with different Emacs versions
 
@@ -818,7 +814,8 @@ BUFFER defaults to the current buffer."
            (cursor (evil-state-property state :cursor t))
            (color (or (and (stringp cursor) cursor)
                       (and (listp cursor)
-                           (evil-member-if #'stringp cursor)))))
+                           (evil-member-if #'stringp cursor))
+                      (frame-parameter nil 'cursor-color))))
       (with-current-buffer (or buffer (current-buffer))
         ;; if both STATE and `evil-default-cursor'
         ;; specify a color, don't set it twice
@@ -1540,7 +1537,7 @@ POS defaults to point."
                 (set-marker marker nil))
             evil-jump-list)
       (setq evil-jump-list nil)
-      (push-mark pos))))
+      (push-mark pos t))))
 
 (defun evil-get-register (register &optional noerror)
   "Return contents of REGISTER.
@@ -1563,16 +1560,14 @@ The following special registers are supported.
         (or (cond
              ((eq register ?\")
               (current-kill 0))
-             ((and (<= ?0 register) (<= register ?9))
-              (let ((reg (- register ?0)))
+             ((and (<= ?1 register) (<= register ?9))
+              (let ((reg (- register ?1)))
                 (and (< reg (length kill-ring))
                      (current-kill reg t))))
              ((eq register ?*)
-              (let ((x-select-enable-primary t))
-                (current-kill 0)))
+              (x-get-selection-value))
              ((eq register ?+)
-              (let ((x-select-enable-clipboard t))
-                (current-kill 0)))
+              (x-get-clipboard))
              ((eq register ?%)
               (or (buffer-file-name) (error "No file name")))
              ((= register ?#)
@@ -1619,20 +1614,18 @@ register instead of replacing its content."
   (cond
    ((eq register ?\")
     (kill-new text))
-   ((and (<= ?0 register) (<= register ?9))
+   ((and (<= ?1 register) (<= register ?9))
     (if (null kill-ring)
         (kill-new text)
       (let ((kill-ring-yank-pointer kill-ring-yank-pointer)
             interprogram-paste-function
             interprogram-cut-function)
-        (current-kill (- register ?0))
+        (current-kill (- register ?1))
         (setcar kill-ring-yank-pointer text))))
    ((eq register ?*)
-    (let ((x-select-enable-primary t))
-      (kill-new text)))
+    (x-set-selection 'PRIMARY text))
    ((eq register ?+)
-    (let ((x-select-enable-clipboard t))
-      (kill-new text)))
+    (x-set-selection 'CLIPBOARD text))
    ((eq register ?-)
     (setq evil-last-small-deletion text))
    ((eq register ?_) ; the black hole register
@@ -1671,8 +1664,8 @@ register instead of replacing its content."
   (sort (append (mapcar #'(lambda (reg)
                             (cons reg (evil-get-register reg t)))
                         '(?\" ?* ?+ ?% ?# ?/ ?: ?. ?-
-                              ?0 ?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9))
-                register-alist)
+                              ?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9))
+                register-alist nil)
         #'(lambda (reg1 reg2) (< (car reg1) (car reg2)))))
 
 (defsubst evil-kbd-macro-suppress-motion-error ()
@@ -1957,6 +1950,8 @@ The tracked insertion is set to `evil-last-insertion'."
       (setq text (propertize text 'yank-handler (list yank-handler))))
     (when register
       (evil-set-register register text))
+    (when evil-was-yanked-without-register
+      (evil-set-register ?0 text)) ; "0 register contains last yanked text
     (unless (eq register ?_)
       (kill-new text))))
 
@@ -1973,11 +1968,13 @@ The tracked insertion is set to `evil-last-insertion'."
     (setq text (propertize text 'yank-handler yank-handler))
     (when register
       (evil-set-register register text))
+    (when evil-was-yanked-without-register
+      (evil-set-register ?0 text)) ; "0 register contains last yanked text
     (unless (eq register ?_)
       (kill-new text))))
 
 (defun evil-yank-rectangle (beg end &optional register yank-handler)
-  "Stores the rectangle defined by region BEG and END into the kill-ring."
+  "Saves the rectangle defined by region BEG and END into the kill-ring."
   (let ((lines (list nil)))
     (evil-apply-on-rectangle #'extract-rectangle-line beg end lines)
     ;; We remove spaces from the beginning and the end of the next.
@@ -1995,6 +1992,8 @@ The tracked insertion is set to `evil-last-insertion'."
                              'yank-handler yank-handler)))
       (when register
         (evil-set-register register text))
+      (when evil-was-yanked-without-register
+        (evil-set-register ?0 text)) ; "0 register contains last yanked text
       (unless (eq register ?_)
         (kill-new text)))))
 
@@ -2640,8 +2639,11 @@ the new (extended) text object range.  See
                        #'(lambda (count)
                            (funcall forward-func (- count))))))
     (if (> count 0)
-        ;; ensure we select the next object
-        (when (and beg end) (forward-char 1))
+        ;; Ensure we select the next object if there is an existing
+        ;; selection. If the selection contains only one character,
+        ;; we've just entered visual mode, and should select the
+        ;; current object as usual.
+        (when (and beg end (> (- end beg) 1)) (forward-char 1))
       ;; going backward
       (evil-swap forward backward)
       (setq count (abs count)))
@@ -2969,7 +2971,11 @@ is stored in `evil-temporary-undo' instead of `buffer-undo-list'."
        (let (buffer-undo-list)
          (prog1
              (progn ,@body)
-           (setq evil-temporary-undo (cons nil buffer-undo-list))))
+           (setq evil-temporary-undo buffer-undo-list)
+           ;; ensure evil-temporary-undo starts with exactly one undo
+           ;; boundary marker, i.e. nil
+           (unless (null (car-safe evil-temporary-undo))
+             (push nil evil-temporary-undo))))
      (unless (eq buffer-undo-list t)
        ;; undo is enabled, so update the global buffer undo list
        (setq buffer-undo-list
@@ -3252,6 +3258,8 @@ REST is the unparsed remainder of TO."
                             (1+ (cdr obj))
                           (cdr obj))))
                   (list result (substring rest end))))
+               ((eq char ?0)
+                (list "\\&" rest))
                (t
                 (list (concat "\\" (char-to-string char)) rest))))
           start)))
