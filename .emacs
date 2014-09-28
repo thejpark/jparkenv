@@ -16,6 +16,10 @@
 
 ;; Cancel auto complete in file selection? C-f
 
+;; Ctrl-i      Tab
+;; Ctrl-[      Esc
+;; Ctrl-m      Enter
+
 
 ;; add PATH
 (setq exec-path (append  exec-path (list "/usr/local/bin" "/User/jpark/bin")))
