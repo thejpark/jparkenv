@@ -86,27 +86,6 @@
   (interactive)
   (ido-find-file-in-dir project))
 
-
-(defun scons-unit ()
-  (interactive)
-  (let ((arg (format "cd %s; scons --unit-test-run" project)))
-    (compile arg)
-    ))
-
-
-(defun style-checker ()
-  (interactive)
-  (let ((arg (format "cd %s; ./Tools/ContinuousIntegration/step_stylecheck.sh" project)))
-    (compile arg)
-    ))
-
-
-(defun scons ()
-  (interactive)
-  (let ((arg (format "cd %s; scons" project)))
-    (compile arg)
-    ))
-
 (add-to-list 'load-path "~/jparkenv/emacs.d/lisp/")
 
 (require 'browse-kill-ring)
@@ -433,12 +412,11 @@
 
 ;(global-set-key (kbd "<f1>") 'goto-gen-bookmark)
 (global-set-key (kbd "<f1>") 'evil-mode)
-(global-set-key (kbd "<f2>") 'goto-prj-bookmark)
+;;(global-set-key (kbd "<f2>") 'goto-prj-bookmark)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'goto_project_dir)
-(global-set-key (kbd "<f5>") 'style-checker)
-(global-set-key (kbd "<f6>") 'scons-unit)
-;(global-set-key (kbd "<f7>") 'compile)
+(global-set-key (kbd "<f5>") 'prj-command)
+(global-set-key (kbd "<f6>") 'goto-prj-bookmark)
 (global-set-key (kbd "<f7>") 'find-tag)
 (global-set-key (kbd "<f8>") 'rgrep)
 (global-set-key (kbd "<f9>") 'execute-extended-command)
@@ -585,3 +563,69 @@
 ;; http://www.keyxl.com/aaa8263/290/vim-keyboard-shortcuts.htm
 
 ;; M-j  means new comment line
+
+
+
+;;(setq prj_bookmarks (list (cons "name" "relative-directory")))
+;;  (setq prj_bookmarks
+;;        (list
+;;  	 (cons "output-dir" "Build/RxDebug")
+;;  	 (cons "integtest" "IntegTests")
+;;  	 (cons "feature-file-dir" "IntegTests/features")
+;;  	 (cons "step-file-dir" "IntegTests/steps")
+;;  	 (cons "phantom" "Phantom/phantom")
+;;  	 (cons "hal-rx" "Hal/Rx")
+;;  	 (cons "hal-integ" "Hal/Integ")
+;;  	 ))
+
+
+;; (defun goto-prj-bookmark ()
+;;   (interactive)
+;;   (progn
+;;     (setq keywords
+;; 	  (mapcar 'car prj_bookmarks))
+;;     (setq keyword (ido-completing-read "goto:" keywords))
+;;     (setq bookmark (assoc keyword prj_bookmarks))
+;;     (setq file (cdr bookmark))
+;;     (setq file (concat project "/" file))
+;;     (find-file file)))
+
+
+;; (defun scons-unit ()
+;;   (interactive)
+;;   (let ((arg (format "cd %s; scons --unit-test-run" project)))
+;;     (compile arg)
+;;     ))
+
+
+;; (defun style-checker ()
+;;   (interactive)
+;;   (let ((arg (format "cd %s; ./Tools/ContinuousIntegration/step_stylecheck.sh" project)))
+;;     (compile arg)
+;;     ))
+
+
+;; (defun scons ()
+;;   (interactive)
+;;   (let ((arg (format "cd %s; scons" project)))
+;;     (compile arg)
+;;     ))
+
+;; (setq prj_commands
+;;        (list
+;;  	 (cons "style-checker" 'style-checker)
+;;  	 (cons "unit-test" 'scons-unit)
+;;  	 ))
+
+
+;; (defun prj-command ()
+;;   (interactive)
+;;   (progn
+;;     (setq keywords
+;; 	  (mapcar 'car prj_commands))
+;;     (setq keyword (ido-completing-read "command:" keywords))
+;;     (setq commands (assoc keyword prj_commands))
+;;     (fset 'command (cdr commands))
+;;     (command)))
+
+;; (provide 'prj-local)
