@@ -71,19 +71,6 @@
  	 (cons "jparkenv" "jparkenv")
  	 (cons "jparksrc" "wrk/jparksrc")
  	 ))
-
-;;(setq prj_bookmarks (list (cons "name" "relative-directory")))
- (setq prj_bookmarks
-       (list
- 	 (cons "output-dir" "Build/RxDebug")
- 	 (cons "integtest" "IntegTests")
- 	 (cons "feature-file-dir" "IntegTests/features")
- 	 (cons "step-file-dir" "IntegTests/steps")
- 	 (cons "phantom" "Phantom/phantom")
- 	 (cons "hal-rx" "Hal/Rx")
- 	 (cons "hal-integ" "Hal/Integ")
- 	 ))
-
 (defun goto-gen-bookmark ()
   (interactive)
   (progn
@@ -93,17 +80,6 @@
     (setq bookmark (assoc keyword gen_bookmarks))
     (setq file (cdr bookmark))
     (setq file (concat "~/" file))
-    (find-file file)))
-
-(defun goto-prj-bookmark ()
-  (interactive)
-  (progn
-    (setq keywords
-	  (mapcar 'car prj_bookmarks))
-    (setq keyword (ido-completing-read "goto:" keywords))
-    (setq bookmark (assoc keyword prj_bookmarks))
-    (setq file (cdr bookmark))
-    (setq file (concat project "/" file))
     (find-file file)))
 
 (defun find-file-in-project ()
@@ -453,17 +429,20 @@
   )
 )
 
-(global-set-key (kbd "<f1>") 'goto-gen-bookmark)
+(require 'prj-local)
+
+;(global-set-key (kbd "<f1>") 'goto-gen-bookmark)
+(global-set-key (kbd "<f1>") 'evil-mode)
 (global-set-key (kbd "<f2>") 'goto-prj-bookmark)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'goto_project_dir)
 (global-set-key (kbd "<f5>") 'style-checker)
 (global-set-key (kbd "<f6>") 'scons-unit)
-(global-set-key (kbd "<f7>") 'compile)
-;(global-set-key (kbd "<f8>") 'execute-extended-command)
+;(global-set-key (kbd "<f7>") 'compile)
+(global-set-key (kbd "<f7>") 'find-tag)
 (global-set-key (kbd "<f8>") 'rgrep)
-(global-set-key (kbd "<f9>") 'evil-mode)
-(global-set-key (kbd "<f10>") 'scons)
+(global-set-key (kbd "<f9>") 'execute-extended-command)
+(global-set-key (kbd "<f10>") 'compile)
 (global-set-key (kbd "<f11>") 'next-error)
 (global-set-key (kbd "<f12>") 'previous-error)
 
