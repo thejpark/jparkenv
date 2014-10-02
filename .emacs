@@ -20,6 +20,7 @@
 ;; Ctrl-[      Esc
 ;; Ctrl-m      Enter
 
+;; search keyword under cursor: C-s C-w (keep press C-w for matching words, then C-s again
 
 ;; add PATH
 (setq exec-path (append  exec-path (list "/usr/local/bin" "/User/jpark/bin")))
@@ -49,15 +50,16 @@
 
 (setq project "~/")
 
-(defun set_project (dir-name)
+(defun set-project (dir-name)
   "Set project directory"
   (interactive "DDirectory: ")
   (setq project
    (format "%s" dir-name))
   (set-frame-name project)
+  (visit-tags-table project)
 )
 
-(defun goto_project_dir ()
+(defun goto-project-dir ()
   (interactive)
   (dired project))
 
@@ -410,10 +412,10 @@
 
 (require 'prj-local)
 
-(global-set-key (kbd "<f1>") 'evil-mode)
+(global-set-key (kbd "<f1>") 'goto-gen-bookmark)
 (global-set-key (kbd "<f2>") 'evil-mpde)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
-(global-set-key (kbd "<f4>") 'goto_project_dir)
+(global-set-key (kbd "<f4>") 'goto-project-dir)
 (global-set-key (kbd "<f5>") 'prj-command)
 (global-set-key (kbd "<f6>") 'goto-prj-bookmark)
 (global-set-key (kbd "<f7>") 'find-tag)
