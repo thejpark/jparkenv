@@ -410,9 +410,8 @@
 
 (require 'prj-local)
 
-;(global-set-key (kbd "<f1>") 'goto-gen-bookmark)
 (global-set-key (kbd "<f1>") 'evil-mode)
-;;(global-set-key (kbd "<f2>") 'goto-prj-bookmark)
+(global-set-key (kbd "<f2>") 'evil-mpde)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'goto_project_dir)
 (global-set-key (kbd "<f5>") 'prj-command)
@@ -613,8 +612,8 @@
 
 ;; (setq prj_commands
 ;;        (list
-;;  	 (cons "style-checker" 'style-checker)
-;;  	 (cons "unit-test" 'scons-unit)
+;;  	 (cons "1. style-checker" 'style-checker)
+;;  	 (cons "2. unit-test" 'scons-unit)
 ;;  	 ))
 
 
