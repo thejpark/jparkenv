@@ -31,7 +31,7 @@
   "Create tags file."
   (interactive "DDirectory: ")
   (shell-command
-   (format "rm -f %s/TAGS; find %s -type f \\( -iname \*.[chS] -o -iname \*.[ch]pp -o -iname \*.py \\) | xargs ctags -a -e -o %s/TAGS"
+   (format "rm -f %s/TAGS; find %s -type f  \\( -iname \*.[chS] -o -iname \*.[ch]pp -o -iname \*.py  -o -iname \*.java \\) | xargs etags -a -o %s/TAGS"
 	   dir-name dir-name dir-name))
   )
 
