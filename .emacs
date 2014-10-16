@@ -450,11 +450,11 @@
 (global-set-key (kbd "M-n") 'forward-paragraph) 
 (global-set-key (kbd "M-p") 'backward-paragraph) 
 ;(global-set-key (kbd "C--") 'beginning-of-buffer)
-(global-set-key (kbd "C--") 'backward-paragraph)
+(global-set-key (kbd "C--") 'other-window)
 (global-set-key (kbd "C-;") 'next-line)
 (global-set-key (kbd "C-l") 'backward-word)
 (global-set-key (kbd "C-'") 'forward-word)
-(global-set-key (kbd "C-=") 'forward-paragraph)
+(global-set-key (kbd "C-=") 'ido-switch-buffer)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f")  'windmove-right)
