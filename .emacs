@@ -19,7 +19,8 @@
 ;; Ctrl-i      Tab
 ;; Ctrl-[      Esc
 ;; Ctrl-m      Enter
-
+;; Ctrl-]      jump to tag under cursor
+ 
 ;; search keyword under cursor: C-s C-w (keep press C-w for matching words, then C-s again
 
 ;; add PATH
@@ -176,6 +177,13 @@
 )
 (add-hook 'python-mode-hook 'my-python-hook)
 
+(defun my-evil-mode-hook()
+  (define-key evil-normal-state-map (kbd "C-n") 'next-line)
+  (define-key evil-normal-state-map (kbd "C-p") 'previous-line)
+  (define-key evil-normal-state-map (kbd "C-.") 'my-copy-line)
+  (define-key evil-normal-state-map (kbd "M-.") 'find-tag)
+)
+(add-hook 'evil-mode-hook 'my-evil-mode-hook)
 
 ;; C-x Tab is used to add indent rigidly (regardless of indent mode). It also used for region.
 
