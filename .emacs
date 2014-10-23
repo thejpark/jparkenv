@@ -439,6 +439,7 @@
 (global-set-key (kbd "M-2") 'ido-switch-buffer)
 (global-set-key (kbd "M-4") 'kill-buffer)
 (global-set-key (kbd "M-5") 'shell)
+(global-set-key (kbd "s-x") 'execute-extended-command)
 (global-set-key (kbd "s-1") 'delete-other-windows)
 (global-set-key (kbd "s-3") 'split-window-right)
 (global-set-key (kbd "s-s") 'other-window)
