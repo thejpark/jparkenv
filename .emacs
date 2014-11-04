@@ -477,7 +477,8 @@
 (global-set-key (kbd "C-c s")  'gtags-find-symbol)
 
 (global-set-key (kbd "C-c v")  'insert-register)
-(global-set-key (kbd "C-c c")  'copy-to-register)
+;(global-set-key (kbd "C-c c")  'copy-to-register)
+(global-set-key (kbd "C-c c")  'kill-ring-save)
 
 (global-set-key (kbd "C-c l") 'recenter)
 (global-set-key (kbd "C-.") 'my-copy-line)
