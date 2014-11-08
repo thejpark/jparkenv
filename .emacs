@@ -479,6 +479,7 @@
 (global-set-key (kbd "C-;") 'next-line)
 (global-set-key (kbd "C-l") 'backward-char)
 (global-set-key (kbd "C-m") 'my-enter)
+(global-set-key (kbd "C-o") 'my-open-line)
 (global-set-key (kbd "C-'") 'forward-char)
 (global-set-key (kbd "C-=") 'ido-switch-buffer)
 
