@@ -291,7 +291,6 @@
   (define-key diff-mode-map (kbd "s-s") 'other-window)
   (define-key diff-mode-map (kbd "s-2") 'ido-switch-buffer)
   (define-key diff-mode-map (kbd "s-4") 'kill-buffer)
-  (define-key diff-mode-map (kbd "s-5") 'shell)
 )
 
 (add-hook 'diff-mode-hook 'jpark-diff-mode-hook)
@@ -306,7 +305,6 @@
   (define-key vc-dir-mode-map (kbd "s-s") 'other-window)
   (define-key vc-dir-mode-map (kbd "s-2") 'ido-switch-buffer)
   (define-key vc-dir-mode-map (kbd "s-4") 'kill-buffer)
-  (define-key vc-dir-mode-map (kbd "s-5") 'shell)
 )
 
 (add-hook 'vc-dir-mode-hook 'jpark-vc-dir-mode-hook)
@@ -320,7 +318,6 @@
   (define-key dired-mode-map (kbd "s-s") 'other-window)
   (define-key dired-mode-map (kbd "s-2") 'ido-switch-buffer)
   (define-key dired-mode-map (kbd "s-4") 'kill-buffer)
-  (define-key dired-mode-map (kbd "s-5") 'shell)
 )
 
 (add-hook 'dired-mode-hook 'jpark-dired-mode-hook)
@@ -458,7 +455,6 @@
 (global-set-key (kbd "s-s") 'other-window)
 (global-set-key (kbd "s-2") 'ido-switch-buffer)
 (global-set-key (kbd "s-4") 'kill-buffer)
-(global-set-key (kbd "s-5") 'shell)
 
 
 ;; check http://ergoemacs.org/emacs/effective_emacs.html for more effective key binding
@@ -472,13 +468,13 @@
 (global-set-key (kbd "M-n") 'forward-paragraph) 
 (global-set-key (kbd "M-p") 'backward-paragraph) 
 ;(global-set-key (kbd "C--") 'beginning-of-buffer)
-(global-set-key (kbd "C--") 'other-window)
+;(global-set-key (kbd "C--") 'other-window)
 (global-set-key (kbd "C-;") 'next-line)
 (global-set-key (kbd "C-l") 'backward-char)
 (global-set-key (kbd "C-m") 'my-enter)
 (global-set-key (kbd "C-o") 'my-open-line)
 (global-set-key (kbd "C-'") 'forward-char)
-(global-set-key (kbd "C-=") 'ido-switch-buffer)
+;(global-set-key (kbd "C-=") 'ido-switch-buffer)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f")  'windmove-right)
