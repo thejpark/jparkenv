@@ -178,6 +178,8 @@
 (add-hook 'python-mode-hook 'my-python-hook)
 
 (defun my-evil-mode-hook()
+  (define-key evil-normal-state-map (kbd "C-f") nil)
+  (define-key evil-normal-state-map (kbd "C-b") nil)
   (define-key evil-normal-state-map (kbd "C-n") nil)
   (define-key evil-insert-state-map (kbd "C-n") nil)
   (define-key evil-normal-state-map (kbd "C-p") nil)
