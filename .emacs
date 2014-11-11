@@ -185,12 +185,14 @@
   (define-key evil-normal-state-map (kbd "C-.") nil)
   (define-key evil-normal-state-map (kbd "M-.") nil)
   (define-key evil-normal-state-map (kbd "C-e") nil)
-  (define-key evil-normal-state-map (kbd "C-d") nil)
   (define-key evil-insert-state-map (kbd "C-e") nil)
   (define-key evil-motion-state-map (kbd "C-e") nil)
+  (define-key evil-normal-state-map (kbd "C-d") nil)
   (define-key evil-insert-state-map (kbd "C-d") nil)
   (define-key evil-insert-state-map (kbd "C-k") nil)
   (define-key evil-insert-state-map (kbd "C-y") nil)
+  (define-key evil-visual-state-map (kbd "C-w") nil)
+  (define-key evil-insert-state-map (kbd "C-w") nil)
   (define-key evil-visual-state-map (kbd "C-c") 'evil-normal-state)
   )
 
@@ -467,7 +469,6 @@
 (global-set-key (kbd "s-2") 'ido-switch-buffer)
 (global-set-key (kbd "s-4") 'kill-buffer)
 
-
 ;; check http://ergoemacs.org/emacs/effective_emacs.html for more effective key binding
 ;; (global-set-key (kbd "M-j") 'backward-char) ; was indent-new-comment-line
 ;; (global-set-key (kbd "M-l") 'forward-char)  ; was downcase-word
@@ -482,7 +483,7 @@
 ;(global-set-key (kbd "C--") 'other-window)
 (global-set-key (kbd "C-;") 'next-line)
 (global-set-key (kbd "C-l") 'backward-char)
-(global-set-key (kbd "C-m") 'my-enter)
+;(global-set-key (kbd "C-m") 'my-enter)
 (global-set-key (kbd "C-o") 'my-open-line)
 (global-set-key (kbd "C-'") 'forward-char)
 ;(global-set-key (kbd "C-=") 'ido-switch-buffer)
