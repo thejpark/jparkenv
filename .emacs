@@ -178,11 +178,22 @@
 (add-hook 'python-mode-hook 'my-python-hook)
 
 (defun my-evil-mode-hook()
-  (define-key evil-normal-state-map (kbd "C-n") 'next-line)
-  (define-key evil-normal-state-map (kbd "C-p") 'previous-line)
-  (define-key evil-normal-state-map (kbd "C-.") 'my-copy-line)
-  (define-key evil-normal-state-map (kbd "M-.") 'find-tag)
-)
+  (define-key evil-normal-state-map (kbd "C-n") nil)
+  (define-key evil-insert-state-map (kbd "C-n") nil)
+  (define-key evil-normal-state-map (kbd "C-p") nil)
+  (define-key evil-insert-state-map (kbd "C-p") nil)
+  (define-key evil-normal-state-map (kbd "C-.") nil)
+  (define-key evil-normal-state-map (kbd "M-.") nil)
+  (define-key evil-normal-state-map (kbd "C-e") nil)
+  (define-key evil-normal-state-map (kbd "C-d") nil)
+  (define-key evil-insert-state-map (kbd "C-e") nil)
+  (define-key evil-motion-state-map (kbd "C-e") nil)
+  (define-key evil-insert-state-map (kbd "C-d") nil)
+  (define-key evil-insert-state-map (kbd "C-k") nil)
+  (define-key evil-insert-state-map (kbd "C-y") nil)
+  (define-key evil-visual-state-map (kbd "C-c") 'evil-normal-state)
+  )
+
 (add-hook 'evil-mode-hook 'my-evil-mode-hook)
 
 ;; C-x Tab is used to add indent rigidly (regardless of indent mode). It also used for region.
