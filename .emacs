@@ -667,3 +667,11 @@
 ;;     (command)))
 
 ;; (provide 'prj-local)
+
+
+;; How to make emacs accept UTF-8 from the keyboard
+;; http://superuser.com/questions/410100/how-to-make-emacs-accept-utf-8-from-the-keyboard
+
+;; and how to make emacs in cygwin deal with ^M when do vc-dir
+;;(setq default-process-coding-system '(undecided-dos . utf-8-unix))
+;; search for the default-process-coding-system in the emacs source folder to take a look
