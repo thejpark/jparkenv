@@ -675,3 +675,5 @@
 ;; and how to make emacs in cygwin deal with ^M when do vc-dir
 ;;(setq default-process-coding-system '(undecided-dos . utf-8-unix))
 ;; search for the default-process-coding-system in the emacs source folder to take a look
+;; M-x apropos-command coding-system shows related command
+;; M-x describe-current-coding-system shows current coding system
