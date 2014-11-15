@@ -177,8 +177,13 @@
 )
 (add-hook 'python-mode-hook 'my-python-hook)
 
+; http://blog.jakubarnold.cz/2014/06/23/evil-mode-how-to-switch-from-vim-to-emacs.html
+; http://stackoverflow.com/questions/8483182/evil-mode-best-practice
 (defun my-evil-mode-hook()
   (define-key evil-normal-state-map (kbd "C-v") 'scroll-up-command)
+  (define-key evil-normal-state-map (kbd ",b") 'ido-switch-buffer)
+  (define-key evil-normal-state-map (kbd ",,") 'evil-buffer)
+  (define-key evil-normal-state-map (kbd ",f") 'ido-find-file)
   (define-key evil-normal-state-map (kbd "C-f") 'forward-char)
   (define-key evil-normal-state-map (kbd "C-b") 'backward-char)
   (define-key evil-normal-state-map (kbd "C-n") nil)
