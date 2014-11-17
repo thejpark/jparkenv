@@ -322,6 +322,13 @@
 (add-hook 'diff-mode-hook 'jpark-diff-mode-hook)
 
 
+(defun jpark-vc-svn-log-view-mode-hook ()
+  (define-key vc-svn-log-view-mode-map (kbd "k") 'previous-line)
+  (define-key vc-svn-log-view-mode-map (kbd "j") 'next-line)
+)
+
+(add-hook 'vc-svn-log-view-mode-hook 'jpark-vc-svn-log-view-mode-hook)
+
 (defun jpark-vc-dir-mode-hook ()
   (define-key vc-dir-mode-map (kbd "M-3") 'save-buffer)
   (define-key vc-dir-mode-map (kbd "M-s") 'other-window)
