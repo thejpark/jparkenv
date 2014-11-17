@@ -185,6 +185,8 @@
   (define-key evil-normal-state-map (kbd ",,") 'evil-buffer)
   (define-key evil-normal-state-map (kbd ",f") 'ido-find-file)
   (define-key evil-normal-state-map (kbd ",k") 'kill-buffer)
+  (define-key evil-normal-state-map (kbd "j") 'next-line)
+  (define-key evil-normal-state-map (kbd "k") 'previous-line)
   (define-key evil-normal-state-map (kbd "C-f") 'forward-char)
   (define-key evil-normal-state-map (kbd "C-b") 'backward-char)
   (define-key evil-normal-state-map (kbd "C-n") nil)
