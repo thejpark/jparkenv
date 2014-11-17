@@ -328,7 +328,9 @@
   (define-key vc-dir-mode-map (kbd "s-3") 'save-buffer)
   (define-key vc-dir-mode-map (kbd "s-s") 'other-window)
   (define-key vc-dir-mode-map (kbd "s-2") 'ido-switch-buffer)
-  (define-key vc-dir-mode-map (kbd "s-4") 'kill-buffer)
+  (define-key vc-dir-mode-map (kbd "s-4") 'killbuffer)
+  (define-key vc-dir-mode-map (kbd "k") 'previous-line)
+  (define-key vc-dir-mode-map (kbd "j") 'next-line)
 )
 
 (add-hook 'vc-dir-mode-hook 'jpark-vc-dir-mode-hook)
