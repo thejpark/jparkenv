@@ -163,7 +163,15 @@
 ;; common to all language, but it looks like for c-mode-common-hook I should add-hook only once?
 ;; (add-hook 'c-mode-common-hook 'jung-c-mode-hook)
 
-
+(defun comment-or-uncomment-region-or-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+    (interactive)
+    (let (beg end)
+        (if (region-active-p)
+            (setq beg (region-beginning) end (region-end))
+            (setq beg (line-beginning-position) end (line-end-position)))
+        (comment-or-uncomment-region beg end)
+        (next-line)))
 
 (defun my-python-hook()
 ;;    (interactive)
@@ -503,7 +511,8 @@
 (global-set-key (kbd "M-p") 'backward-paragraph) 
 ;(global-set-key (kbd "C--") 'beginning-of-buffer)
 ;(global-set-key (kbd "C--") 'other-window)
-(global-set-key (kbd "C-;") 'next-line)
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region-or-line)
+;(global-set-key (kbd "C-;") 'next-line)
 (global-set-key (kbd "C-l") 'backward-char)
 ;(global-set-key (kbd "C-m") 'my-enter)
 (global-set-key (kbd "C-o") 'my-open-line)
