@@ -198,7 +198,7 @@
   (define-key evil-normal-state-map (kbd "C-f") 'forward-char)
   (define-key evil-normal-state-map (kbd "C-b") 'backward-char)
   (define-key evil-normal-state-map (kbd "C-n") nil)
-  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+  ;; (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
   (define-key evil-normal-state-map (kbd "C-z") 'suspend-frame)
   (define-key evil-insert-state-map (kbd "C-n") nil)
   (define-key evil-normal-state-map (kbd "C-p") nil)
