@@ -100,7 +100,6 @@
 ;; (evil-mode 1)
 ;; (global-set-key (kbd "M-,")  'find-tag)
 
-
 ;; C-_ meanx undo-
 ;; C-x s means save all
 
@@ -131,7 +130,6 @@
 (defun use-80-columns()
   (setq fill-column 79)
   (highlight-80+-mode t))
-
 
 (defun jung-c-mode-hook ()
   (setq c-default-style
@@ -201,7 +199,6 @@
   (define-key evil-normal-state-map (kbd "C-f") 'forward-char)
   (define-key evil-normal-state-map (kbd "C-b") 'backward-char)
   (define-key evil-normal-state-map (kbd "C-n") nil)
-  ;; (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
   (define-key evil-normal-state-map (kbd "C-z") 'suspend-frame)
   (define-key evil-insert-state-map (kbd "C-n") nil)
   (define-key evil-normal-state-map (kbd "C-p") nil)
@@ -236,7 +233,6 @@
 
 ;; Treat .h as c++
 (setq auto-mode-alist (cons '("\\.h$" . c++-mode) auto-mode-alist))
-
 
 ;;M-x highlight-80+-mode
 
@@ -306,7 +302,6 @@
 ;; find diff in region
 ;; (M-x ediff-region-wordwise)
 
-
 ;; emacs word count region
 ;; Set a region, then press M-=
 
@@ -368,11 +363,6 @@
 
 (add-hook 'dired-mode-hook 'jpark-dired-mode-hook)
 
-
-
-
-
-
 (browse-kill-ring-default-keybindings)
 
 
@@ -387,7 +377,6 @@
 ;; M-c capitalize word
 ;; C-x C-u uppercase region
 ;; C-x C-u lowercase region
-
 
 ;;identify what command is bound on the new keys:
 ;; C-h k then press short cut keys
