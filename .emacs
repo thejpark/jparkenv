@@ -194,8 +194,10 @@
   (define-key evil-normal-state-map (kbd ",,") 'evil-buffer)
   (define-key evil-normal-state-map (kbd ",f") 'ido-find-file)
   (define-key evil-normal-state-map (kbd ",k") 'kill-buffer)
-  (define-key evil-normal-state-map (kbd "j") 'next-line)
-  (define-key evil-normal-state-map (kbd "k") 'previous-line)
+  (define-key evil-normal-state-map (kbd "i") 'previous-line)
+  (define-key evil-normal-state-map (kbd "j") 'backward-char)
+  (define-key evil-normal-state-map (kbd "k") 'next-line)
+  (define-key evil-normal-state-map (kbd "h") 'evil-insert)
   (define-key evil-normal-state-map (kbd "C-f") 'forward-char)
   (define-key evil-normal-state-map (kbd "C-b") 'backward-char)
   (define-key evil-normal-state-map (kbd "C-n") nil)
@@ -501,10 +503,16 @@
 (global-set-key (kbd "s-4") 'kill-buffer)
 
 ;; check http://ergoemacs.org/emacs/effective_emacs.html for more effective key binding
-;; (global-set-key (kbd "M-j") 'backward-char) ; was indent-new-comment-line
-;; (global-set-key (kbd "M-l") 'forward-char)  ; was downcase-word
-;; (global-set-key (kbd "M-i") 'previous-line) ; was tab-to-tab-stop
-;; (global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
+(global-set-key (kbd "M-j") 'backward-char) ; was indent-new-comment-line
+(global-set-key (kbd "M-l") 'forward-char)  ; was downcase-word
+(global-set-key (kbd "M-i") 'previous-line) ; was tab-to-tab-stop
+(global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
+
+(global-set-key (kbd "s-j") 'backward-char) ; was indent-new-comment-line
+(global-set-key (kbd "s-l") 'forward-char)  ; was downcase-word
+(global-set-key (kbd "s-i") 'previous-line) ; was tab-to-tab-stop
+(global-set-key (kbd "s-k") 'next-line) ; was kill-sentence
+(global-set-key (kbd "s-x") 'execute-extended-command) ; 
 
 ;; (global-set-key (kbd "M-[") 'backward-word)
 ;; (global-set-key (kbd "M-]") 'forward-word) 
