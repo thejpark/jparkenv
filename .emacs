@@ -97,7 +97,6 @@
 ;; evil mode changes
 (add-to-list 'load-path "~/jparkenv/emacs.d/evil/") ; only without ELPA/el-get
 (require 'evil)
-(evil-mode 1)
 ;; (global-set-key (kbd "M-,")  'find-tag)
 
 ;; C-_ meanx undo-
