@@ -213,6 +213,7 @@
   (define-key evil-insert-state-map (kbd "C-y") nil)
   (define-key evil-insert-state-map (kbd "C-w") nil)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (define-key evil-replace-state-map (kbd "C-g") 'evil-normal-state)
   (define-key evil-visual-state-map (kbd "C-c") 'evil-exit-visual-state)
   )
 
