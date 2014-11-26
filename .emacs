@@ -348,8 +348,6 @@
   (define-key vc-dir-mode-map (kbd "s-s") 'other-window)
   (define-key vc-dir-mode-map (kbd "s-2") 'ido-switch-buffer)
   (define-key vc-dir-mode-map (kbd "s-4") 'killbuffer)
-  (define-key vc-dir-mode-map (kbd "i") 'previous-line)
-  (define-key vc-dir-mode-map (kbd "k") 'next-line)
 )
 
 (add-hook 'vc-dir-mode-hook 'jpark-vc-dir-mode-hook)
