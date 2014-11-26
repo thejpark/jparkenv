@@ -333,8 +333,8 @@
 
 
 (defun jpark-vc-svn-log-view-mode-hook ()
-  (define-key vc-svn-log-view-mode-map (kbd "k") 'previous-line)
-  (define-key vc-svn-log-view-mode-map (kbd "j") 'next-line)
+  (define-key vc-svn-log-view-mode-map (kbd "i") 'previous-line)
+  (define-key vc-svn-log-view-mode-map (kbd "k") 'next-line)
 )
 
 (add-hook 'vc-svn-log-view-mode-hook 'jpark-vc-svn-log-view-mode-hook)
@@ -348,8 +348,8 @@
   (define-key vc-dir-mode-map (kbd "s-s") 'other-window)
   (define-key vc-dir-mode-map (kbd "s-2") 'ido-switch-buffer)
   (define-key vc-dir-mode-map (kbd "s-4") 'killbuffer)
-  (define-key vc-dir-mode-map (kbd "k") 'previous-line)
-  (define-key vc-dir-mode-map (kbd "j") 'next-line)
+  (define-key vc-dir-mode-map (kbd "i") 'previous-line)
+  (define-key vc-dir-mode-map (kbd "k") 'next-line)
 )
 
 (add-hook 'vc-dir-mode-hook 'jpark-vc-dir-mode-hook)
