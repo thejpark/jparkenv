@@ -221,6 +221,7 @@
   (define-key evil-replace-state-map (kbd "C-g") 'evil-normal-state)
   (define-key evil-replace-state-map (kbd "C-u") 'evil-normal-state)
   (define-key evil-visual-state-map (kbd "C-c") 'evil-exit-visual-state)
+  (define-key evil-visual-state-map (kbd "C-u") 'evil-exit-visual-state)
   )
 
 (add-hook 'evil-mode-hook 'my-evil-mode-hook)
