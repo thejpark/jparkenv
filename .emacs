@@ -506,6 +506,7 @@
 (global-set-key (kbd "s-i") 'previous-line) ; was tab-to-tab-stop
 (global-set-key (kbd "s-k") 'next-line) ; was kill-sentence
 (global-set-key (kbd "s-x") 'execute-extended-command) ; 
+(global-set-key (kbd "s-v") 'scroll-down-command) 
 
 ;; (global-set-key (kbd "M-[") 'backward-word)
 ;; (global-set-key (kbd "M-]") 'forward-word) 
