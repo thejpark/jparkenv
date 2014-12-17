@@ -336,10 +336,10 @@
 
 (add-hook 'diff-mode-hook 'jpark-diff-mode-hook)
 
-(defun jpark-vc-svn-log-view-mode-hook ()
-  (if (not (eq evil-state nil)) (evil-emacs-state))
-)
-(add-hook 'vc-svn-log-view-mode-hook 'jpark-vc-svn-log-view-mode-hook)
+;; (defun jpark-vc-svn-log-view-mode-hook ()
+;;   (if (not (eq evil-state nil)) (evil-emacs-state))
+;; )
+;; (add-hook 'vc-svn-log-view-mode-hook 'jpark-vc-svn-log-view-mode-hook)
 
 (defun jpark-vc-dir-mode-hook ()
   (if (not (eq evil-state nil)) (evil-emacs-state))
@@ -368,6 +368,12 @@
 )
 
 (add-hook 'dired-mode-hook 'jpark-dired-mode-hook)
+
+(defun jpark-log-edit-mode-hook ()
+  (if (not (eq evil-state nil)) (evil-emacs-state))
+)
+
+(add-hook 'log-edit-mode-hook 'jpark-log-edit-mode-hook)
 
 (defun jpark-git-log-edit-mode-hook ()
   (if (not (eq evil-state nil)) (evil-emacs-state))
