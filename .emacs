@@ -202,11 +202,11 @@
   (define-key evil-normal-state-map (kbd "h") 'evil-insert)
   (define-key evil-normal-state-map (kbd "C-f") 'forward-char)
   (define-key evil-normal-state-map (kbd "C-b") 'backward-char)
-  (define-key evil-normal-state-map (kbd "C-n") nil)
-  (define-key evil-normal-state-map (kbd "C-z") 'suspend-frame)
-  (define-key evil-insert-state-map (kbd "C-n") nil)
-  (define-key evil-normal-state-map (kbd "C-p") nil)
-  (define-key evil-insert-state-map (kbd "C-p") nil)
+  (define-key evil-normal-state-map (kbd "C-n") 'scroll-up-command)
+  ;; (define-key evil-normal-state-map (kbd "C-z") 'suspend-frame)
+  (define-key evil-insert-state-map (kbd "C-n") 'scroll-up-command)
+  (define-key evil-normal-state-map (kbd "C-p") 'scroll-down-command)
+  (define-key evil-insert-state-map (kbd "C-p") 'scroll-down-command)
   (define-key evil-normal-state-map (kbd "C-.") nil)
   (define-key evil-normal-state-map (kbd "M-.") nil)
   (define-key evil-normal-state-map (kbd "C-e") nil)
@@ -323,6 +323,7 @@
 
 
 (defun jpark-diff-mode-hook ()
+  (evil-emacs-state)
   (define-key diff-mode-map (kbd "M-3") 'save-buffer)
   (define-key diff-mode-map (kbd "M-s") 'other-window)
   (define-key diff-mode-map (kbd "M-2") 'ido-switch-buffer)
@@ -342,6 +343,7 @@
 ;; (add-hook 'vc-svn-log-view-mode-hook 'jpark-vc-svn-log-view-mode-hook)
 
 (defun jpark-vc-dir-mode-hook ()
+  (evil-emacs-state)
   (define-key vc-dir-mode-map (kbd "M-3") 'save-buffer)
   (define-key vc-dir-mode-map (kbd "M-s") 'other-window)
   (define-key vc-dir-mode-map (kbd "M-2") 'ido-switch-buffer)
@@ -355,6 +357,7 @@
 (add-hook 'vc-dir-mode-hook 'jpark-vc-dir-mode-hook)
 
 (defun jpark-dired-mode-hook ()
+  (evil-emacs-state)
   (define-key dired-mode-map (kbd "M-3") 'save-buffer)
   (define-key dired-mode-map (kbd "M-s") 'other-window)
   (define-key dired-mode-map (kbd "M-2") 'ido-switch-buffer)
