@@ -148,6 +148,7 @@
 
 (add-hook 'c-mode-hook 'jung-c-mode-hook)
 (add-hook 'c++-mode-hook 'jung-c-mode-hook)
+(add-hook 'java-mode-hook 'jung-c-mode-hook)
 (add-hook 'python-mode-hook 'jung-c-mode-hook)
 
 ;;add this hook as common to all languages 
