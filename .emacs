@@ -720,11 +720,30 @@
 ;; (provide 'prj-local)
 
 
-;; How to make emacs accept UTF-8 from the keyboard
+;; HOW TO MAKE EMACS ACCEPT UTF-8 FROM THE KEYBOARD
 ;; http://superuser.com/questions/410100/how-to-make-emacs-accept-utf-8-from-the-keyboard
 
-;; and how to make emacs in cygwin deal with ^M when do vc-dir
+;; AND HOW TO MAKE EMACS IN CYGWIN DEAL WITH ^M WHEN DO VC-DIR
 ;;(setq default-process-coding-system '(undecided-dos . utf-8-unix))
 ;; search for the default-process-coding-system in the emacs source folder to take a look
 ;; M-x apropos-command coding-system shows related command
 ;; M-x describe-current-coding-system shows current coding system
+
+
+
+;; INSTALL PACKAGES, ADDING PACKAGE ARCHIVE
+;; M-x package-refresh-contents [RET]
+;; M-: (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+;; M-x package-refresh-contents [RET]
+;; M-x package-install [RET] marmalade-demo
+                    
+;; Alternatively you can use Emacs' customize system to permanently alter your package archives:
+
+;; M-x package-refresh-contents [RET]
+;; M-x customize-variable [RET] package-archives
+
+;;   Archive name: gnu
+;;   URL or directory name: http://elpa.gnu.org/packages/
+;;   Archive name: marmalade
+;;   URL or directory name: http://marmalade-repo.org/packages/
+                    
