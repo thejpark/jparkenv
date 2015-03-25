@@ -219,9 +219,9 @@
   (define-key evil-insert-state-map (kbd "C-y") nil)
   (define-key evil-insert-state-map (kbd "C-w") nil)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-u") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-u") 'evil-force-normal-state)
   (define-key evil-replace-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-replace-state-map (kbd "C-u") 'evil-normal-state)
+  (define-key evil-replace-state-map (kbd "C-u") 'evil-force-normal-state)
   (define-key evil-visual-state-map (kbd "C-c") 'evil-exit-visual-state)
   (define-key evil-visual-state-map (kbd "C-u") 'evil-exit-visual-state)
   )
@@ -728,7 +728,6 @@
 ;; search for the default-process-coding-system in the emacs source folder to take a look
 ;; M-x apropos-command coding-system shows related command
 ;; M-x describe-current-coding-system shows current coding system
-
 
 
 ;; INSTALL PACKAGES, ADDING PACKAGE ARCHIVE
