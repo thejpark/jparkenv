@@ -485,7 +485,7 @@
   (interactive)
   (progn
     (move-beginning-of-line())
-    (open-line())
+    (newline-and-indent)
   )
 )
 
