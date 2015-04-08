@@ -486,7 +486,6 @@
   (progn
     (move-beginning-of-line())
     (open-line())
-    (next-line())
   )
 )
 
@@ -532,10 +531,10 @@
 ;; (global-set-key (kbd "M-i") 'previous-line) ; was tab-to-tab-stop
 ;; (global-set-key (kbd "M-k") 'next-line) ; was kill-sentence
 
-(global-set-key (kbd "s-j") 'backward-char) ; was indent-new-comment-line
-(global-set-key (kbd "s-l") 'forward-char)  ; was downcase-word
-(global-set-key (kbd "s-i") 'previous-line) ; was tab-to-tab-stop
-(global-set-key (kbd "s-k") 'next-line) ; was kill-sentence
+;; (global-set-key (kbd "s-j") 'backward-char) ; was indent-new-comment-line
+;; (global-set-key (kbd "s-l") 'forward-char)  ; was downcase-word
+;; (global-set-key (kbd "s-i") 'previous-line) ; was tab-to-tab-stop
+;; (global-set-key (kbd "s-k") 'next-line) ; was kill-sentence
 (global-set-key (kbd "s-x") 'execute-extended-command) ; 
 
 ;; (global-set-key (kbd "M-[") 'backward-word)
