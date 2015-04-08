@@ -481,6 +481,15 @@
   )
 )
 
+(defun my-open-line-above ()
+  (interactive)
+  (progn
+    (move-beginning-of-line())
+    (open-line())
+    (next-line())
+  )
+)
+
 (defun my-enter ()
   (interactive)
   (progn
@@ -537,7 +546,8 @@
 ;(global-set-key (kbd "C--") 'other-window)
 (global-set-key (kbd "M-;") 'comment-or-uncomment-region-or-line)
 ;; (global-set-key (kbd "C-;") 'next-line)
-(global-set-key (kbd "C-l") 'my-open-line)
+(global-set-key (kbd "C-l") 'my-open-line-above)
+(global-set-key (kbd "<C-return>") 'my-open-line)
 ;(global-set-key (kbd "C-m") 'my-enter)
 (global-set-key (kbd "C-o") 'my-open-line)
 ;; (global-set-key (kbd "C-'") 'forward-char)
