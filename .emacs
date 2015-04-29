@@ -192,6 +192,7 @@
   (define-key evil-normal-state-map (kbd ",b") 'ido-switch-buffer)
   (define-key evil-normal-state-map (kbd ",,") 'evil-buffer)
   (define-key evil-normal-state-map (kbd ",f") 'ido-find-file)
+  (define-key evil-normal-state-map (kbd ",d") 'ido-dired)
   (define-key evil-normal-state-map (kbd ",k") 'kill-buffer)
   (define-key evil-visual-state-map (kbd "i") 'previous-line)
   (define-key evil-visual-state-map (kbd "j") 'backward-char)
@@ -499,7 +500,7 @@
 
 (require 'prj-local)
 
-(global-set-key (kbd "<f1>") 'goto-gen-bookmark)
+(global-set-key (kbd "<f1>") 'ido-find-file)
 (global-set-key (kbd "<f2>") 'evil-mode)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'goto-project-dir)
