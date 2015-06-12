@@ -503,6 +503,7 @@
 (require 'prj-local)
 
 ;; (global-set-key (kbd "<f1>") 'ido-find-file)
+(global-set-key (kbd "<f1>") 'keyboard-escape-quit)
 (global-set-key (kbd "<f2>") 'evil-force-normal-state)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'goto-project-dir)
