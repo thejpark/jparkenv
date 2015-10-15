@@ -94,6 +94,10 @@
 (require 'browse-kill-ring)
 (require 'gtags)
 
+;; wgrep mode changes
+(add-to-list 'load-path "~/jparkenv/emacs.d/wgrep/") 
+(require 'wgrep)
+
 ;; evil mode changes
 (add-to-list 'load-path "~/jparkenv/emacs.d/evil/") ; only without ELPA/el-get
 (require 'evil)
