@@ -89,18 +89,20 @@
   (interactive)
   (ido-find-file-in-dir project))
 
-(add-to-list 'load-path "~/jparkenv/emacs.d/lisp/")
+
+; packages
+(require 'package)
+(push '("marmalade" . "http://marmalade-repo.org/packages/")
+      package-archives )
+(push '("melpa" . "http://melpa.milkbox.net/packages/")
+      package-archives)
+(package-initialize)
 
 (require 'browse-kill-ring)
 (require 'gtags)
-
-;; wgrep mode changes
-(add-to-list 'load-path "~/jparkenv/emacs.d/wgrep/") 
+(require 'evil)
 (require 'wgrep)
 
-;; evil mode changes
-(add-to-list 'load-path "~/jparkenv/emacs.d/evil/") ; only without ELPA/el-get
-(require 'evil)
 ;; (global-set-key (kbd "M-,")  'find-tag)
 
 ;; C-_ meanx undo-
@@ -128,6 +130,7 @@
 
 ;; first non-white space char M-m
 
+(add-to-list 'load-path "~/jparkenv/emacs.d/lisp/")
 (require 'highlight-80+)
 
 (defun use-80-columns()
@@ -764,4 +767,3 @@
 ;;   URL or directory name: http://elpa.gnu.org/packages/
 ;;   Archive name: marmalade
 ;;   URL or directory name: http://marmalade-repo.org/packages/
-                    
