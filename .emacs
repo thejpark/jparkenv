@@ -334,7 +334,7 @@
 
 
 (defun jpark-diff-mode-hook ()
-  (if (not (eq evil-state nil)) (evil-emacs-state))
+  (if (eq evil-mode 't) (evil-emacs-state))
   (define-key diff-mode-map (kbd "M-3") 'save-buffer)
   (define-key diff-mode-map (kbd "M-s") 'other-window)
   (define-key diff-mode-map (kbd "M-2") 'ido-switch-buffer)
@@ -353,7 +353,7 @@
 ;; (add-hook 'vc-svn-log-view-mode-hook 'jpark-vc-svn-log-view-mode-hook)
 
 (defun jpark-vc-dir-mode-hook ()
-  (if (not (eq evil-state nil)) (evil-emacs-state))
+  (if (eq evil-mode 't) (evil-emacs-state))
   (define-key vc-dir-mode-map (kbd "M-3") 'save-buffer)
   (define-key vc-dir-mode-map (kbd "M-s") 'other-window)
   (define-key vc-dir-mode-map (kbd "M-2") 'ido-switch-buffer)
@@ -367,7 +367,7 @@
 (add-hook 'vc-dir-mode-hook 'jpark-vc-dir-mode-hook)
 
 (defun jpark-dired-mode-hook ()
-  (if (not (eq evil-state nil)) (evil-emacs-state))
+  (if (eq evil-mode 't) (evil-emacs-state))
   (define-key dired-mode-map (kbd "M-3") 'save-buffer)
   (define-key dired-mode-map (kbd "M-s") 'other-window)
   (define-key dired-mode-map (kbd "M-2") 'ido-switch-buffer)
@@ -381,22 +381,16 @@
 (add-hook 'dired-mode-hook 'jpark-dired-mode-hook)
 
 (defun jpark-log-edit-mode-hook ()
-  (if (not (eq evil-state nil)) (evil-emacs-state))
+  (if (eq evil-mode 't) (evil-emacs-state))
 )
 
 (add-hook 'log-edit-mode-hook 'jpark-log-edit-mode-hook)
 
 (defun jpark-git-log-edit-mode-hook ()
-  (if (not (eq evil-state nil)) (evil-emacs-state))
+  (if (eq evil-mode 't) (evil-emacs-state))
 )
 
 (add-hook 'vc-git-log-edit-mode-hook 'jpark-git-log-edit-mode-hook)
-
-(defun jpark-help-mode-hook ()
-  (if (not (eq evil-state nil)) (evil-emacs-state))
-)
-
-(add-hook 'help-mode-hook 'jpark-help-mode-hook)
 
 
 (browse-kill-ring-default-keybindings)
