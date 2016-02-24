@@ -32,7 +32,7 @@
   "Create tags file."
   (interactive "DDirectory: ")
   (shell-command
-   (format "rm -f %s/TAGS; find %s -type f  \\( -iname \*.[chS] -o -iname \*.[ch]pp -o -iname \*.py  -o -iname \*.java \\) | xargs etags -a -o %s/TAGS"
+   (format "rm -f ./TAGS; find . -type f  \\( -iname \*.[chS] -o -iname \*.[ch]pp -o -iname \*.py  -o -iname \*.java \\) | xargs realpath | xargs etags -a -o %s/TAGS"
 	   dir-name dir-name dir-name))
   )
 
@@ -99,7 +99,6 @@
 (package-initialize)
 
 (require 'browse-kill-ring)
-(require 'gtags)
 (require 'evil)
 (require 'wgrep)
 
