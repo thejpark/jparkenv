@@ -202,7 +202,7 @@
   (define-key evil-normal-state-map (kbd ",w") 'other-window)
   (define-key evil-normal-state-map (kbd ",d") 'ido-dired)
   (define-key evil-normal-state-map (kbd ",k") 'kill-buffer)
-
+  (define-key evil-normal-state-map (kbd "C-[") 'beginning-of-defun)
   ;; (define-key evil-visual-state-map (kbd "i") 'previous-line)
   ;; (define-key evil-visual-state-map (kbd "j") 'backward-char)
   ;; (define-key evil-visual-state-map (kbd "k") 'next-line)
