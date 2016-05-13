@@ -147,7 +147,7 @@
   (setq indent-tabs-mode nil)             ;; Use space instead of tab
   (setq tab-width 4)
   (use-80-columns)
-  (gtags-mode 1)
+  ;; (gtags-mode 1)
   (c-set-offset 'innamespace 0)
   (c-set-offset 'substatement-open 0)
 )
@@ -573,9 +573,9 @@
 
 (global-set-key (kbd "C-c o")  'ff-find-other-file)
 
-(global-set-key (kbd "C-c d")  'gtags-find-tag)
-(global-set-key (kbd "C-c r")  'gtags-find-rtag)
-(global-set-key (kbd "C-c s")  'gtags-find-symbol)
+;; (global-set-key (kbd "C-c d")  'gtags-find-tag)
+;; (global-set-key (kbd "C-c r")  'gtags-find-rtag)
+;; (global-set-key (kbd "C-c s")  'gtags-find-symbol)
 
 (global-set-key (kbd "C-c v")  'insert-register)
 ;(global-set-key (kbd "C-c c")  'copy-to-register)
