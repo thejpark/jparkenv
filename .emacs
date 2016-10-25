@@ -291,14 +291,14 @@
 
 ))
 
- (if (file-directory-p "c:/cygwin/bin")
+ ;; (if (file-directory-p "c:/cygwin/bin")
 ;; if window version of emacs
- 	 (if (eq window-system 'w32)
+(if (eq window-system 'w32)
        (setq default-frame-alist
             '(
               (font . "-outline-Lucida Console-normal-normal-normal-mono-13-*-*-*-c-*-iso10646-1")))
 
-))
+)
 
 
 ;;	window-system variable shows which windows system am I using. w32, nil (if used in terminal), etc
