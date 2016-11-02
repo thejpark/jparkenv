@@ -583,7 +583,8 @@
 
 (global-set-key (kbd "C-c l") 'recenter)
 (global-set-key (kbd "C-.") 'my-copy-line)
-(global-set-key (kbd "C-,") 'my-kill-line)
+;; (global-set-key (kbd "C-,") 'my-kill-line)
+(global-set-key (kbd "C-,") 'ido-switch-buffer)
 
 
 ;; http://www.emacswiki.org/emacs/IndentingText, shift left and right
