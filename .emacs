@@ -198,6 +198,7 @@
   (define-key evil-normal-state-map (kbd ",b") 'ido-switch-buffer)
   (define-key evil-normal-state-map (kbd ",,") 'evil-buffer)
   (define-key evil-normal-state-map (kbd ",.") 'other-window)
+  (define-key evil-normal-state-map (kbd ",s") 'save-buffer)
   (define-key evil-normal-state-map (kbd ",f") 'ido-find-file)
   (define-key evil-normal-state-map (kbd ",w") 'other-window)
   (define-key evil-normal-state-map (kbd ",d") 'ido-dired)
