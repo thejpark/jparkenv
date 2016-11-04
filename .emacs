@@ -583,7 +583,7 @@
 
 (global-set-key (kbd "C-c l") 'recenter)
 ;; (global-set-key (kbd "C-.") 'my-copy-line)
-(global-set-key (kbd "C-.") 'save-buffer)
+(global-set-key (kbd "C-.") 'other-window)
 ;; (global-set-key (kbd "C-,") 'my-kill-line)
 (global-set-key (kbd "C-,") 'ido-switch-buffer)
 
