@@ -98,9 +98,9 @@
       package-archives)
 (package-initialize)
 
-(require 'browse-kill-ring)
-(require 'evil)
-(require 'wgrep)
+;; (require 'browse-kill-ring)
+;; (require 'evil)
+;; (require 'wgrep)
 
 ;; (global-set-key (kbd "M-,")  'find-tag)
 
