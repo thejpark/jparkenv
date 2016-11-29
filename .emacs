@@ -85,11 +85,6 @@
     (setq file (concat "~/" file))
     (find-file file)))
 
-(defun find-file-in-project ()
-  (interactive)
-  (ido-find-file-in-dir project))
-
-
 ; packages
 (require 'package)
 (push '("marmalade" . "http://marmalade-repo.org/packages/")
