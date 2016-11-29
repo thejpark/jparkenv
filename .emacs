@@ -508,7 +508,7 @@
 
 (global-set-key (kbd "<f1>") 'ido-find-file)
 ;; (global-set-key (kbd "<f1>") 'keyboard-escape-quit)
-(global-set-key (kbd "<f2>") 'other-window)
+(global-set-key (kbd "<f2>") 'find-file-in-project)
 (global-set-key (kbd "<f3>") 'goto-vc-dir)
 (global-set-key (kbd "<f4>") 'goto-project-dir)
 (global-set-key (kbd "<f5>") 'prj-command)
