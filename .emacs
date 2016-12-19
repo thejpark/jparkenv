@@ -189,7 +189,7 @@
 (defun my-evil-mode-hook()
   ;; (define-key evil-normal-state-map (kbd "C-v") 'scroll-up-command)
   ;; (define-key evil-visual-state-map (kbd "C-v") 'scroll-up-command)
-  (define-key evil-normal-state-map (kbd "C-r") nil)
+  ;; (define-key evil-normal-state-map (kbd "C-r") nil)
   (define-key evil-normal-state-map (kbd ",b") 'ido-switch-buffer)
   (define-key evil-normal-state-map (kbd ",,") 'evil-buffer)
   (define-key evil-normal-state-map (kbd ",.") 'other-window)
