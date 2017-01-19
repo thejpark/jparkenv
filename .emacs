@@ -237,6 +237,7 @@
   (define-key evil-replace-state-map (kbd "C-u") 'evil-force-normal-state)
   (define-key evil-visual-state-map (kbd "C-c") 'evil-exit-visual-state)
   (define-key evil-visual-state-map (kbd "C-u") 'evil-exit-visual-state)
+  (setq evil-emacs-state-modes (append  evil-emacs-state-modes '(diff-mode)))
   )
 
 (add-hook 'evil-mode-hook 'my-evil-mode-hook)
@@ -337,7 +338,6 @@
 
 
 (defun jpark-diff-mode-hook ()
-  (if (eq evil-mode 't) (evil-emacs-state))
   (define-key diff-mode-map (kbd "M-s") 'other-window)
   (define-key diff-mode-map (kbd "s-s") 'other-window)
 )
@@ -620,14 +620,6 @@
 ;; see this http://amitp.blogspot.com.au/2007/04/emacs-color-in-shell-buffers.html
 ;; also this https://snarfed.org/why_i_dont_run_shells_inside_emacs
 
-(custom-set-variables
- '(comint-scroll-to-bottom-on-input t)  ; always insert at the bottom
- '(comint-scroll-to-bottom-on-output t) ; always add output at the bottom
- '(comint-scroll-show-maximum-output t) ; scroll to show max possible output
- '(comint-completion-autolist t)        ; show completion list when ambiguous
- '(comint-input-ignoredups t)           ; no duplicates in command history
- '(comint-completion-addsuffix t)       ; insert space/slash after file completion
- )
 (setq ansi-color-names-vector ; better contrast colors
       ["black" "red4" "green4" "yellow4"
        "blue3" "magenta4" "cyan4" "white"])
