@@ -338,14 +338,8 @@
 
 (defun jpark-diff-mode-hook ()
   (if (eq evil-mode 't) (evil-emacs-state))
-  (define-key diff-mode-map (kbd "M-3") 'save-buffer)
   (define-key diff-mode-map (kbd "M-s") 'other-window)
-  (define-key diff-mode-map (kbd "M-2") 'ido-switch-buffer)
-  (define-key diff-mode-map (kbd "M-4") 'kill-buffer)
-  (define-key diff-mode-map (kbd "s-3") 'save-buffer)
   (define-key diff-mode-map (kbd "s-s") 'other-window)
-  (define-key diff-mode-map (kbd "s-2") 'ido-switch-buffer)
-  (define-key diff-mode-map (kbd "s-4") 'kill-buffer)
 )
 
 (add-hook 'diff-mode-hook 'jpark-diff-mode-hook)
@@ -357,28 +351,16 @@
 
 (defun jpark-vc-dir-mode-hook ()
   (if (eq evil-mode 't) (evil-emacs-state))
-  (define-key vc-dir-mode-map (kbd "M-3") 'save-buffer)
   (define-key vc-dir-mode-map (kbd "M-s") 'other-window)
-  (define-key vc-dir-mode-map (kbd "M-2") 'ido-switch-buffer)
-  (define-key vc-dir-mode-map (kbd "M-4") 'kill-buffer)
-  (define-key vc-dir-mode-map (kbd "s-3") 'save-buffer)
   (define-key vc-dir-mode-map (kbd "s-s") 'other-window)
-  (define-key vc-dir-mode-map (kbd "s-2") 'ido-switch-buffer)
-  (define-key vc-dir-mode-map (kbd "s-4") 'killbuffer)
 )
 
 (add-hook 'vc-dir-mode-hook 'jpark-vc-dir-mode-hook)
 
 (defun jpark-dired-mode-hook ()
   (if (eq evil-mode 't) (evil-emacs-state))
-  (define-key dired-mode-map (kbd "M-3") 'save-buffer)
   (define-key dired-mode-map (kbd "M-s") 'other-window)
-  (define-key dired-mode-map (kbd "M-2") 'ido-switch-buffer)
-  (define-key dired-mode-map (kbd "M-4") 'kill-buffer)
-  (define-key dired-mode-map (kbd "s-3") 'save-buffer)
   (define-key dired-mode-map (kbd "s-s") 'other-window)
-  (define-key dired-mode-map (kbd "s-2") 'ido-switch-buffer)
-  (define-key dired-mode-map (kbd "s-4") 'kill-buffer)
 )
 
 (add-hook 'dired-mode-hook 'jpark-dired-mode-hook)
@@ -522,18 +504,9 @@
 (global-set-key (kbd "<f11>") 'next-error)
 (global-set-key (kbd "<f12>") 'previous-error)
 
-(global-set-key (kbd "M-1") 'ido-find-file)
-(global-set-key (kbd "M-3") 'save-buffer)
 (global-set-key (kbd "M-s") 'other-window)
-(global-set-key (kbd "M-2") 'ido-switch-buffer)
-(global-set-key (kbd "M-4") 'kill-buffer)
-(global-set-key (kbd "M-5") 'vc-diff)
 (global-set-key (kbd "s-x") 'execute-extended-command)
-(global-set-key (kbd "s-1") 'ido-find-file)
-(global-set-key (kbd "s-3") 'save-buffer)
 (global-set-key (kbd "s-s") 'other-window)
-(global-set-key (kbd "s-2") 'ido-switch-buffer)
-(global-set-key (kbd "s-4") 'kill-buffer)
 
 ;; check http://ergoemacs.org/emacs/effective_emacs.html for more effective key binding
 ;; (global-set-key (kbd "M-j") 'backward-char) ; was indent-new-comment-line
