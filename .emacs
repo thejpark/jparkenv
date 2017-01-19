@@ -337,7 +337,7 @@
 
 
 (defun jpark-diff-mode-hook ()
-  ;; (if (eq evil-mode 't) (evil-emacs-state))
+  (if (eq evil-mode 't) (evil-emacs-state))
   (define-key diff-mode-map (kbd "M-3") 'save-buffer)
   (define-key diff-mode-map (kbd "M-s") 'other-window)
   (define-key diff-mode-map (kbd "M-2") 'ido-switch-buffer)
