@@ -54,7 +54,6 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 
-execute pathogen#infect()
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
@@ -100,3 +99,18 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'airblade/vim-gitgutter'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'mattn/emmet-vim'
+Plug 'scrooloose/nerdtree'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-surround'
+Plug 'w0rp/ale'
+Plug 'scrooloose/nerdcommenter'
+call plug#end()
