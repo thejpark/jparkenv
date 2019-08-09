@@ -31,6 +31,10 @@ set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 
+"
+" Highlight matching pairs of brackets. Use the '%' character to jump between them.
+set matchpairs+=<:>
+
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
 
@@ -46,11 +50,15 @@ if has('mouse')
   set mouse=a
 endif
 
+" highlight trailing white space
+highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
+
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
+  autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
 endif
 
 
@@ -113,4 +121,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-unimpaired'
+Plug 'ludovicchabunt/vim-gutentags'
 call plug#end()
